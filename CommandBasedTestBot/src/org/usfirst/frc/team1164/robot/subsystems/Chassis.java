@@ -21,7 +21,7 @@ public class Chassis extends Subsystem {
 	private WPI_VictorSPX Right1, Right2, Right3, Left1, Left2, Left3;
 	private Encoder LeftEncoder, RightEncoder;
 	private AHRS Navx;
-	private DoubleSolenoid Transmission;
+	private DoubleSolenoid Transmission, PTO;
 	private Servo Neutralizer;
 	
 
@@ -54,10 +54,11 @@ public class Chassis extends Subsystem {
 				RobotMap.CHE_Right_reversed, Encoder.EncodingType.k2X);
 		
 		Transmission = new DoubleSolenoid(RobotMap.CHT_Forward_Channel,RobotMap.CHT_Reverse_Channel);
+		PTO = new DoubleSolenoid(RobotMap.CHP_Forward_Channel, RobotMap.CHP_Reverse_Channel);
 		
 		Neutralizer = new Servo(RobotMap.CHN_Channel);
 		
-		//configuration 
+		//object configuration options
 		
 			LeftEncoder.reset();
 			RightEncoder.reset();
@@ -72,6 +73,7 @@ public class Chassis extends Subsystem {
 			Right2.setInverted(true);
 		
 			Navx.reset();
+			
 		
 	}
 	
@@ -127,6 +129,18 @@ public class Chassis extends Subsystem {
 	public void EngageNeutralizer() {
 		Neutralizer.setAngle(RobotMap.CHN_EngageAngle);
 	}
+	public void DisengageNeutralizer() {
+		Neutralizer.setAngle(RobotMap.CHN_DisengageAngle);
+	}
 	
+	public void EngagePTO() {
+		PTO.set(DoubleSolenoid.Value.kForward);
+	}
+	public void DisengagePTO() {
+		PTO.set(DoubleSolenoid.Value.kReverse);
+	}
 	
+	public enum Config{
+		Starting, Climbing
+	}
 }

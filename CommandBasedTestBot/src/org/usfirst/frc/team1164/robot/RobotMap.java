@@ -73,7 +73,12 @@ public class RobotMap {
 	
 	//Neutralizer
 	public static final int CHN_Channel = 0;
-	public static final double CHN_EngageAngle = 0;
+	public static final double CHN_EngageAngle = 30;
+	public static final double CHN_DisengageAngle = 150;
+	
+	//PTO
+	public static final int CHP_Forward_Channel = 2;
+	public static final int CHP_Reverse_Channel = 3;
 
 
 // claw options

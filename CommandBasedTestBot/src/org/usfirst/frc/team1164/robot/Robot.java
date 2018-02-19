@@ -12,6 +12,7 @@ import org.usfirst.frc.team1164.robot.commands.Auto.AutoTurn;
 import org.usfirst.frc.team1164.robot.subsystems.Chassis;
 import org.usfirst.frc.team1164.robot.subsystems.Claw;
 import org.usfirst.frc.team1164.robot.subsystems.Winch;
+import org.usfirst.frc.team1164.robot.commands.*;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -42,6 +43,7 @@ public class Robot extends TimedRobot {
 //	private Command autoForward;
 	//private Command autoCommand;
 	private Command autocommand;
+	private Command ChassisInit = new SetConfiguration(Chassis.Config.Starting);
 	
 	
 	private int mode = 1;
@@ -63,6 +65,8 @@ public class Robot extends TimedRobot {
 		
 		CameraServer Camera = CameraServer.getInstance();
 		Camera.addAxisCamera("10.11.64.13");
+		
+		ChassisInit.start();
 
 		
 	}
