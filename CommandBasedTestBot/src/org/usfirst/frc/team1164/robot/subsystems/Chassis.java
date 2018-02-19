@@ -8,6 +8,8 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Servo;
 
 
 import com.kauailabs.navx.frc.AHRS;
@@ -19,6 +21,8 @@ public class Chassis extends Subsystem {
 	private WPI_VictorSPX Right1, Right2, Right3, Left1, Left2, Left3;
 	private Encoder LeftEncoder, RightEncoder;
 	private AHRS Navx;
+	private DoubleSolenoid Transmission;
+	private Servo Neutralizer;
 	
 
 	@Override
@@ -27,12 +31,14 @@ public class Chassis extends Subsystem {
 	}
 	
 	public Chassis() {
+		
+		//Object definitions
 		Left1 = new WPI_VictorSPX(RobotMap.CHV_Left_1);
 		Left2 = new WPI_VictorSPX(RobotMap.CHV_Left_2);
-		Left3 = new WPI_VictorSPX(RobotMap.CHV_Left_2);
+		Left3 = new WPI_VictorSPX(RobotMap.CHV_Left_3);
 		Right1 = new WPI_VictorSPX(RobotMap.CHV_Right_1);
 		Right2 = new WPI_VictorSPX(RobotMap.CHV_Right_2);
-		Right3 = new WPI_VictorSPX(RobotMap.CHV_Right_2);
+		Right3 = new WPI_VictorSPX(RobotMap.CHV_Right_3);
 		
 		try {
 			Navx = new AHRS(SPI.Port.kMXP);
@@ -47,6 +53,9 @@ public class Chassis extends Subsystem {
 		RightEncoder = new Encoder(RobotMap.CHE_Right_channelA, RobotMap.CHE_Right_channelB, 
 				RobotMap.CHE_Right_reversed, Encoder.EncodingType.k2X);
 		
+		Transmission = new DoubleSolenoid(RobotMap.CHT_Forward_Channel,RobotMap.CHT_Reverse_Channel);
+		
+		Neutralizer = new Servo(RobotMap.CHN_Channel);
 		
 		//configuration 
 		
@@ -106,5 +115,18 @@ public class Chassis extends Subsystem {
 		Left2.set(ControlMode.PercentOutput, 0);
 		Left3.set(ControlMode.PercentOutput, 0);
 	}
+	
+	public void SetHighGear() {
+		Transmission.set(DoubleSolenoid.Value.kForward);
+	}
+	
+	public void SetLowGear() {
+		Transmission.set(DoubleSolenoid.Value.kReverse);
+	}
+	
+	public void EngageNeutralizer() {
+		Neutralizer.setAngle(RobotMap.CHN_EngageAngle);
+	}
+	
 	
 }

@@ -55,6 +55,7 @@ public class RobotMap {
 	public static final int CHV_Right_3 = 15;
 	
 	public static final double speedReducer = 1;	
+	
 	// encoders
 	public static final int CHE_Left_channelA = 0;
 	public static final int CHE_Left_channelB = 1;
@@ -66,6 +67,15 @@ public class RobotMap {
 	
 	public static final double kDistancePerPulse = 0.249364;
 	
+	//transmission
+	public static final int CHT_Forward_Channel = 0;
+	public static final int CHT_Reverse_Channel = 1;
+	
+	//Neutralizer
+	public static final int CHN_Channel = 0;
+	public static final double CHN_EngageAngle = 0;
+
+
 // claw options
 	public static final int CL_sol0ID = 0;
 	public static final int CL_sol1ID = 1;
