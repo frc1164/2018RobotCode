@@ -10,7 +10,7 @@ package org.usfirst.frc.team1164.robot;
 import org.usfirst.frc.team1164.robot.commands.CloseClaw;
 import org.usfirst.frc.team1164.robot.commands.OpenClaw;
 
-import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
@@ -19,8 +19,8 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	public static int remotePort = 0;
-	private static Joystick stick = new Joystick(remotePort);
+	public static final int remotePort = 0;
+	private static XboxController stick = new XboxController(remotePort);
 	Button buttonOpenClaw = new JoystickButton(stick, 1);
 	Button buttonCloseClaw = new JoystickButton(stick, 2);
 	
@@ -29,8 +29,11 @@ public class OI {
 		buttonCloseClaw.whenPressed(new CloseClaw());
 	}
 	
-	public static Joystick getJoystick() {
-		return stick;
+	public static double getControllerAxis(int AxisChannel) {
+		return stick.getRawAxis(AxisChannel);
+	}
+	public static boolean getControllerButton(int ButtonChannel) {
+		return stick.getRawButton(ButtonChannel);
 	}
 	
 	

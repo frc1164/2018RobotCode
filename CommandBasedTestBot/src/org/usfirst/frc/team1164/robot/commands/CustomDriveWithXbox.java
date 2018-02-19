@@ -1,9 +1,8 @@
 package org.usfirst.frc.team1164.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import org.usfirst.frc.team1164.robot.*;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
+import org.usfirst.frc.team1164.robot.*;
 /**
  *
  */
@@ -14,7 +13,8 @@ public class CustomDriveWithXbox extends Command {
 	private double LTriggerValue;
 	private double RTriggerValue;
 	
-	private double[] Motors = {0,0};
+	private double LeftMotorValue;
+	private double RightMotorValue;
 
 
     public CustomDriveWithXbox() {
@@ -31,28 +31,29 @@ public class CustomDriveWithXbox extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	this.LStickValue = OI.getJoystick().getRawAxis(RobotMap.LAxis);
-    	this.RStickValue = OI.getJoystick().getRawAxis(RobotMap.RAxis);
-    	this.LTriggerValue = OI.getJoystick().getRawAxis(RobotMap.LTriggerAxis);
-    	this.RTriggerValue = OI.getJoystick().getRawAxis(RobotMap.RTriggerAxis);
+    	this.LStickValue = OI.getControllerAxis(RobotMap.LAxis);
+    	this.RStickValue = OI.getControllerAxis(RobotMap.RAxis);
+    	this.LTriggerValue = OI.getControllerAxis(RobotMap.LTriggerAxis);
+    	this.RTriggerValue = OI.getControllerAxis(RobotMap.RTriggerAxis);
 
 		//Drive forward and backward
-		this.Motors[0] = this.RTriggerValue - this.LTriggerValue;
-		this.Motors[1] = this.RTriggerValue - this.LTriggerValue;
+    	RightMotorValue = this.RTriggerValue - this.LTriggerValue;
+    	LeftMotorValue = this.RTriggerValue - this.LTriggerValue;
 
 		//Turning slowly (Assuming LAxis is the slow turning axis)
-		this.Motors[0] = (1 - this.RStickValue) * this.Motors[0];
-		this.Motors[1] = (1 + this.RStickValue) * this.Motors[3];
+    	RightMotorValue = (1 - this.RStickValue) * RightMotorValue;
+    	LeftMotorValue = (1 + this.RStickValue) * RightMotorValue;
 
 		//Turning quickly (Assuming RAxis is the fast turning axis)
-		this.Motors[0] = this.Motors[0] - (0.5 * this.LStickValue);
-		this.Motors[1] = this.Motors[3] + (0.5 * this.LStickValue);
+		RightMotorValue = RightMotorValue - (0.5 * this.LStickValue);
+		LeftMotorValue = LeftMotorValue + (0.5 * this.LStickValue);
 		
-		Robot.kChassis.setRightMotorSpeed(this.Motors[0]);
-		Robot.kChassis.setLeftMotorSpeed(this.Motors[1]);
-
-		SmartDashboard.putNumberArray("Motor Values", this.Motors);
+		Robot.kChassis.setRightMotorSpeed(RightMotorValue);
+		Robot.kChassis.setLeftMotorSpeed(LeftMotorValue);
     	
+		SmartDashboard.putNumber("Left Encoder", Robot.kChassis.GetLeftEncoder());
+		SmartDashboard.putNumber("Right Encoder", Robot.kChassis.GetRightEncoder());
+
     	
     }
 
