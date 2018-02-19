@@ -9,6 +9,8 @@ package org.usfirst.frc.team1164.robot;
 
 import org.usfirst.frc.team1164.robot.commands.CloseClaw;
 import org.usfirst.frc.team1164.robot.commands.OpenClaw;
+import org.usfirst.frc.team1164.robot.commands.SetTransmissionHighGear;
+import org.usfirst.frc.team1164.robot.commands.SetTransmissionLowGear;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -23,10 +25,15 @@ public class OI {
 	private static XboxController stick = new XboxController(remotePort);
 	Button buttonOpenClaw = new JoystickButton(stick, 1);
 	Button buttonCloseClaw = new JoystickButton(stick, 2);
+	Button buttonHighGear = new JoystickButton(stick, 6);
+	Button buttonLowGear = new JoystickButton(stick, 5);
 	
 	public OI() {
 		buttonOpenClaw.whenPressed(new OpenClaw());
 		buttonCloseClaw.whenPressed(new CloseClaw());
+		buttonHighGear.whenPressed(new SetTransmissionHighGear());
+		buttonLowGear.whenPressed(new SetTransmissionLowGear());
+
 	}
 	
 	public static double getControllerAxis(int AxisChannel) {
