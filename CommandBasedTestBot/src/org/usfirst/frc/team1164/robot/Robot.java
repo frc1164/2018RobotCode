@@ -65,7 +65,7 @@ public class Robot extends TimedRobot {
 		CameraServer Camera = CameraServer.getInstance();
 		Camera.addAxisCamera("10.11.64.13");
 		
-		RobotCompressor = new Compressor();
+		RobotCompressor = new Compressor(0);
 		lw = new LiveWindow();
 		LiveWindow.enableTelemetry(kChassis);
 		LiveWindow.setEnabled(true);

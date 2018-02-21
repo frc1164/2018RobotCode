@@ -82,8 +82,8 @@ public class RobotMap {
 	public static final double CHN_Right_EngageAngle = .8888;
 	
 	//PTO
-	public static final int CHP_Forward_Channel = 2;
-	public static final int CHP_Reverse_Channel = 3;
+	public static final int CHP_Forward_Channel = 3;
+	public static final int CHP_Reverse_Channel = 2;
 
 
 // claw options
