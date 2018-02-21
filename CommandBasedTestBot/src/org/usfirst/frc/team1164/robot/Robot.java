@@ -43,7 +43,8 @@ public class Robot extends TimedRobot {
 	
 //	private Command autoForward;
 	//private Command autoCommand;
-	private Command autocommand;	
+	private Command autocommand;
+	private Command ChassisInit;
 	
 	private int mode = 1;
 	private SendableChooser<Integer> m_chooser = new SendableChooser<>();
@@ -70,7 +71,8 @@ public class Robot extends TimedRobot {
 		LiveWindow.enableTelemetry(kChassis);
 		LiveWindow.setEnabled(true);
 		
-		Robot.kChassis.DisengageNeutralizer();	
+		ChassisInit = new SetConfiguration(Chassis.Config.Starting);
+	
 	}
 
 	/**
@@ -111,7 +113,6 @@ public class Robot extends TimedRobot {
 		if (autocommand != null) {
 			autocommand.start();
 		}
-		
 	}
 	
 
@@ -132,8 +133,8 @@ public class Robot extends TimedRobot {
 		if (autocommand != null) {
 			autocommand.cancel();
 		}
-	}
 
+	}
 	/**
 	 * This function is called periodically during operator control.
 	 */

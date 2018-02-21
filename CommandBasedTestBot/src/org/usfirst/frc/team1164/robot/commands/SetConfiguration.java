@@ -34,10 +34,13 @@ public class SetConfiguration extends Command {
     	if (configuration == Chassis.Config.Starting) {
     		Robot.kChassis.DisengageNeutralizer();
     		Robot.kChassis.DisengagePTO();
+    		Robot.kChassis.IsClimbingConfiguration = false;
+    		
     		}
     	else {
     		Robot.kChassis.EngageNeutralizer();
     		Robot.kChassis.EngagePTO();
+    		Robot.kChassis.IsClimbingConfiguration = true;
     	}
     	
     	//sets low gear to finish configuring in neutral

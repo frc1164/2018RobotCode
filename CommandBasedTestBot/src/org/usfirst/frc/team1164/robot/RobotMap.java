@@ -87,13 +87,6 @@ public class RobotMap {
 
 
 // claw options
-	public static final int CL_sol0ID = 0;
-	public static final int CL_sol1ID = 1;
-	public static final int CL_canID = 0;
-	
-// winch options
-	//victors
-	public static final int WIV_winch1 = 5;
-	public static final int WIV_winch2 = 6;
-	public static final int WIV_winch3 = 7;
+	public static final int CL_Forward_Channel = 4;
+	public static final int CL_Reverse_Channel = 5;
 }

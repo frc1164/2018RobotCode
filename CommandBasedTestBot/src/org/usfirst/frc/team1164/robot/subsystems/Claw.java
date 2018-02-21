@@ -2,23 +2,19 @@ package org.usfirst.frc.team1164.robot.subsystems;
 
 import org.usfirst.frc.team1164.robot.RobotMap;
 
-import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Claw extends Subsystem{
-	@SuppressWarnings("unused")
-	private boolean isOpen;
-	//private Solenoid sol0, sol1;
 	
+	public boolean isOpen;
+	private DoubleSolenoid Claw;
 	
 
 	public Claw() {
-		//sol0 = new Solenoid(RobotMap.CL_canID, RobotMap.CL_sol0ID);
-		//sol1 = new Solenoid(RobotMap.CL_canID, RobotMap.CL_sol1ID);
+		Claw = new DoubleSolenoid(RobotMap.CL_Forward_Channel, RobotMap.CL_Reverse_Channel);
 		
-		//sol0.set(false);
-		//sol1.set(true);
+		
 	}
 	
 
@@ -30,14 +26,12 @@ public class Claw extends Subsystem{
 	
 	public void Close() {
 		isOpen = false;
-		//sol0.set(false);
-		//sol1.set(true);
+		Claw.set(DoubleSolenoid.Value.kForward);
 	}
 	
 	public void Open() {
 		isOpen = true;
-		//sol0.set(true);
-		//sol1.set(false);
+		Claw.set(DoubleSolenoid.Value.kReverse);
 	}
 
 	public boolean getOpenState() {

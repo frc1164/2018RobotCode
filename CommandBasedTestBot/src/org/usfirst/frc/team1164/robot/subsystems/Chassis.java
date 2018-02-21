@@ -7,6 +7,7 @@ import org.usfirst.frc.team1164.robot.commands.CustomDriveWithXbox;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -24,6 +25,8 @@ public class Chassis extends Subsystem {
 	private AHRS Navx;
 	private DoubleSolenoid Transmission, PTO;
 	private Servo LeftNeutralizer, RightNeutralizer;
+	public boolean IsClimbingConfiguration;
+	public boolean IsHighGear;
 	
 
 	@Override
@@ -41,12 +44,6 @@ public class Chassis extends Subsystem {
 		Right2 = new WPI_VictorSPX(RobotMap.CHV_Right_2);
 		Right3 = new WPI_VictorSPX(RobotMap.CHV_Right_3);
 		
-		Left1.setName("Left1");
-		Left2.setName("Left2");
-		Left3.setName("Left3");
-		Right1.setName("Right1");
-		Right2.setName("Right2");
-		Right3.setName("Right3");
 		
 		
 		//LiveWindow.add("Chassis");
@@ -55,7 +52,9 @@ public class Chassis extends Subsystem {
 		LiveWindow.add(Right1);
 		LiveWindow.add(Right2);
 		LiveWindow.add(Right3);
-		
+		LiveWindow.add(Navx);
+		LiveWindow.add(LeftEncoder);
+		LiveWindow.add(RightEncoder);
 		try {
 			Navx = new AHRS(SPI.Port.kMXP);
 		}
@@ -69,11 +68,18 @@ public class Chassis extends Subsystem {
 		RightEncoder = new Encoder(RobotMap.CHE_Right_channelA, RobotMap.CHE_Right_channelB, 
 				RobotMap.CHE_Right_reversed, Encoder.EncodingType.k2X);
 		
+		LeftEncoder.setName("Chassis", "LeftEncoder");
+		RightEncoder.setName("Chassis", "RightEncoder");
+		
 		Transmission = new DoubleSolenoid(RobotMap.CHT_Forward_Channel,RobotMap.CHT_Reverse_Channel);
 		PTO = new DoubleSolenoid(RobotMap.CHP_Forward_Channel, RobotMap.CHP_Reverse_Channel);
 		
+		
 		LeftNeutralizer = new Servo(RobotMap.CHN_Left_Channel);
 		RightNeutralizer = new Servo(RobotMap.CHN_Right_Channel);
+		
+		IsClimbingConfiguration = false;
+		IsHighGear = false;
 		
 		//object configuration options
 		
@@ -90,6 +96,14 @@ public class Chassis extends Subsystem {
 			Right2.setInverted(true);
 		
 			Navx.reset();
+			
+			Left1.setName("Chassis", "Left1");
+			Left2.setName("Chassis", "Left2");
+			Left3.setName("Chassis", "Left3");
+			Right1.setName("Chassis", "Right1");
+			Right2.setName("Chassis", "Right2");
+			Right3.setName("Chassis", "Right3");
+			Navx.setName("Chassis", "NavX");
 			
 		
 	}
@@ -137,10 +151,12 @@ public class Chassis extends Subsystem {
 	
 	public void SetHighGear() {
 		Transmission.set(DoubleSolenoid.Value.kForward);
+		IsHighGear = true;
 	}
 	
 	public void SetLowGear() {
 		Transmission.set(DoubleSolenoid.Value.kReverse);
+		IsHighGear = false;
 	}
 	
 	public void EngageNeutralizer() {
@@ -160,6 +176,6 @@ public class Chassis extends Subsystem {
 	}
 	
 	public enum Config{
-		Starting, Climbings
+		Starting, Climbing
 	}
 }

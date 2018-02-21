@@ -39,20 +39,26 @@ public class CustomDriveWithXbox extends Command {
 		//Drive forward and backward
     	RightMotorValue = RTriggerValue - LTriggerValue;
     	LeftMotorValue = RTriggerValue - LTriggerValue;
+    	
+    	//prevents wheels from running at inconsistent speeds if the PTO is engaged
+    	if (!Robot.kChassis.IsClimbingConfiguration) {
 
-		//Turning slowly (Assuming LAxis is the slow turning axis)
-    	RightMotorValue = (1 - RStickValue) * RightMotorValue;
-    	LeftMotorValue = (1 + RStickValue) * RightMotorValue;
+    		//Turning slowly (Assuming LAxis is the slow turning axis)
+    		RightMotorValue = (1 - RStickValue) * RightMotorValue;
+    		LeftMotorValue = (1 + LStickValue) * LeftMotorValue;
 
-		//Turning quickly (Assuming RAxis is the fast turning axis)
-		RightMotorValue = RightMotorValue - (0.5 * LStickValue);
-		LeftMotorValue = LeftMotorValue + (0.5 * LStickValue);
+    		//Turning quickly (Assuming RAxis is the fast turning axis)
+    		RightMotorValue = RightMotorValue - (0.5 * RStickValue);
+    		LeftMotorValue = LeftMotorValue + (0.5 * LStickValue);
+    		
+    	}
 		
 		Robot.kChassis.setRightMotorSpeed(RightMotorValue);
 		Robot.kChassis.setLeftMotorSpeed(LeftMotorValue);
     	
 		SmartDashboard.putNumber("Left Encoder", Robot.kChassis.GetLeftEncoder());
 		SmartDashboard.putNumber("Right Encoder", Robot.kChassis.GetRightEncoder());
+		SmartDashboard.putBoolean("High Gear", Robot.kChassis.IsHighGear);
 
     	
     }
