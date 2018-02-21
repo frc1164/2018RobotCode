@@ -18,7 +18,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.Compressor;
 
 
 /**
@@ -32,6 +34,8 @@ public class Robot extends TimedRobot {
 	
 	public static final Chassis kChassis = new Chassis();
 	public static final Claw kClaw = new Claw();
+	private Compressor RobotCompressor;
+	public LiveWindow lw;
 	
 	public static OI m_oi;
 
@@ -39,9 +43,7 @@ public class Robot extends TimedRobot {
 	
 //	private Command autoForward;
 	//private Command autoCommand;
-	private Command autocommand;
-	private Command ChassisInit = new SetConfiguration(Chassis.Config.Starting);
-	
+	private Command autocommand;	
 	
 	private int mode = 1;
 	private SendableChooser<Integer> m_chooser = new SendableChooser<>();
@@ -63,9 +65,12 @@ public class Robot extends TimedRobot {
 		CameraServer Camera = CameraServer.getInstance();
 		Camera.addAxisCamera("10.11.64.13");
 		
-		ChassisInit.start();
-
+		RobotCompressor = new Compressor();
+		lw = new LiveWindow();
+		LiveWindow.enableTelemetry(kChassis);
+		LiveWindow.setEnabled(true);
 		
+		Robot.kChassis.DisengageNeutralizer();	
 	}
 
 	/**
@@ -144,6 +149,29 @@ public class Robot extends TimedRobot {
 	public void testPeriodic() {
 		SmartDashboard.putNumber("Left Encoder", kChassis.GetLeftEncoder());
 		SmartDashboard.putNumber("Right Encoder", kChassis.GetRightEncoder());
+		Robot.kChassis.setSubsystem("Chassis");
+		Robot.kClaw.setSubsystem("Claw");
+		
+		//LiveWindow.add(Robot.kChassis.getSubsystem(), );
+		
+		if (OI.getControllerButton(1) == true) {
+			Robot.kChassis.EngageNeutralizer();
+		}
+		else if (OI.getControllerButton(2) == true) {
+			Robot.kChassis.DisengageNeutralizer();
+		}
+		else if (OI.getControllerButton(3) == true) {
+			Robot.kChassis.EngagePTO();
+		}
+		else if (OI.getControllerButton(4) == true) {
+			Robot.kChassis.DisengagePTO();
+		}
+		else if (OI.getControllerButton(5) == true) {
+			Robot.kChassis.SetLowGear();
+		}
+		else if (OI.getControllerButton(6) == true) {
+			Robot.kChassis.SetHighGear();
+		}
 		
 	}
 }

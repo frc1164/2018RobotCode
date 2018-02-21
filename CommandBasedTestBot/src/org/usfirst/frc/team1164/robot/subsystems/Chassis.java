@@ -6,6 +6,7 @@ import org.usfirst.frc.team1164.robot.commands.CustomDriveWithXbox;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -22,7 +23,7 @@ public class Chassis extends Subsystem {
 	private Encoder LeftEncoder, RightEncoder;
 	private AHRS Navx;
 	private DoubleSolenoid Transmission, PTO;
-	private Servo Neutralizer;
+	private Servo LeftNeutralizer, RightNeutralizer;
 	
 
 	@Override
@@ -40,6 +41,21 @@ public class Chassis extends Subsystem {
 		Right2 = new WPI_VictorSPX(RobotMap.CHV_Right_2);
 		Right3 = new WPI_VictorSPX(RobotMap.CHV_Right_3);
 		
+		Left1.setName("Left1");
+		Left2.setName("Left2");
+		Left3.setName("Left3");
+		Right1.setName("Right1");
+		Right2.setName("Right2");
+		Right3.setName("Right3");
+		
+		
+		//LiveWindow.add("Chassis");
+		LiveWindow.add(Left2);
+		LiveWindow.add(Left3);
+		LiveWindow.add(Right1);
+		LiveWindow.add(Right2);
+		LiveWindow.add(Right3);
+		
 		try {
 			Navx = new AHRS(SPI.Port.kMXP);
 		}
@@ -56,7 +72,8 @@ public class Chassis extends Subsystem {
 		Transmission = new DoubleSolenoid(RobotMap.CHT_Forward_Channel,RobotMap.CHT_Reverse_Channel);
 		PTO = new DoubleSolenoid(RobotMap.CHP_Forward_Channel, RobotMap.CHP_Reverse_Channel);
 		
-		Neutralizer = new Servo(RobotMap.CHN_Channel);
+		LeftNeutralizer = new Servo(RobotMap.CHN_Left_Channel);
+		RightNeutralizer = new Servo(RobotMap.CHN_Right_Channel);
 		
 		//object configuration options
 		
@@ -127,10 +144,12 @@ public class Chassis extends Subsystem {
 	}
 	
 	public void EngageNeutralizer() {
-		Neutralizer.setAngle(RobotMap.CHN_EngageAngle);
+		LeftNeutralizer.set(RobotMap.CHN_Left_EngageAngle);
+		RightNeutralizer.set(RobotMap.CHN_Right_EngageAngle);
 	}
 	public void DisengageNeutralizer() {
-		Neutralizer.setAngle(RobotMap.CHN_DisengageAngle);
+		LeftNeutralizer.set(RobotMap.CHN_Left_DisengageAngle);
+		RightNeutralizer.set(RobotMap.CHN_Right_DisengageAngle);
 	}
 	
 	public void EngagePTO() {
@@ -141,6 +160,6 @@ public class Chassis extends Subsystem {
 	}
 	
 	public enum Config{
-		Starting, Climbing
+		Starting, Climbings
 	}
 }

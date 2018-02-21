@@ -42,6 +42,8 @@ public class RobotMap {
 	public static final int RTriggerAxis = 3;
 	public static final int LAxis = 0;
 	public static final int RAxis = 4;
+	public static final int driverPort = 0;
+	public static final int operatorPort = 1;
 
 	
 // chassis options
@@ -72,9 +74,12 @@ public class RobotMap {
 	public static final int CHT_Reverse_Channel = 1;
 	
 	//Neutralizer
-	public static final int CHN_Channel = 0;
-	public static final double CHN_EngageAngle = 30;
-	public static final double CHN_DisengageAngle = 150;
+	public static final int CHN_Left_Channel = 0;
+	public static final int CHN_Right_Channel = 1;
+	public static final double CHN_Left_DisengageAngle = .8888;
+	public static final double CHN_Left_EngageAngle = .35;
+	public static final double CHN_Right_DisengageAngle = .5;
+	public static final double CHN_Right_EngageAngle = .8888;
 	
 	//PTO
 	public static final int CHP_Forward_Channel = 2;

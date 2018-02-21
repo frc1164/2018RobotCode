@@ -21,12 +21,12 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	public static final int remotePort = 0;
-	private static XboxController stick = new XboxController(remotePort);
-	Button buttonOpenClaw = new JoystickButton(stick, 1);
-	Button buttonCloseClaw = new JoystickButton(stick, 2);
-	Button buttonHighGear = new JoystickButton(stick, 6);
-	Button buttonLowGear = new JoystickButton(stick, 5);
+	private static XboxController driverStick = new XboxController(RobotMap.driverPort);
+	private static XboxController operatorStick = new XboxController(RobotMap.operatorPort);
+	private Button buttonOpenClaw = new JoystickButton(operatorStick, 1);
+	private Button buttonCloseClaw = new JoystickButton(operatorStick, 2);
+	private Button buttonHighGear = new JoystickButton(driverStick, 6);
+	private Button buttonLowGear = new JoystickButton(driverStick, 5);
 	
 	public OI() {
 		buttonOpenClaw.whenPressed(new OpenClaw());
@@ -37,10 +37,10 @@ public class OI {
 	}
 	
 	public static double getControllerAxis(int AxisChannel) {
-		return stick.getRawAxis(AxisChannel);
+		return driverStick.getRawAxis(AxisChannel);
 	}
 	public static boolean getControllerButton(int ButtonChannel) {
-		return stick.getRawButton(ButtonChannel);
+		return driverStick.getRawButton(ButtonChannel);
 	}
 	
 	
