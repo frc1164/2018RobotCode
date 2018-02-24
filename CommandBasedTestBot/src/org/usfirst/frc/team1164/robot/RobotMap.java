@@ -25,9 +25,7 @@ public class RobotMap {
 	public static int rangefinderPort = 1;
 	public static int rangefinderModule = 1;
 	*/
-	
-	public static double kDistancePerPulse = 0.249364;
-	
+		
 // base robot options
 	// Subsystem names
 	/** 
@@ -40,31 +38,55 @@ public class RobotMap {
 	
 // controller options
 	
+	public static final int LTriggerAxis = 2;
+	public static final int RTriggerAxis = 3;
+	public static final int LAxis = 0;
+	public static final int RAxis = 4;
+	public static final int driverPort = 0;
+	public static final int operatorPort = 1;
+
+	
 // chassis options
 	// victors
-	public static int CHV_Left_1 = 2;
-	public static int CHV_Left_2 = 3;
+	public static final int CHV_Left_1 = 0;
+	public static final int CHV_Left_2 = 1;
+	public static final int CHV_Left_3 = 2;
 	
-	public static int CHV_Right_1 = 1;
-	public static int CHV_Right_2 = 4;
+	public static final int CHV_Right_1 = 13;
+	public static final int CHV_Right_2 = 14;
+	public static final int CHV_Right_3 = 15;
+	
+	public static final double speedReducer = 1;	
 	
 	// encoders
-	public static int CHE_Left_channelA = 0;
-	public static int CHE_Left_channelB = 1;
-	public static boolean CHE_Left_reversed = true;
+	public static final int CHE_Left_channelA = 0;
+	public static final int CHE_Left_channelB = 1;
+	public static final boolean CHE_Left_reversed = true;
 	
-	public static int CHE_Right_channelA = 2;
-	public static int CHE_Right_channelB = 3;
-	public static boolean CHE_Right_reversed = false;
+	public static final int CHE_Right_channelA = 2;
+	public static final int CHE_Right_channelB = 3;
+	public static final boolean CHE_Right_reversed = false;
 	
+	public static final double kDistancePerPulse = 0.249364;
+	
+	//transmission
+	public static final int CHT_Forward_Channel = 0;
+	public static final int CHT_Reverse_Channel = 1;
+	
+	//Neutralizer
+	public static final int CHN_Left_Channel = 0;
+	public static final int CHN_Right_Channel = 1;
+	public static final double CHN_Left_DisengageAngle = .8888;
+	public static final double CHN_Left_EngageAngle = .35;
+	public static final double CHN_Right_DisengageAngle = .5;
+	public static final double CHN_Right_EngageAngle = .8888;
+	
+	//PTO
+	public static final int CHP_Forward_Channel = 3;
+	public static final int CHP_Reverse_Channel = 2;
+
+
 // claw options
-	public static int CL_sol0ID = 0;
-	public static int CL_sol1ID = 1;
-	public static int CL_canID = 0;
-	
-// winch options
-	//victors
-	public static int WIV_winch1 = 5;
-	public static int WIV_winch2 = 6;
-	public static int WIV_winch3 = 7;
+	public static final int CL_Forward_Channel = 4;
+	public static final int CL_Reverse_Channel = 5;
 }

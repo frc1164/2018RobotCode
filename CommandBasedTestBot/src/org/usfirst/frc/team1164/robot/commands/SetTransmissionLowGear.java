@@ -7,10 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class OpenClaw extends Command {
+public class SetTransmissionLowGear extends Command {
 
-    public OpenClaw() {
-    	requires(Robot.kClaw);
+    public SetTransmissionLowGear() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -21,8 +20,7 @@ public class OpenClaw extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (!Robot.kClaw.getOpenState())
-    		Robot.kClaw.Open();
+    	Robot.kChassis.SetLowGear();
     }
 
     // Make this return true when this Command no longer needs to run execute()

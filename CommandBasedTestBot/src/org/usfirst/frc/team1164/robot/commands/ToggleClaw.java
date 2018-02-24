@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class ToggleClaw extends Command {
-	private boolean isOpen;
     public ToggleClaw() {
     	requires(Robot.kClaw);
         // Use requires() here to declare subsystem dependencies
@@ -17,19 +16,15 @@ public class ToggleClaw extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	isOpen = true;
-    	Robot.kClaw.Open();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (isOpen) {
+    	if (Robot.kClaw.getOpenState()) {
     		Robot.kClaw.Close();
-    		isOpen = false;
     	}
     	else {
     		Robot.kClaw.Open();
-    		isOpen = true;
     	}
     }
 
