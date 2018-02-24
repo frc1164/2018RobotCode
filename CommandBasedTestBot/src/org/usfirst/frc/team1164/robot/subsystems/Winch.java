@@ -26,7 +26,7 @@ public class Winch extends Subsystem {
 	public void DriveWinch() {
 		double StickValue = Stick.getRawAxis(2);
 		
-		if (OI.getJoystick().getRawButton(2)) {
+		if (OI.getControllerButton(2)) {
 			Winch1.set(1);
 			Winch2.set(1);
 			Winch3.set(1);
