@@ -7,6 +7,9 @@
 
 package org.usfirst.frc.team1164.robot;
 
+import edu.wpi.first.wpilibj.CounterBase;
+import edu.wpi.first.wpilibj.Encoder;
+
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -89,4 +92,14 @@ public class RobotMap {
 // claw options
 	public static final int CL_Forward_Channel = 4;
 	public static final int CL_Reverse_Channel = 5;
+	
+// arm options
+	public static final int ARM_Victor_Channel = 3;
+	public static final int ARM_Encoder_ChannelA = 0;
+	public static final int ARM_Encoder_ChannelB = 1;
+	public static final boolean ARM_Encoder_IsInverted = false;
+	public static final CounterBase.EncodingType ARM_Encoder_EncodingType = CounterBase.EncodingType.k4X; //k is for konstant
+	public static final int ARM_Pot_Channel = 0;
+	public static final int ARM_Forward_Stop = 3;
+	public static final int ARM_Reverse_Stop = 4;
 }
