@@ -44,12 +44,12 @@ public class CustomDriveWithXbox extends Command {
     	if (!Robot.kChassis.IsClimbingConfiguration) {
 
     		//Turning slowly (Assuming LAxis is the slow turning axis)
-    		RightMotorValue = (1 - RStickValue) * RightMotorValue;
+    		RightMotorValue = (1 - LStickValue) * RightMotorValue;
     		LeftMotorValue = (1 + LStickValue) * LeftMotorValue;
 
     		//Turning quickly (Assuming RAxis is the fast turning axis)
     		RightMotorValue = RightMotorValue - (0.5 * RStickValue);
-    		LeftMotorValue = LeftMotorValue + (0.5 * LStickValue);
+    		LeftMotorValue = LeftMotorValue + (0.5 * RStickValue);
     		
     	}
 		
