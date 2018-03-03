@@ -8,9 +8,10 @@
 package org.usfirst.frc.team1164.robot;
 
 import org.usfirst.frc.team1164.logic.autoDecissionMattrix;
+import org.usfirst.frc.team1164.robot.commands.Auto.AutoTurn;
 import org.usfirst.frc.team1164.robot.subsystems.Chassis;
 import org.usfirst.frc.team1164.robot.subsystems.Claw;
-import org.usfirst.frc.team1164.robot.commands.*;
+import org.usfirst.frc.team1164.robot.subsystems.Winch;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -18,9 +19,6 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.CameraServer;
-import edu.wpi.first.wpilibj.Compressor;
 
 
 /**
@@ -34,8 +32,7 @@ public class Robot extends TimedRobot {
 	
 	public static final Chassis kChassis = new Chassis();
 	public static final Claw kClaw = new Claw();
-	private Compressor RobotCompressor;
-	public LiveWindow lw;
+	public static final Winch kWinch = new Winch();
 	
 	public static OI m_oi;
 
@@ -44,7 +41,7 @@ public class Robot extends TimedRobot {
 //	private Command autoForward;
 	//private Command autoCommand;
 	private Command autocommand;
-	private Command ChassisInit;
+	
 	
 	private int mode = 1;
 	private SendableChooser<Integer> m_chooser = new SendableChooser<>();
@@ -62,17 +59,8 @@ public class Robot extends TimedRobot {
 		m_chooser.addObject("Position 3", 3);
 		m_chooser.addObject("Testing", 4);
 		SmartDashboard.putData("Positions", m_chooser);
+
 		
-		CameraServer Camera = CameraServer.getInstance();
-		Camera.addAxisCamera("10.11.64.13");
-		
-		RobotCompressor = new Compressor(0);
-		lw = new LiveWindow();
-		LiveWindow.enableTelemetry(kChassis);
-		LiveWindow.setEnabled(true);
-		
-		ChassisInit = new SetConfiguration(Chassis.Config.Starting);
-	
 	}
 
 	/**
@@ -113,6 +101,7 @@ public class Robot extends TimedRobot {
 		if (autocommand != null) {
 			autocommand.start();
 		}
+		
 	}
 	
 
@@ -133,8 +122,8 @@ public class Robot extends TimedRobot {
 		if (autocommand != null) {
 			autocommand.cancel();
 		}
-
 	}
+
 	/**
 	 * This function is called periodically during operator control.
 	 */
@@ -150,29 +139,5 @@ public class Robot extends TimedRobot {
 	public void testPeriodic() {
 		SmartDashboard.putNumber("Left Encoder", kChassis.GetLeftEncoder());
 		SmartDashboard.putNumber("Right Encoder", kChassis.GetRightEncoder());
-		Robot.kChassis.setSubsystem("Chassis");
-		Robot.kClaw.setSubsystem("Claw");
-		
-		//LiveWindow.add(Robot.kChassis.getSubsystem(), );
-		
-		if (OI.getControllerButton(1) == true) {
-			Robot.kChassis.EngageNeutralizer();
-		}
-		else if (OI.getControllerButton(2) == true) {
-			Robot.kChassis.DisengageNeutralizer();
-		}
-		else if (OI.getControllerButton(3) == true) {
-			Robot.kChassis.EngagePTO();
-		}
-		else if (OI.getControllerButton(4) == true) {
-			Robot.kChassis.DisengagePTO();
-		}
-		else if (OI.getControllerButton(5) == true) {
-			Robot.kChassis.SetLowGear();
-		}
-		else if (OI.getControllerButton(6) == true) {
-			Robot.kChassis.SetHighGear();
-		}
-		
 	}
 }

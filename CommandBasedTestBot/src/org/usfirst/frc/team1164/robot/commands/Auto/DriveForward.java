@@ -1,7 +1,6 @@
 package org.usfirst.frc.team1164.robot.commands.Auto;
 
 import org.usfirst.frc.team1164.robot.Robot;
-import org.usfirst.frc.team1164.logic.PIDController;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -10,13 +9,13 @@ public class DriveForward extends Command {
 	private double distance;
 	private double speed;
 	
-
 	public DriveForward(double distance, double speed) {
 		this.distance = distance;
 		this.speed = speed;
 		requires(Robot.kChassis);
 		
 	}
+	
 	public void initialize() {
 		Robot.kChassis.ResetEncoders();
 	}
