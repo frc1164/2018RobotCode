@@ -8,10 +8,8 @@
 package org.usfirst.frc.team1164.robot;
 
 import org.usfirst.frc.team1164.logic.autoDecissionMattrix;
-import org.usfirst.frc.team1164.robot.commands.Auto.AutoTurn;
-import org.usfirst.frc.team1164.robot.subsystems.Chassis;
-import org.usfirst.frc.team1164.robot.subsystems.Claw;
-import org.usfirst.frc.team1164.robot.subsystems.Winch;
+import org.usfirst.frc.team1164.robot.subsystems.*;
+import org.usfirst.frc.team1164.robot.commands.*;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -32,8 +30,9 @@ public class Robot extends TimedRobot {
 	
 	public static final Chassis kChassis = new Chassis();
 	public static final Claw kClaw = new Claw();
-	public static final Winch kWinch = new Winch();
-	
+	public static final Arm kArm = new Arm();
+	private Compressor RobotCompressor;
+	public LiveWindow lw;
 	public static OI m_oi;
 
 //	private Command m_autonomousCommand;

@@ -11,8 +11,9 @@ import org.usfirst.frc.team1164.robot.commands.CloseClaw;
 import org.usfirst.frc.team1164.robot.commands.OpenClaw;
 import org.usfirst.frc.team1164.robot.commands.SetTransmissionHighGear;
 import org.usfirst.frc.team1164.robot.commands.SetTransmissionLowGear;
-import org.usfirst.frc.team1164.robot.subsystems.Chassis;
 import org.usfirst.frc.team1164.robot.commands.SetConfiguration;
+import org.usfirst.frc.team1164.robot.commands.ArmDebug;
+import org.usfirst.frc.team1164.robot.subsystems.Chassis;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -31,7 +32,6 @@ public class OI {
 	private Button buttonLowGear = new JoystickButton(driverStick, 5);
 	private Button buttonPTO_Init = new JoystickButton(driverStick, 6);
 	private Button buttonChassis_Init = new JoystickButton(driverStick, 5);
-
 	
 	public OI() {
 		buttonOpenClaw.whenPressed(new OpenClaw());
@@ -43,7 +43,6 @@ public class OI {
 			buttonPTO_Init.whenPressed(new SetConfiguration(Chassis.Config.Climbing));
 			buttonChassis_Init.whenPressed(new SetConfiguration(Chassis.Config.Starting));
 		}
-		
 		
 
 	}
