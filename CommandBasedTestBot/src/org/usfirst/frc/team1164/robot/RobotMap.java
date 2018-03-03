@@ -64,11 +64,11 @@ public class RobotMap {
 	// encoders
 	public static final int CHE_Left_channelA = 0;
 	public static final int CHE_Left_channelB = 1;
-	public static final boolean CHE_Left_reversed = true;
+	public static final boolean CHE_Left_reversed = false;
 	
 	public static final int CHE_Right_channelA = 2;
 	public static final int CHE_Right_channelB = 3;
-	public static final boolean CHE_Right_reversed = false;
+	public static final boolean CHE_Right_reversed = true;
 	
 	public static final double kDistancePerPulse = 0.249364;
 	
@@ -77,12 +77,12 @@ public class RobotMap {
 	public static final int CHT_Reverse_Channel = 1;
 	
 	//Neutralizer
-	public static final int CHN_Left_Channel = 0;
-	public static final int CHN_Right_Channel = 1;
-	public static final double CHN_Left_DisengageAngle = .8888;
-	public static final double CHN_Left_EngageAngle = .35;
-	public static final double CHN_Right_DisengageAngle = .5;
-	public static final double CHN_Right_EngageAngle = .8888;
+	public static final int CHN_Left_Channel = 1;
+	public static final int CHN_Right_Channel = 0;
+	public static final double CHN_Left_DisengageAngle = .25;
+	public static final double CHN_Left_EngageAngle = 1;
+	public static final double CHN_Right_DisengageAngle = .75;
+	public static final double CHN_Right_EngageAngle = 0;
 	
 	//PTO
 	public static final int CHP_Forward_Channel = 3;

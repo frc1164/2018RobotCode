@@ -9,16 +9,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.SPI;
-<<<<<<< HEAD
-import com.kauailabs.navx.frc.AHRS;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-=======
->>>>>>> master
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Servo;
-
 
 import com.kauailabs.navx.frc.AHRS;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
@@ -29,15 +23,10 @@ public class Chassis extends Subsystem {
 	private WPI_VictorSPX Right1, Right2, Right3, Left1, Left2, Left3;
 	private Encoder LeftEncoder, RightEncoder;
 	private AHRS Navx;
-<<<<<<< HEAD
-	private DoubleSolenoid Transmission;
-=======
 	private DoubleSolenoid Transmission, PTO;
 	private Servo LeftNeutralizer, RightNeutralizer;
-	public boolean IsClimbingConfiguration;
-	public boolean IsHighGear;
->>>>>>> master
-	
+	public boolean IsClimbingConfiguration, IsHighGear;
+
 
 	@Override
 	protected void initDefaultCommand() {
@@ -45,15 +34,6 @@ public class Chassis extends Subsystem {
 	}
 	
 	public Chassis() {
-<<<<<<< HEAD
-		Left1 = new Victor(RobotMap.CHV_Left_1);
-		Left2 = new Victor(RobotMap.CHV_Left_2);
-		Right1 = new Victor(RobotMap.CHV_Right_1);
-		Right2 = new Victor(RobotMap.CHV_Right_2);
-		
-		Transmission = new DoubleSolenoid(RobotMap.CHT_Forward_channel, RobotMap.CHT_Reverse_channel);
-		
-=======
 		
 		//Object definitions
 		Left1 = new WPI_VictorSPX(RobotMap.CHV_Left_1);
@@ -74,7 +54,7 @@ public class Chassis extends Subsystem {
 		LiveWindow.add(Navx);
 		LiveWindow.add(LeftEncoder);
 		LiveWindow.add(RightEncoder);
->>>>>>> master
+
 		try {
 			Navx = new AHRS(SPI.Port.kMXP);
 		}
@@ -91,16 +71,8 @@ public class Chassis extends Subsystem {
 		LeftEncoder.setName("Chassis", "LeftEncoder");
 		RightEncoder.setName("Chassis", "RightEncoder");
 		
-<<<<<<< HEAD
-		Right1.setInverted(RobotMap.CHV_RightInverted);
-		Right2.setInverted(RobotMap.CHV_RightInverted);
-		Left1.setInverted(RobotMap.CHV_LeftInverted);
-		Left2.setInverted(RobotMap.CHV_LeftInverted);
-=======
 		Transmission = new DoubleSolenoid(RobotMap.CHT_Forward_Channel,RobotMap.CHT_Reverse_Channel);
 		PTO = new DoubleSolenoid(RobotMap.CHP_Forward_Channel, RobotMap.CHP_Reverse_Channel);
->>>>>>> master
-		
 		
 		LeftNeutralizer = new Servo(RobotMap.CHN_Left_Channel);
 		RightNeutralizer = new Servo(RobotMap.CHN_Right_Channel);
@@ -167,12 +139,7 @@ public class Chassis extends Subsystem {
 	public void ResetNavx() {
 		Navx.reset();
 	}
-<<<<<<< HEAD
 	
-
-	public void SetLowGear() {
-		Transmission.set(DoubleSolenoid.Value.kForward);
-=======
 	public void Brake() {
 		Right1.set(ControlMode.PercentOutput, 0);
 		Right2.set(ControlMode.PercentOutput, 0);
@@ -210,10 +177,6 @@ public class Chassis extends Subsystem {
 	
 	public enum Config{
 		Starting, Climbing
->>>>>>> master
 	}
 	
-	public void SetHighGear() {
-		Transmission.set(DoubleSolenoid.Value.kReverse);
-	}
 }

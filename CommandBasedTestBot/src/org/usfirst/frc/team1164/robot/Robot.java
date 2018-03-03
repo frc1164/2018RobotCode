@@ -17,6 +17,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.hal.PDPJNI;
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 
 /**
@@ -34,12 +37,14 @@ public class Robot extends TimedRobot {
 	private Compressor RobotCompressor;
 	public LiveWindow lw;
 	public static OI m_oi;
+	public static PDPJNI PDP = new PDPJNI();
 
 //	private Command m_autonomousCommand;
 	
 //	private Command autoForward;
 	//private Command autoCommand;
 	private Command autocommand;
+	private Command ChassisInit = new SetConfiguration(Chassis.Config.Starting);
 	
 	
 	private int mode = 1;
@@ -58,6 +63,7 @@ public class Robot extends TimedRobot {
 		m_chooser.addObject("Position 3", 3);
 		m_chooser.addObject("Testing", 4);
 		SmartDashboard.putData("Positions", m_chooser);
+		
 
 		
 	}
@@ -121,6 +127,11 @@ public class Robot extends TimedRobot {
 		if (autocommand != null) {
 			autocommand.cancel();
 		}
+	/*	if (ChassisInit != null) {
+			ChassisInit.start();
+		}*/
+		Robot.kChassis.SetHighGear();
+		Robot.kChassis.DisengageNeutralizer();
 	}
 
 	/**
@@ -138,5 +149,17 @@ public class Robot extends TimedRobot {
 	public void testPeriodic() {
 		SmartDashboard.putNumber("Left Encoder", kChassis.GetLeftEncoder());
 		SmartDashboard.putNumber("Right Encoder", kChassis.GetRightEncoder());
+		if (OI.getControllerButton(5) == true) {
+			Robot.kChassis.SetHighGear();
+		}
+		else if (OI.getControllerButton(6) == true) {
+			Robot.kChassis.SetLowGear();
+		}
+		if (OI.getControllerButton(1) == true) {
+			Robot.kChassis.EngageNeutralizer();
+		}
+		else if (OI.getControllerButton(2) == true){
+			Robot.kChassis.DisengageNeutralizer();
+		}
 	}
 }
