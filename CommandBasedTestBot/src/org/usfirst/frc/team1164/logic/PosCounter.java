@@ -15,10 +15,21 @@ public class PosCounter {
 		gap = Gap;
 	}
 	
+	/**
+	 * description
+	 * 
+	 * @param EndPoint datatype purpose
+	 * @return datatype what it is
+	 * 
+	 */
 	public void setPoint(int EndPoint){
 		endPoint = EndPoint;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public double PIDGet(){
 		itr_num++;
 		if (curPosition < endPoint) {						//if we have to go foward

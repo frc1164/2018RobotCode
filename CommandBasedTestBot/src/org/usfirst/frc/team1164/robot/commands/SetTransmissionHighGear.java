@@ -1,16 +1,15 @@
 package org.usfirst.frc.team1164.robot.commands;
 
-import org.usfirst.frc.team1164.robot.Robot;
-
 import edu.wpi.first.wpilibj.command.Command;
+
+import org.usfirst.frc.team1164.robot.Robot;
 
 /**
  *
  */
-public class OpenClaw extends Command {
+public class SetTransmissionHighGear extends Command {
 
-    public OpenClaw() {
-    	requires(Robot.kClaw);
+    public SetTransmissionHighGear() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -21,8 +20,8 @@ public class OpenClaw extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (!Robot.kClaw.getOpenState())
-    		Robot.kClaw.Open();
+    	Robot.kChassis.SetHighGear();
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
