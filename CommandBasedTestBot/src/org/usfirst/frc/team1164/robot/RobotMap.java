@@ -7,6 +7,9 @@
 
 package org.usfirst.frc.team1164.robot;
 
+import edu.wpi.first.wpilibj.CounterBase;
+import edu.wpi.first.wpilibj.Encoder;
+
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -42,6 +45,8 @@ public class RobotMap {
 	public static final int RTriggerAxis = 3;
 	public static final int LAxis = 0;
 	public static final int RAxis = 4;
+	public static final int driverPort = 0;
+	public static final int operatorPort = 1;
 
 	
 // chassis options
@@ -72,18 +77,32 @@ public class RobotMap {
 	public static final int CHT_Reverse_Channel = 1;
 	
 	//Neutralizer
-	public static final int CHN_Channel = 0;
-	public static final double CHN_EngageAngle = 0;
+	public static final int CHN_Left_Channel = 0;
+	public static final int CHN_Right_Channel = 1;
+	public static final double CHN_Left_DisengageAngle = .8888;
+	public static final double CHN_Left_EngageAngle = .35;
+	public static final double CHN_Right_DisengageAngle = .5;
+	public static final double CHN_Right_EngageAngle = .8888;
+	
+	//PTO
+	public static final int CHP_Forward_Channel = 3;
+	public static final int CHP_Reverse_Channel = 2;
 
 
 // claw options
-	public static final int CL_sol0ID = 0;
-	public static final int CL_sol1ID = 1;
-	public static final int CL_canID = 0;
+	public static final int CL_Forward_Channel = 4;
+	public static final int CL_Reverse_Channel = 5;
 	
-// winch options
-	//victors
-	public static final int WIV_winch1 = 5;
-	public static final int WIV_winch2 = 6;
-	public static final int WIV_winch3 = 7;
+// arm options
+	public static final int ARM_Victor_Channel = 3;
+	public static final int ARM_Encoder_ChannelA = 4;
+	public static final int ARM_Encoder_ChannelB = 5;
+	public static final boolean ARM_Encoder_IsInverted = false;
+	public static final CounterBase.EncodingType ARM_Encoder_EncodingType = CounterBase.EncodingType.k4X; //k is for konstant
+	public static final int ARM_Pot_Channel = 0;
+	public static final int ARM_Forward_Stop = 6;
+	public static final int ARM_Reverse_Stop = 7;
+	public static final int ARM_FoldingPiston_ForwardChannel = 6;
+	public static final int ARM_FoldingPiston_ReverseChannel = 7;
+
 }

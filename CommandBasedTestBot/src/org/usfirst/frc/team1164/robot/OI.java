@@ -9,6 +9,11 @@ package org.usfirst.frc.team1164.robot;
 
 import org.usfirst.frc.team1164.robot.commands.CloseClaw;
 import org.usfirst.frc.team1164.robot.commands.OpenClaw;
+import org.usfirst.frc.team1164.robot.commands.SetTransmissionHighGear;
+import org.usfirst.frc.team1164.robot.commands.SetTransmissionLowGear;
+import org.usfirst.frc.team1164.robot.commands.SetConfiguration;
+import org.usfirst.frc.team1164.robot.commands.ArmDebug;
+import org.usfirst.frc.team1164.robot.subsystems.Chassis;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -19,21 +24,34 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	public static final int remotePort = 0;
-	private static XboxController stick = new XboxController(remotePort);
-	Button buttonOpenClaw = new JoystickButton(stick, 1);
-	Button buttonCloseClaw = new JoystickButton(stick, 2);
+	private static XboxController driverStick = new XboxController(RobotMap.driverPort);
+	private static XboxController operatorStick = new XboxController(RobotMap.operatorPort);
+	private Button buttonOpenClaw = new JoystickButton(operatorStick, 1);
+	private Button buttonCloseClaw = new JoystickButton(operatorStick, 2);
+	private Button buttonHighGear = new JoystickButton(driverStick, 6);
+	private Button buttonLowGear = new JoystickButton(driverStick, 5);
+	private Button buttonPTO_Init = new JoystickButton(driverStick, 6);
+	private Button buttonChassis_Init = new JoystickButton(driverStick, 5);
 	
 	public OI() {
 		buttonOpenClaw.whenPressed(new OpenClaw());
 		buttonCloseClaw.whenPressed(new CloseClaw());
+		buttonHighGear.whenPressed(new SetTransmissionHighGear());
+		buttonLowGear.whenPressed(new SetTransmissionLowGear());
+		
+		if (driverStick.getRawButton(8)) {
+			buttonPTO_Init.whenPressed(new SetConfiguration(Chassis.Config.Climbing));
+			buttonChassis_Init.whenPressed(new SetConfiguration(Chassis.Config.Starting));
+		}
+		
+
 	}
 	
 	public static double getControllerAxis(int AxisChannel) {
-		return stick.getRawAxis(AxisChannel);
+		return driverStick.getRawAxis(AxisChannel);
 	}
 	public static boolean getControllerButton(int ButtonChannel) {
-		return stick.getRawButton(ButtonChannel);
+		return driverStick.getRawButton(ButtonChannel);
 	}
 	
 	

@@ -7,14 +7,6 @@ import org.usfirst.frc.team1164.robot.*;
  *
  */
 public class CustomDriveWithXbox extends Command {
-	
-	private double LStickValue;
-	private double RStickValue;
-	private double LTriggerValue;
-	private double RTriggerValue;
-	
-	private double LeftMotorValue;
-	private double RightMotorValue;
 
 
     public CustomDriveWithXbox() {
@@ -31,28 +23,42 @@ public class CustomDriveWithXbox extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	this.LStickValue = OI.getControllerAxis(RobotMap.LAxis);
-    	this.RStickValue = OI.getControllerAxis(RobotMap.RAxis);
-    	this.LTriggerValue = OI.getControllerAxis(RobotMap.LTriggerAxis);
-    	this.RTriggerValue = OI.getControllerAxis(RobotMap.RTriggerAxis);
+    	double LStickValue;
+    	double RStickValue;
+    	double LTriggerValue;
+    	double RTriggerValue;
+    	
+    	double LeftMotorValue;
+    	double RightMotorValue;
+    	
+    	LStickValue = OI.getControllerAxis(RobotMap.LAxis);
+    	RStickValue = OI.getControllerAxis(RobotMap.RAxis);
+    	LTriggerValue = OI.getControllerAxis(RobotMap.LTriggerAxis);
+    	RTriggerValue = OI.getControllerAxis(RobotMap.RTriggerAxis);
 
 		//Drive forward and backward
-    	RightMotorValue = this.RTriggerValue - this.LTriggerValue;
-    	LeftMotorValue = this.RTriggerValue - this.LTriggerValue;
+    	RightMotorValue = RTriggerValue - LTriggerValue;
+    	LeftMotorValue = RTriggerValue - LTriggerValue;
+    	
+    	//prevents wheels from running at inconsistent speeds if the PTO is engaged
+    	if (!Robot.kChassis.IsClimbingConfiguration) {
 
-		//Turning slowly (Assuming LAxis is the slow turning axis)
-    	RightMotorValue = (1 - this.RStickValue) * RightMotorValue;
-    	LeftMotorValue = (1 + this.RStickValue) * RightMotorValue;
+    		//Turning slowly (Assuming LAxis is the slow turning axis)
+    		RightMotorValue = (1 - LStickValue) * RightMotorValue;
+    		LeftMotorValue = (1 + LStickValue) * LeftMotorValue;
 
-		//Turning quickly (Assuming RAxis is the fast turning axis)
-		RightMotorValue = RightMotorValue - (0.5 * this.LStickValue);
-		LeftMotorValue = LeftMotorValue + (0.5 * this.LStickValue);
+    		//Turning quickly (Assuming RAxis is the fast turning axis)
+    		RightMotorValue = RightMotorValue - (0.5 * RStickValue);
+    		LeftMotorValue = LeftMotorValue + (0.5 * RStickValue);
+    		
+    	}
 		
 		Robot.kChassis.setRightMotorSpeed(RightMotorValue);
 		Robot.kChassis.setLeftMotorSpeed(LeftMotorValue);
     	
 		SmartDashboard.putNumber("Left Encoder", Robot.kChassis.GetLeftEncoder());
 		SmartDashboard.putNumber("Right Encoder", Robot.kChassis.GetRightEncoder());
+		SmartDashboard.putBoolean("High Gear", Robot.kChassis.IsHighGear);
 
     	
     }
