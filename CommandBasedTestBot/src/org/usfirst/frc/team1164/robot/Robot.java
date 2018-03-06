@@ -44,7 +44,7 @@ public class Robot extends TimedRobot {
 //	private Command autoForward;
 	//private Command autoCommand;
 	private Command autocommand;
-	private Command ChassisInit = new SetConfiguration(Chassis.Config.Starting);
+	private Command ChassisInit = new StartingConfiguration();
 	
 	
 	private int mode = 1;
@@ -74,9 +74,7 @@ public class Robot extends TimedRobot {
 	 * the robot is disabled.
 	 */
 	@Override
-	public void disabledInit() {
-
-	}
+	public void disabledInit() {}
 
 	@Override
 	public void disabledPeriodic() {
@@ -102,7 +100,9 @@ public class Robot extends TimedRobot {
 		
 		autocommand = autoDecissionMattrix.decide(mode, gameData);
 		//autocommand = new AutoTurn(90, 0.25);
-		
+		if (ChassisInit != null) {
+			ChassisInit.start();
+		}
 		if (autocommand != null) {
 			autocommand.start();
 		}
@@ -130,8 +130,9 @@ public class Robot extends TimedRobot {
 	/*	if (ChassisInit != null) {
 			ChassisInit.start();
 		}*/
-		Robot.kChassis.SetHighGear();
-		Robot.kChassis.DisengageNeutralizer();
+		if (ChassisInit != null) {
+			ChassisInit.start();
+		}
 	}
 
 	/**
@@ -160,6 +161,12 @@ public class Robot extends TimedRobot {
 		}
 		else if (OI.getControllerButton(2) == true){
 			Robot.kChassis.DisengageNeutralizer();
+		}
+		if (OI.getControllerButton(3) == true) {
+			Robot.kChassis.EngagePTO();
+		}
+		else if (OI.getControllerButton(4) == true){
+			Robot.kChassis.DisengagePTO();
 		}
 	}
 }

@@ -2,6 +2,8 @@ package org.usfirst.frc.team1164.robot.subsystems;
 
 import org.usfirst.frc.team1164.robot.RobotMap;
 import org.usfirst.frc.team1164.robot.commands.CustomDriveWithXbox;
+import org.usfirst.frc.team1164.robot.OI;
+import org.usfirst.frc.team1164.robot.commands.ClimbingConfiguration;
 
 
 import edu.wpi.first.wpilibj.Encoder;
@@ -9,6 +11,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.command.Command;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -26,6 +29,7 @@ public class Chassis extends Subsystem {
 	private DoubleSolenoid Transmission, PTO;
 	private Servo LeftNeutralizer, RightNeutralizer;
 	public boolean IsClimbingConfiguration, IsHighGear;
+	private Command ClimbingConfiguration = new ClimbingConfiguration();
 
 
 	@Override
@@ -173,6 +177,11 @@ public class Chassis extends Subsystem {
 	}
 	public void DisengagePTO() {
 		PTO.set(DoubleSolenoid.Value.kReverse);
+	} 
+	public void Climb() {
+		if (OI.getControllerButton(3) == true) {
+			ClimbingConfiguration.start();
+		}
 	}
 	
 	public enum Config{
