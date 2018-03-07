@@ -69,7 +69,7 @@ public class RobotMap {
 	public static final int CHE_Right_channelA = 2;
 	public static final int CHE_Right_channelB = 3;
 	public static final boolean CHE_Right_reversed = true;
-	
+	//
 	public static final double kDistancePerPulse = 0.249364;
 	
 	//transmission

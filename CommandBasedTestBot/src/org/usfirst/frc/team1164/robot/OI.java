@@ -30,8 +30,8 @@ public class OI {
 	private Button buttonCloseClaw = new JoystickButton(operatorStick, 2);
 	private Button buttonHighGear = new JoystickButton(driverStick, 6);
 	private Button buttonLowGear = new JoystickButton(driverStick, 5);
-	private Button buttonPTO_Init = new JoystickButton(driverStick, 3);
-	private Button buttonChassis_Init = new JoystickButton(operatorStick, 4);
+	private Button buttonPTO_Init = new JoystickButton(operatorStick, 7);
+	private Button buttonChassis_Init = new JoystickButton (operatorStick, 8);
 	
 	public OI() {
 		buttonOpenClaw.whenPressed(new OpenClaw());

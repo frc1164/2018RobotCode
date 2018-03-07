@@ -10,6 +10,7 @@ package org.usfirst.frc.team1164.robot;
 import org.usfirst.frc.team1164.logic.autoDecissionMattrix;
 import org.usfirst.frc.team1164.robot.subsystems.*;
 import org.usfirst.frc.team1164.robot.commands.*;
+import org.usfirst.frc.team1164.robot.commands.Auto.DriveForward;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -94,7 +95,6 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-
 		mode = m_chooser.getSelected();
 		String gameData = DriverStation.getInstance().getGameSpecificMessage();
 		
@@ -105,8 +105,7 @@ public class Robot extends TimedRobot {
 		}
 		if (autocommand != null) {
 			autocommand.start();
-		}
-		
+		} 
 	}
 	
 
