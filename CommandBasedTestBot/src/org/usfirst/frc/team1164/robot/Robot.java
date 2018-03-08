@@ -48,7 +48,7 @@ public class Robot extends TimedRobot {
 //	private Command autoForward;
 	//private Command autoCommand;
 	private Command autocommand;
-	private Command ChassisInit = new StartingConfiguration();
+	private Command ChassisInit;
 	private Command AutoChassisInit;
 	
 	
@@ -100,6 +100,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		AutoChassisInit = new StartingConfiguration();
+		ChassisInit = new StartingConfiguration();
 		if (AutoChassisInit != null) {
 			AutoChassisInit.start();
 		}
@@ -135,6 +136,7 @@ public class Robot extends TimedRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
+		ChassisInit = new StartingConfiguration();
 		if (autocommand != null) {
 			autocommand.cancel();
 		}
@@ -159,7 +161,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void testPeriodic() {
-		SmartDashboard.putNumber("Left Encoder", kChassis.GetLeftEncoder());
+	/*	SmartDashboard.putNumber("Left Encoder", kChassis.GetLeftEncoder());
 		SmartDashboard.putNumber("Right Encoder", kChassis.GetRightEncoder());
 		if (OI.getControllerButton(5) == true) {
 			Robot.kChassis.SetHighGear();
@@ -178,6 +180,7 @@ public class Robot extends TimedRobot {
 		}
 		else if (OI.getControllerButton(4) == true){
 			Robot.kChassis.DisengagePTO();
-		}
+		}*/
+		
 	}
 }

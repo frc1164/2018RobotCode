@@ -90,8 +90,8 @@ public class RobotMap {
 
 
 // claw options
-	public static final int CL_Forward_Channel = 4;
-	public static final int CL_Reverse_Channel = 5;
+	public static final int CL_Forward_Channel = 5;
+	public static final int CL_Reverse_Channel = 4;
 	
 // arm options
 	public static final int ARM_Victor_Channel = 3;
