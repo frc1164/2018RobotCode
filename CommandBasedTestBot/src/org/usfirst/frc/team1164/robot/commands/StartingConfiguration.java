@@ -13,7 +13,7 @@ public class StartingConfiguration extends Command {
     public StartingConfiguration() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.kChassis);
+    	// requires(Robot.kChassis);
     
     }
 

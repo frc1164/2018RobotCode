@@ -22,6 +22,9 @@ import edu.wpi.first.wpilibj.hal.PDPJNI;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
+import java.util.concurrent.TimeUnit;
+import java.lang.System;
+
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -46,6 +49,7 @@ public class Robot extends TimedRobot {
 	//private Command autoCommand;
 	private Command autocommand;
 	private Command ChassisInit = new StartingConfiguration();
+	private Command AutoChassisInit;
 	
 	
 	private int mode = 1;
@@ -95,14 +99,22 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
+		AutoChassisInit = new StartingConfiguration();
+		if (AutoChassisInit != null) {
+			AutoChassisInit.start();
+		}
+		try {
+		TimeUnit.SECONDS.sleep(1);
+		}
+		catch (InterruptedException ex){
+			System.out.println(ex);
+		}
 		mode = m_chooser.getSelected();
 		String gameData = DriverStation.getInstance().getGameSpecificMessage();
 		
 		autocommand = autoDecissionMattrix.decide(mode, gameData);
 		//autocommand = new AutoTurn(90, 0.25);
-		if (ChassisInit != null) {
-			ChassisInit.start();
-		}
+
 		if (autocommand != null) {
 			autocommand.start();
 		} 
