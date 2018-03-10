@@ -26,12 +26,17 @@ public class MoveArm extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double LStickValue;
-    	LStickValue = OI.getControllerAxis(RobotMap.LAxis);
-    	if (LStickValue > 0.05) {
-    		Robot.kArm.moveArm(OI.armSpeed);
-    	} else if (LStickValue < -0.05) {
-    		Robot.kArm.moveArm(-OI.armSpeed);
+
+		SmartDashboard.putNumber("arm pot", Robot.kArm.getArmEncoder());
+    	SmartDashboard.putNumber("lTrigger", OI.getOperatorAxis(2));
+    	SmartDashboard.putNumber("RTrigger", OI.getOperatorAxis(3));
+    	
+    	if (OI.getOperatorAxis(3) > 0.2) {
+    		Robot.kArm.moveArmUp(OI.armSpeed);
+    	} else if (OI.getOperatorAxis(2) > 0.2) {
+    		Robot.kArm.moveArmDown(-OI.armSpeed);
+    	} else {
+    		Robot.kArm.armBreak();
     	}
     }
 

@@ -26,6 +26,7 @@ public class Arm extends Subsystem {
 	private AnalogInput ArmPot = new AnalogInput(RobotMap.ARM_Pot_Channel);
 	private DigitalInput ForwardStop = new DigitalInput(RobotMap.ARM_Forward_Stop);
 	private DigitalInput ReverseStop = new DigitalInput(RobotMap.ARM_Reverse_Stop);
+	
 	private DoubleSolenoid FoldingPiston = new DoubleSolenoid(RobotMap.ARM_FoldingPiston_ForwardChannel, RobotMap.ARM_FoldingPiston_ReverseChannel);
    
 	// Put methods for controlling this subsystem
@@ -37,17 +38,31 @@ public class Arm extends Subsystem {
 	 public boolean GetReverseLimitSwitch() {
 		 return ReverseStop.get();
 	 }
-	 public void moveArm(double speed) {
-		 SmartDashboard.putString("moveArm called from Arm Subsystem", " ");
-		 if (speed < 0.2 || getArmPot() < 4.8 || getArmPot() > 2.1) {
+	 public void moveArmDown(double speed) {
+		 if (speed < 0.2 && getArmEncoder() > 2.1) {
 			 ArmVictor.set(speed);
+		 } else {
+			 ArmVictor.set(0);
 		 }
 	 }
+	 
+	 public void moveArmUp(double speed) {
+		 if (speed < 0.2 && getArmEncoder() < 4.94) {
+			 ArmVictor.set(speed);
+		 } else {
+			 ArmVictor.set(0);
+		 }
+	 }
+	 
+	 public void armBreak() {
+		 ArmVictor.set(0);
+	 }
+	 
 	 public double getArmPot() {
 		 return NeoUtil.VoltsToDegrees(ArmPot.getVoltage());
 	 }
 	 public double getArmEncoder() {
-		 return ArmEncoder.get();
+		 return ArmPot.getVoltage();
 	 }
 	 public void FoldArm() {
 		 FoldingPiston.set(DoubleSolenoid.Value.kForward);
@@ -57,7 +72,7 @@ public class Arm extends Subsystem {
 	 }
 
     public void initDefaultCommand() {
-    	//setDefaultCommand(new MoveArm());
+    	setDefaultCommand(new MoveArm());
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }
