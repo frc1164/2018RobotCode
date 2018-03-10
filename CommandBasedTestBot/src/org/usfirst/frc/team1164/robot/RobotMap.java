@@ -99,7 +99,7 @@ public class RobotMap {
 	public static final int ARM_Encoder_ChannelB = 5;
 	public static final boolean ARM_Encoder_IsInverted = false;
 	public static final CounterBase.EncodingType ARM_Encoder_EncodingType = CounterBase.EncodingType.k4X; //k is for konstant
-	public static final int ARM_Pot_Channel = 0;
+	public static final int ARM_Pot_Channel = 3;
 	public static final int ARM_Forward_Stop = 6;
 	public static final int ARM_Reverse_Stop = 7;
 	public static final int ARM_FoldingPiston_ForwardChannel = 6;

@@ -2,6 +2,7 @@ package org.usfirst.frc.team1164.robot.subsystems;
 
 import org.usfirst.frc.team1164.logic.NeoUtil;
 import org.usfirst.frc.team1164.robot.RobotMap;
+import org.usfirst.frc.team1164.robot.commands.MoveArm;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
@@ -11,6 +12,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 
 /**
@@ -35,14 +37,11 @@ public class Arm extends Subsystem {
 	 public boolean GetReverseLimitSwitch() {
 		 return ReverseStop.get();
 	 }
-	 public void RaiseArm() {
-		 ArmVictor.set(.1);
-	 }
-	 public void LowerArm() {
-		 ArmVictor.set(-.1);
-	 }
-	 public void StopArm() {
-		 ArmVictor.set(0);
+	 public void moveArm(double speed) {
+		 SmartDashboard.putString("moveArm called from Arm Subsystem", " ");
+		 if (speed < 0.2 || getArmPot() < 4.8 || getArmPot() > 2.1) {
+			 ArmVictor.set(speed);
+		 }
 	 }
 	 public double getArmPot() {
 		 return NeoUtil.VoltsToDegrees(ArmPot.getVoltage());
@@ -58,6 +57,7 @@ public class Arm extends Subsystem {
 	 }
 
     public void initDefaultCommand() {
+    	//setDefaultCommand(new MoveArm());
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }

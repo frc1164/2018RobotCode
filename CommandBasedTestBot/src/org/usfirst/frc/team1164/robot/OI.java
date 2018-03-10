@@ -13,6 +13,8 @@ import org.usfirst.frc.team1164.robot.commands.SetTransmissionHighGear;
 import org.usfirst.frc.team1164.robot.commands.SetTransmissionLowGear;
 import org.usfirst.frc.team1164.robot.commands.StartingConfiguration;
 import org.usfirst.frc.team1164.robot.commands.ClimbingConfiguration;
+import org.usfirst.frc.team1164.robot.commands.setArmSpeed;
+import org.usfirst.frc.team1164.robot.commands.MoveArm;
 import org.usfirst.frc.team1164.robot.subsystems.Chassis;
 
 import edu.wpi.first.wpilibj.XboxController;
@@ -32,6 +34,10 @@ public class OI {
 	private Button buttonLowGear = new JoystickButton(driverStick, 5);
 	private Button buttonPTO_Init = new JoystickButton(operatorStick, 7);
 	private Button buttonChassis_Init = new JoystickButton (operatorStick, 8);
+	private Button increaseArmSpeed = new JoystickButton(operatorStick, 6);
+	private Button decreaseArmSpeed = new JoystickButton(operatorStick, 5);
+	
+	public static double armSpeed = 0.15;
 	
 	public OI() {
 		buttonOpenClaw.whenPressed(new OpenClaw());
@@ -39,7 +45,9 @@ public class OI {
 		buttonHighGear.whenPressed(new SetTransmissionHighGear());
 		buttonLowGear.whenPressed(new SetTransmissionLowGear());
 		buttonPTO_Init.whenPressed(new ClimbingConfiguration());
-		buttonChassis_Init.whenPressed(new StartingConfiguration());		
+		buttonChassis_Init.whenPressed(new StartingConfiguration());
+		increaseArmSpeed.whenPressed(new setArmSpeed(0.01));
+		decreaseArmSpeed.whenPressed(new setArmSpeed(-0.01));
 
 	}
 	
@@ -49,7 +57,10 @@ public class OI {
 	public static boolean getControllerButton(int ButtonChannel) {
 		return driverStick.getRawButton(ButtonChannel);
 	}
-	
+
+	public static double getOperatorAxis(int AxisChannel) {
+		return operatorStick.getRawAxis(AxisChannel);
+	}
 	
 	//// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a
