@@ -1,13 +1,14 @@
-package org.usfirst.frc.team1164.robot.commands.Auto;
+package org.usfirst.frc.team1164.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+
 /**
  *
  */
-public class AutoRun extends CommandGroup {
+public class EndingConfiguration extends CommandGroup {
 
-    public AutoRun() {
-    	addSequential (new DriveForward(304.8, .25));
+    public EndingConfiguration() {
+        // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
         // these will run in order.

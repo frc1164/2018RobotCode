@@ -2,6 +2,8 @@ package org.usfirst.frc.team1164.robot.subsystems;
 
 import org.usfirst.frc.team1164.robot.RobotMap;
 import org.usfirst.frc.team1164.robot.commands.CustomDriveWithXbox;
+import org.usfirst.frc.team1164.robot.OI;
+import org.usfirst.frc.team1164.robot.commands.ClimbingConfiguration;
 
 
 import edu.wpi.first.wpilibj.Encoder;
@@ -9,10 +11,11 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.command.Command;
+
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Servo;
-
 
 import com.kauailabs.navx.frc.AHRS;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
@@ -25,9 +28,9 @@ public class Chassis extends Subsystem {
 	private AHRS Navx;
 	private DoubleSolenoid Transmission, PTO;
 	private Servo LeftNeutralizer, RightNeutralizer;
-	public boolean IsClimbingConfiguration;
-	public boolean IsHighGear;
-	
+	public boolean IsClimbingConfiguration, IsHighGear;
+	private Command ClimbingConfiguration = new ClimbingConfiguration();
+
 
 	@Override
 	protected void initDefaultCommand() {
@@ -55,6 +58,7 @@ public class Chassis extends Subsystem {
 		LiveWindow.add(Navx);
 		LiveWindow.add(LeftEncoder);
 		LiveWindow.add(RightEncoder);
+
 		try {
 			Navx = new AHRS(SPI.Port.kMXP);
 		}
@@ -73,7 +77,6 @@ public class Chassis extends Subsystem {
 		
 		Transmission = new DoubleSolenoid(RobotMap.CHT_Forward_Channel,RobotMap.CHT_Reverse_Channel);
 		PTO = new DoubleSolenoid(RobotMap.CHP_Forward_Channel, RobotMap.CHP_Reverse_Channel);
-		
 		
 		LeftNeutralizer = new Servo(RobotMap.CHN_Left_Channel);
 		RightNeutralizer = new Servo(RobotMap.CHN_Right_Channel);
@@ -140,6 +143,7 @@ public class Chassis extends Subsystem {
 	public void ResetNavx() {
 		Navx.reset();
 	}
+	
 	public void Brake() {
 		Right1.set(ControlMode.PercentOutput, 0);
 		Right2.set(ControlMode.PercentOutput, 0);
@@ -173,9 +177,15 @@ public class Chassis extends Subsystem {
 	}
 	public void DisengagePTO() {
 		PTO.set(DoubleSolenoid.Value.kReverse);
+	} 
+	public void Climb() {
+		if (OI.getControllerButton(3) == true) {
+			ClimbingConfiguration.start();
+		}
 	}
 	
 	public enum Config{
 		Starting, Climbing
 	}
+	
 }

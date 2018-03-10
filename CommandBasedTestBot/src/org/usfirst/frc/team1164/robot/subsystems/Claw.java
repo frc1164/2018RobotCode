@@ -13,8 +13,6 @@ public class Claw extends Subsystem{
 
 	public Claw() {
 		Claw = new DoubleSolenoid(RobotMap.CL_Forward_Channel, RobotMap.CL_Reverse_Channel);
-		
-		
 	}
 	
 

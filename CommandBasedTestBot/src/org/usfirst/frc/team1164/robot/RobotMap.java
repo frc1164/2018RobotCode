@@ -7,6 +7,9 @@
 
 package org.usfirst.frc.team1164.robot;
 
+import edu.wpi.first.wpilibj.CounterBase;
+import edu.wpi.first.wpilibj.Encoder;
+
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -61,12 +64,12 @@ public class RobotMap {
 	// encoders
 	public static final int CHE_Left_channelA = 0;
 	public static final int CHE_Left_channelB = 1;
-	public static final boolean CHE_Left_reversed = true;
+	public static final boolean CHE_Left_reversed = false;
 	
 	public static final int CHE_Right_channelA = 2;
 	public static final int CHE_Right_channelB = 3;
-	public static final boolean CHE_Right_reversed = false;
-	
+	public static final boolean CHE_Right_reversed = true;
+	//
 	public static final double kDistancePerPulse = 0.249364;
 	
 	//transmission
@@ -74,12 +77,12 @@ public class RobotMap {
 	public static final int CHT_Reverse_Channel = 1;
 	
 	//Neutralizer
-	public static final int CHN_Left_Channel = 0;
-	public static final int CHN_Right_Channel = 1;
-	public static final double CHN_Left_DisengageAngle = .8888;
-	public static final double CHN_Left_EngageAngle = .35;
-	public static final double CHN_Right_DisengageAngle = .5;
-	public static final double CHN_Right_EngageAngle = .8888;
+	public static final int CHN_Left_Channel = 1;
+	public static final int CHN_Right_Channel = 0;
+	public static final double CHN_Left_DisengageAngle = .25;
+	public static final double CHN_Left_EngageAngle = 1;
+	public static final double CHN_Right_DisengageAngle = .75;
+	public static final double CHN_Right_EngageAngle = 0;
 	
 	//PTO
 	public static final int CHP_Forward_Channel = 3;
@@ -87,6 +90,19 @@ public class RobotMap {
 
 
 // claw options
-	public static final int CL_Forward_Channel = 4;
-	public static final int CL_Reverse_Channel = 5;
+	public static final int CL_Forward_Channel = 5;
+	public static final int CL_Reverse_Channel = 4;
+	
+// arm options
+	public static final int ARM_Victor_Channel = 3;
+	public static final int ARM_Encoder_ChannelA = 4;
+	public static final int ARM_Encoder_ChannelB = 5;
+	public static final boolean ARM_Encoder_IsInverted = false;
+	public static final CounterBase.EncodingType ARM_Encoder_EncodingType = CounterBase.EncodingType.k4X; //k is for konstant
+	public static final int ARM_Pot_Channel = 3;
+	public static final int ARM_Forward_Stop = 6;
+	public static final int ARM_Reverse_Stop = 7;
+	public static final int ARM_FoldingPiston_ForwardChannel = 6;
+	public static final int ARM_FoldingPiston_ReverseChannel = 7;
+
 }
