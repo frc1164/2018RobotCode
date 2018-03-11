@@ -133,8 +133,8 @@ public final class RobotMap {
 	//													 //
 	//---------------------------------------------------//
 	
-	public static final int 	Cl_forwardPort			= 5;
-	public static final int 	CL_reversePort			= 4;
+	public static final int 	Cl_forwardPort			= 4;
+	public static final int 	CL_reversePort			= 5;
 
 	//---------------------------------------------------//
 	//													 //

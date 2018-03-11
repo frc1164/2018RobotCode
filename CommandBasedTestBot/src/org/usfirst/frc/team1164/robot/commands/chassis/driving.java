@@ -21,8 +21,8 @@ public class driving extends Command {
 
     protected void execute() {
     	
-    	double forward = m_oi.getControllerAxis(LT.toInt());
-    	double backward = m_oi.getControllerAxis(RT.toInt());
+    	double forward = m_oi.getControllerAxis(RT.toInt());
+    	double backward = m_oi.getControllerAxis(LT.toInt());
     	double rotate = m_oi.getControllerAxis(RS_X.toInt());
     	double turn = m_oi.getControllerAxis(LS_X.toInt());
     	
