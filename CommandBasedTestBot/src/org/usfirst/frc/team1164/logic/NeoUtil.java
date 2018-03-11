@@ -18,4 +18,12 @@ public class NeoUtil{
 			writer.append(data);
 			writer.close();
 	}
+	
+	public static boolean inRange(double x, double min, double max) {
+		return (x < max && x > min);
+	}
+	
+	public static boolean outRange(double x, double min, double max) {
+		return (x < min || x > max);
+	}
 }

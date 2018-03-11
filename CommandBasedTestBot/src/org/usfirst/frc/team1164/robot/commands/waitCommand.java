@@ -1,27 +1,26 @@
 package org.usfirst.frc.team1164.robot.commands;
 
-import org.usfirst.frc.team1164.robot.Robot;
+import java.util.concurrent.TimeUnit;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class UnfoldArm extends Command {
+public class waitCommand extends Command {
 
-    public UnfoldArm() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    	requires(Robot.kArm);
-    }
+    public waitCommand() {}
 
     // Called just before this Command runs the first time
-    protected void initialize() {
-    }
+    protected void initialize() {}
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.kArm.UnfoldArm();;
+    	try {
+    		TimeUnit.SECONDS.sleep(1);
+    	} catch (InterruptedException e) {
+			System.out.println(e);
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()

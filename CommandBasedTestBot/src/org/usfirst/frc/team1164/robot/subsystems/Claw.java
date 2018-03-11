@@ -1,38 +1,33 @@
 package org.usfirst.frc.team1164.robot.subsystems;
 
-import org.usfirst.frc.team1164.robot.RobotMap;
+import static org.usfirst.frc.team1164.robot.RobotMap.*;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Claw extends Subsystem{
 	
-	public boolean isOpen;
-	private DoubleSolenoid Claw;
+	private boolean isOpen;
+	private DoubleSolenoid claw;
 	
 
 	public Claw() {
-		Claw = new DoubleSolenoid(RobotMap.CL_Forward_Channel, RobotMap.CL_Reverse_Channel);
+		isOpen = Cl_isOpen;
+		claw = new DoubleSolenoid(Cl_forwardPort, CL_reversePort);
+		claw.set(Cl_isOpen ? DoubleSolenoid.Value.kReverse :
+ 			  				 DoubleSolenoid.Value.kForward);
 	}
-	
 
 	@Override
-	protected void initDefaultCommand() {
-		// TODO Auto-generated method stub
-		
-	}
+	protected void initDefaultCommand() {}
 	
-	public void Close() {
-		isOpen = false;
-		Claw.set(DoubleSolenoid.Value.kForward);
-	}
-	
-	public void Open() {
-		isOpen = true;
-		Claw.set(DoubleSolenoid.Value.kReverse);
+	public void setOpened(boolean opened) {
+		claw.set(opened ? DoubleSolenoid.Value.kReverse :
+			   			  DoubleSolenoid.Value.kForward);
+		isOpen = opened;
 	}
 
-	public boolean getOpenState() {
+	public boolean isOpen() {
 		return isOpen;
 	}
 

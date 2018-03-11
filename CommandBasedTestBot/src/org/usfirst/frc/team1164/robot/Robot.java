@@ -8,22 +8,19 @@
 package org.usfirst.frc.team1164.robot;
 
 import org.usfirst.frc.team1164.logic.autoDecissionMattrix;
-import org.usfirst.frc.team1164.robot.subsystems.*;
-import org.usfirst.frc.team1164.robot.commands.*;
-import org.usfirst.frc.team1164.robot.commands.Auto.DriveForward;
+import org.usfirst.frc.team1164.robot.subsystems.Arm;
+import org.usfirst.frc.team1164.robot.subsystems.Chassis;
+import org.usfirst.frc.team1164.robot.subsystems.Claw;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.hal.PDPJNI;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.hal.PDPJNI;
-import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-
-import java.util.concurrent.TimeUnit;
-import java.lang.System;
 
 
 /**
@@ -38,18 +35,12 @@ public class Robot extends TimedRobot {
 	public static final Chassis kChassis = new Chassis();
 	public static final Claw kClaw = new Claw();
 	public static final Arm kArm = new Arm();
-	private Compressor RobotCompressor;
-	public LiveWindow lw;
+	private static Compressor robotCompressor;
+	public static LiveWindow lw;
 	public static OI m_oi;
 	public static PDPJNI PDP = new PDPJNI();
 
-//	private Command m_autonomousCommand;
-	
-//	private Command autoForward;
-	//private Command autoCommand;
-	private Command autocommand;
-	private Command ChassisInit;
-	private Command AutoChassisInit;
+	private Command autoCommand;
 	
 	
 	private int mode = 1;
@@ -62,15 +53,11 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		m_oi = new OI();
-
 		m_chooser.addDefault("Position 1", 1);
 		m_chooser.addObject("Position 2", 2);
 		m_chooser.addObject("Position 3", 3);
 		m_chooser.addObject("Testing", 4);
 		SmartDashboard.putData("Positions", m_chooser);
-		
-
-		
 	}
 
 	/**
@@ -99,26 +86,12 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		AutoChassisInit = new StartingConfiguration();
-		ChassisInit = new StartingConfiguration();
-		if (AutoChassisInit != null) {
-			AutoChassisInit.start();
-		}
-		try {
-		TimeUnit.SECONDS.sleep(1);
-		}
-		catch (InterruptedException ex){
-			System.out.println(ex);
-		}
 		mode = m_chooser.getSelected();
 		String gameData = DriverStation.getInstance().getGameSpecificMessage();
 		
-		autocommand = autoDecissionMattrix.decide(mode, gameData);
-		//autocommand = new AutoTurn(90, 0.25);
-
-		if (autocommand != null) {
-			autocommand.start();
-		} 
+		autoCommand = autoDecissionMattrix.decide(mode, gameData);
+		if (autoCommand != null) 
+			autoCommand.start();
 	}
 	
 
@@ -136,15 +109,8 @@ public class Robot extends TimedRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
-		ChassisInit = new StartingConfiguration();
-		if (autocommand != null) {
-			autocommand.cancel();
-		}
-	/*	if (ChassisInit != null) {
-			ChassisInit.start();
-		}*/
-		if (ChassisInit != null) {
-			ChassisInit.start();
+		if (autoCommand != null) {
+			autoCommand.cancel();
 		}
 	}
 
