@@ -14,8 +14,13 @@ public class Claw extends Subsystem{
 	public Claw() {
 		isOpen = Cl_isOpen;
 		claw = new DoubleSolenoid(Cl_forwardPort, CL_reversePort);
+//		claw.set(Cl_isOpen ? DoubleSolenoid.Value.kReverse :
+// 			  				 DoubleSolenoid.Value.kForward);
+	}
+	
+	public void initialize() {
 		claw.set(Cl_isOpen ? DoubleSolenoid.Value.kReverse :
- 			  				 DoubleSolenoid.Value.kForward);
+							 DoubleSolenoid.Value.kForward);
 	}
 
 	@Override

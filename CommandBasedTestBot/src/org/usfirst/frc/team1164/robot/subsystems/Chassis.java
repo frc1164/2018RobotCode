@@ -145,20 +145,20 @@ public class Chassis extends Subsystem {
 	public void initializeGearBox() {
 		
 		transmission = new DoubleSolenoid(CH_trans_forwardPort, CH_trans_reversePort);
-		transmission.set(highGearEnabled ? DoubleSolenoid.Value.kForward :
-			  							   DoubleSolenoid.Value.kReverse);
+//		transmission.set(highGearEnabled ? DoubleSolenoid.Value.kForward :
+//			  							   DoubleSolenoid.Value.kReverse);
 
 		PTO	= new DoubleSolenoid(CH_PTO_forwardPort, CH_PTO_reversePort);
-		PTO.set(PTOEnabled ? DoubleSolenoid.Value.kForward :
-						  	 DoubleSolenoid.Value.kReverse);
+//		PTO.set(PTOEnabled ? DoubleSolenoid.Value.kForward :
+//						  	 DoubleSolenoid.Value.kReverse);
 
 		leftNeutralizer = new Servo(CH_neut_left_port);
-		leftNeutralizer.set(neutralizerEnabled ? CH_neut_left_enable : 
-												 CH_neut_left_disable);
+//		leftNeutralizer.set(neutralizerEnabled ? CH_neut_left_enable : 
+//												 CH_neut_left_disable);
 
 		rightNeutralizer = new Servo(CH_neut_right_port);
-		rightNeutralizer.set(neutralizerEnabled ? CH_neut_left_disable : 
-												  CH_neut_right_disable);
+//		rightNeutralizer.set(neutralizerEnabled ? CH_neut_left_disable : 
+//												  CH_neut_right_disable);
 	}
 	
 	public void initializeLiveWindow() {
@@ -172,6 +172,18 @@ public class Chassis extends Subsystem {
 		LiveWindow.add(Navx);
 		LiveWindow.add(leftEncoder);
 		LiveWindow.add(rightEncoder);
+	}
+	
+	public void initialize() {
+		transmission.set(highGearEnabled ? DoubleSolenoid.Value.kForward :
+										   DoubleSolenoid.Value.kReverse);
+		PTO.set(PTOEnabled ? DoubleSolenoid.Value.kForward :
+						 	 DoubleSolenoid.Value.kReverse);
+		leftNeutralizer.set(neutralizerEnabled ? CH_neut_left_enable : 
+												 CH_neut_left_disable);
+		rightNeutralizer.set(neutralizerEnabled ? CH_neut_left_disable : 
+												  CH_neut_right_disable);
+		
 	}
 	
 	//------------------------------------------//

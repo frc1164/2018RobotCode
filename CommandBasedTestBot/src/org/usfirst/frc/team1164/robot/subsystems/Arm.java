@@ -65,8 +65,14 @@ public class Arm extends Subsystem {
 	
 	public void initializeFoldingPiston() {
 		foldingPiston = new DoubleSolenoid(Arm_fold_forwardPort, Arm_fold_reversePort);
+//		foldingPiston.set(isFolded ? DoubleSolenoid.Value.kForward :
+//								   	 DoubleSolenoid.Value.kReverse);
+	}
+	
+	public void initialize() {
 		foldingPiston.set(isFolded ? DoubleSolenoid.Value.kForward :
-								   	 DoubleSolenoid.Value.kReverse);
+	   								 DoubleSolenoid.Value.kReverse);
+		
 	}
 	
 	//------------------------------------------//
