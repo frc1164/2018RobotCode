@@ -1,6 +1,6 @@
 package org.usfirst.frc.team1164.robot.commands.Auto;
 
-import org.usfirst.frc.team1164.robot.commands.OpenClaw;
+import org.usfirst.frc.team1164.robot.commands.claw.OpenClaw;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
