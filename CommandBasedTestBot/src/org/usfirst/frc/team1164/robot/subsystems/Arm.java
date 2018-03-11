@@ -1,21 +1,33 @@
 package org.usfirst.frc.team1164.robot.subsystems;
 
+<<<<<<< HEAD
 import org.usfirst.frc.team1164.logic.NeoUtil;
 import org.usfirst.frc.team1164.robot.RobotMap;
+=======
+import static org.usfirst.frc.team1164.robot.RobotMap.*;
+
+import org.usfirst.frc.team1164.logic.NeoUtil;
+import org.usfirst.frc.team1164.robot.commands.arm.MoveArm;
+>>>>>>> origin/Devon
 
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.AnalogInput;
+<<<<<<< HEAD
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+=======
+import edu.wpi.first.wpilibj.CounterBase.EncodingType;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Encoder;
+>>>>>>> origin/Devon
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-/**
- *
- */
 public class Arm extends Subsystem {
 	
+<<<<<<< HEAD
 	private WPI_VictorSPX ArmVictor = new WPI_VictorSPX(RobotMap.ARM_Victor_Channel);
 	private Encoder ArmEncoder = new Encoder(RobotMap.ARM_Encoder_ChannelA, RobotMap.ARM_Encoder_ChannelB, 
 			RobotMap.ARM_Encoder_IsInverted, RobotMap.ARM_Encoder_EncodingType);
@@ -54,10 +66,131 @@ public class Arm extends Subsystem {
 	 public void UnfoldArm() {
 		 FoldingPiston.set(DoubleSolenoid.Value.kReverse);
 	 }
+=======
+	private WPI_VictorSPX armVictor;
+	private Encoder armEncoder;
+	private AnalogInput armPot;
+	private DigitalInput forwardLimitSwitch, reverseLimitSwitch;
+	private DoubleSolenoid foldingPiston;
+	private boolean isFolded;
+	private double armSpeed;
 
-    public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
-    }
+	public void initDefaultCommand() {
+		setDefaultCommand(new MoveArm());
+	}
+>>>>>>> origin/Devon
+
+	//------------------------------------------//
+	
+	public Arm() {
+		isFolded = Arm_isFolded;
+		
+		initializeMotor();
+		initializeEncoder();
+		initializePot();
+		initializeLimitSwitch();
+		initializeFoldingPiston();
+	}
+	
+	public void initializeMotor() {
+		armVictor = new WPI_VictorSPX(Arm_victor_port);
+		armVictor.setInverted(Arm_victor_inverted);
+		armVictor.setName(Arm_victor_name);
+	}
+	
+	public void initializeEncoder() {
+		armEncoder = new Encoder(Arm_encoder_APort, Arm_encoder_BPort, 
+				 				 Arm_encoder_invert, EncodingType.k4X);
+		armEncoder.setName(Arm_encoder_name);
+		armEncoder.reset();
+		
+	}
+
+	public void initializePot() {
+		armPot = new AnalogInput(Arm_pot_channel);
+	}
+	
+	public void initializeLimitSwitch() {
+		forwardLimitSwitch = new DigitalInput(Arm_limiter_forwardPort);
+		reverseLimitSwitch = new DigitalInput(Arm_limiter_reversePort);
+	}
+	
+	public void initializeFoldingPiston() {
+		foldingPiston = new DoubleSolenoid(Arm_fold_forwardPort, Arm_fold_reversePort);
+		foldingPiston.set(isFolded ? DoubleSolenoid.Value.kForward :
+								   	 DoubleSolenoid.Value.kReverse);
+	}
+	
+	//------------------------------------------//
+	
+	public void setArmVictor(double speed) {
+		armVictor.set(speed);
+	}
+
+	//------------------------------------------//
+	
+	public double getArmEncoder() {
+		return armEncoder.get();
+	}
+
+	public double getArmPot() {
+		return armPot.getVoltage();
+	}
+	
+	public double getArmAngle() {
+		return NeoUtil.VoltsToDegrees(getArmPot());
+	}
+
+	//------------------------------------------//
+	
+	public boolean getForwardLimiter() {
+		return forwardLimitSwitch.get();
+	}
+	
+	public boolean getReverseLimiter() {
+		return reverseLimitSwitch.get();
+	}
+
+	//------------------------------------------//
+	
+	public void setArmFolded(boolean folded) {
+		foldingPiston.set(folded ? DoubleSolenoid.Value.kForward :
+								   DoubleSolenoid.Value.kReverse);
+		isFolded = folded;
+	}
+	
+	public boolean getArmFolded() {
+		return isFolded;
+	}
+
+	//------------------------------------------//
+	
+	public void setArmSpeed(double speed) {
+		this.armSpeed = speed;
+	}
+	
+	public double getArmSpeed() {
+		return armSpeed;
+	}
+//	public void moveArmDown(double speed) {
+//		if (speed < 0.4 && getArmEncoder() > 2.1) {
+//			armVictor.set(speed);
+//		} else {
+//			armVictor.set(0);
+//		}
+//	}
+//	
+//	public void moveArmUp(double speed) {
+//		if (speed < 0.4 && getArmEncoder() < 4.94) {
+//			armVictor.set(speed);
+//		} else {
+//			armVictor.set(0);
+//		}
+//	}
+
+//	public void armBreak() {
+//		armVictor.set(0);
+//	}
+	    
 }
-
+	

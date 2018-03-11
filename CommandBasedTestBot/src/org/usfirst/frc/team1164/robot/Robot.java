@@ -8,13 +8,22 @@
 package org.usfirst.frc.team1164.robot;
 
 import org.usfirst.frc.team1164.logic.autoDecissionMattrix;
+<<<<<<< HEAD
 import org.usfirst.frc.team1164.robot.subsystems.*;
 import org.usfirst.frc.team1164.robot.commands.*;
+=======
+import org.usfirst.frc.team1164.robot.subsystems.Arm;
+import org.usfirst.frc.team1164.robot.subsystems.Chassis;
+import org.usfirst.frc.team1164.robot.subsystems.Claw;
+>>>>>>> origin/Devon
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.hal.PDPJNI;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -31,16 +40,25 @@ public class Robot extends TimedRobot {
 	public static final Chassis kChassis = new Chassis();
 	public static final Claw kClaw = new Claw();
 	public static final Arm kArm = new Arm();
+<<<<<<< HEAD
 	private Compressor RobotCompressor;
 	public LiveWindow lw;
+=======
+	private static Compressor robotCompressor;
+	public static LiveWindow lw;
+>>>>>>> origin/Devon
 	public static OI m_oi;
+	public static PDPJNI PDP = new PDPJNI();
 
-//	private Command m_autonomousCommand;
+	private Command autoCommand;
 	
+<<<<<<< HEAD
 //	private Command autoForward;
 	//private Command autoCommand;
 	private Command autocommand;
 	
+=======
+>>>>>>> origin/Devon
 	
 	private int mode = 1;
 	private SendableChooser<Integer> m_chooser = new SendableChooser<>();
@@ -52,14 +70,16 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		m_oi = new OI();
-
 		m_chooser.addDefault("Position 1", 1);
 		m_chooser.addObject("Position 2", 2);
 		m_chooser.addObject("Position 3", 3);
 		m_chooser.addObject("Testing", 4);
 		SmartDashboard.putData("Positions", m_chooser);
+<<<<<<< HEAD
 
 		
+=======
+>>>>>>> origin/Devon
 	}
 
 	/**
@@ -68,9 +88,7 @@ public class Robot extends TimedRobot {
 	 * the robot is disabled.
 	 */
 	@Override
-	public void disabledInit() {
-
-	}
+	public void disabledInit() {}
 
 	@Override
 	public void disabledPeriodic() {
@@ -90,10 +108,10 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-
 		mode = m_chooser.getSelected();
 		String gameData = DriverStation.getInstance().getGameSpecificMessage();
 		
+<<<<<<< HEAD
 		autocommand = autoDecissionMattrix.decide(mode, gameData);
 		//autocommand = new AutoTurn(90, 0.25);
 		
@@ -101,6 +119,11 @@ public class Robot extends TimedRobot {
 			autocommand.start();
 		}
 		
+=======
+		autoCommand = autoDecissionMattrix.decide(mode, gameData);
+		if (autoCommand != null) 
+			autoCommand.start();
+>>>>>>> origin/Devon
 	}
 	
 
@@ -118,8 +141,8 @@ public class Robot extends TimedRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
-		if (autocommand != null) {
-			autocommand.cancel();
+		if (autoCommand != null) {
+			autoCommand.cancel();
 		}
 	}
 
@@ -136,7 +159,29 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void testPeriodic() {
-		SmartDashboard.putNumber("Left Encoder", kChassis.GetLeftEncoder());
+	/*	SmartDashboard.putNumber("Left Encoder", kChassis.GetLeftEncoder());
 		SmartDashboard.putNumber("Right Encoder", kChassis.GetRightEncoder());
+<<<<<<< HEAD
+=======
+		if (OI.getControllerButton(5) == true) {
+			Robot.kChassis.SetHighGear();
+		}
+		else if (OI.getControllerButton(6) == true) {
+			Robot.kChassis.SetLowGear();
+		}
+		if (OI.getControllerButton(1) == true) {
+			Robot.kChassis.EngageNeutralizer();
+		}
+		else if (OI.getControllerButton(2) == true){
+			Robot.kChassis.DisengageNeutralizer();
+		}
+		if (OI.getControllerButton(3) == true) {
+			Robot.kChassis.EngagePTO();
+		}
+		else if (OI.getControllerButton(4) == true){
+			Robot.kChassis.DisengagePTO();
+		}*/
+		
+>>>>>>> origin/Devon
 	}
 }
