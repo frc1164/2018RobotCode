@@ -32,7 +32,7 @@ public class driving extends Command {
         	double speed = forward - backward;
         	LSpeed = speed - (turn < 0 ? (Drive_turnModifier*speed*turn) : 0);
         	RSpeed = speed - (turn > 0 ? (Drive_turnModifier*speed*turn) : 0);
-    	} else {
+    	} else if (rotate < -0.1 || rotate > 0.1) {
     		LSpeed = rotate;
     		RSpeed = -rotate;
     	}
