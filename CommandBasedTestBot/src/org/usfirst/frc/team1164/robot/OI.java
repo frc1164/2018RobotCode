@@ -46,9 +46,9 @@ public class OI {
 		buttonLowGear.whenPressed(new SetTransmissionLowGear());
 		buttonPTO_Init.whenPressed(new ClimbingConfiguration());
 		buttonChassis_Init.whenPressed(new StartingConfiguration());
+		
 		increaseArmSpeed.whenPressed(new setArmSpeed(0.01));
 		decreaseArmSpeed.whenPressed(new setArmSpeed(-0.01));
-
 	}
 	
 	public static double getControllerAxis(int AxisChannel) {
@@ -58,8 +58,8 @@ public class OI {
 		return driverStick.getRawButton(ButtonChannel);
 	}
 
-	public static double getOperatorAxis(int AxisChannel) {
-		return operatorStick.getRawAxis(AxisChannel);
+	public static XboxController getOperator() {
+		return operatorStick;
 	}
 	
 	//// CREATING BUTTONS

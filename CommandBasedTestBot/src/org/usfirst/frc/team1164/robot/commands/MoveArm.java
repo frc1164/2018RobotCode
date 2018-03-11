@@ -21,16 +21,15 @@ public class MoveArm extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	SmartDashboard.putString("In init move arm initialized", " ");
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	double LStickValue;
-    	LStickValue = OI.getControllerAxis(RobotMap.LAxis);
-    	if (LStickValue > 0.05) {
+    	LStickValue = OI.getOperator().getRawAxis(RobotMap.LAxis);
+    	if (LStickValue > 0.5) {
     		Robot.kArm.moveArm(OI.armSpeed);
-    	} else if (LStickValue < -0.05) {
+    	} else if (LStickValue < -0.5) {
     		Robot.kArm.moveArm(-OI.armSpeed);
     	}
     }

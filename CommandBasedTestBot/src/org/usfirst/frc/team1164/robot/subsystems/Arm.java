@@ -38,7 +38,7 @@ public class Arm extends Subsystem {
 		 return ReverseStop.get();
 	 }
 	 public void moveArm(double speed) {
-		 SmartDashboard.putString("moveArm called from Arm Subsystem", " ");
+		 SmartDashboard.putNumber("moveArm called from Arm Subsystem", speed);
 		 if (speed < 0.2 || getArmPot() < 4.8 || getArmPot() > 2.1) {
 			 ArmVictor.set(speed);
 		 }
@@ -57,7 +57,7 @@ public class Arm extends Subsystem {
 	 }
 
     public void initDefaultCommand() {
-    	//setDefaultCommand(new MoveArm());
+    	setDefaultCommand(new MoveArm());
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }
