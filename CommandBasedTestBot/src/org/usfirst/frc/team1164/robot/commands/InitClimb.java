@@ -14,7 +14,7 @@ public class InitClimb extends CommandGroup {
     	
     	addSequential(new EngageHighGear());
     	addSequential(new EngageNeutralizer());
-    	addSequential(new waitCommand());
+//    	addSequential(new waitCommand());
     	addParallel(new DisengageHighGear());
     	addSequential(new EngagePTO());
     }

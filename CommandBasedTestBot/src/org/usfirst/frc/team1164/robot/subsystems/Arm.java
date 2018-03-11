@@ -32,6 +32,7 @@ public class Arm extends Subsystem {
 	
 	public Arm() {
 		isFolded = Arm_isFolded;
+		armSpeed = 0.15;
 		
 		initializeMotor();
 		initializeEncoder();

@@ -9,6 +9,7 @@ import static org.usfirst.frc.team1164.robot.Robot.m_oi;
 import static org.usfirst.frc.team1164.robot.RobotMap.Drive_turnModifier;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class driving extends Command {
 
@@ -36,6 +37,8 @@ public class driving extends Command {
     		LSpeed = rotate;
     		RSpeed = -rotate;
     	}
+    	SmartDashboard.putNumber("LSpeed", LSpeed);
+    	SmartDashboard.putNumber("RSpeed", RSpeed);
     	kChassis.setLeftSpeed(LSpeed);
     	kChassis.setRightSpeed(RSpeed);
     	

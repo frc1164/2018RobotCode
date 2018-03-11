@@ -9,6 +9,7 @@ import static org.usfirst.frc.team1164.robot.RobotMap.Arm_limit_bot_folded;
 import static org.usfirst.frc.team1164.robot.RobotMap.Arm_limit_top;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class MoveArm extends Command {
 	
@@ -37,18 +38,24 @@ public class MoveArm extends Command {
     	 * 		stop arm
     	 */
     	
+    	SmartDashboard.putNumber("arm speed", kArm.getArmSpeed());
+    	
+    	
     	if (m_oi.getOperatorAxis(RT.toInt()) > 0.2) {
     		if (Arm_limit_top > kArm.getArmPot()) {
     			kArm.setArmVictor(kArm.getArmSpeed());
+    	    	SmartDashboard.putNumber("arm speed", kArm.getArmSpeed());
     		}
     	} else if (m_oi.getOperatorAxis(LT.toInt()) > 0.2) { 
     		double limit = (kArm.getArmFolded() ? Arm_limit_bot_folded : 
     											  Arm_limit_bot);
     		if (limit < kArm.getArmPot()) {
     			kArm.setArmVictor(-kArm.getArmSpeed());
+    	    	SmartDashboard.putNumber("arm speed", -kArm.getArmSpeed());
     		}
     	} else {
     		kArm.setArmVictor(0);
+        	SmartDashboard.putNumber("arm speed", 0);
     	}
     	
     }

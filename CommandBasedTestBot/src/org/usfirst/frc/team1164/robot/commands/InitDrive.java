@@ -12,7 +12,7 @@ public class InitDrive extends CommandGroup {
         addParallel(new EngageHighGear());
         addParallel(new DisengagePTO());
         addSequential(new DisengageNeutralizer());
-        addSequential(new waitCommand());
+//        addSequential(new waitCommand());
         addSequential(new DisengageHighGear());
     }
 }
