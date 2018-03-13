@@ -12,7 +12,6 @@ import org.usfirst.frc.team1164.robot.commands.OpenClaw;
 import org.usfirst.frc.team1164.robot.commands.SetTransmissionHighGear;
 import org.usfirst.frc.team1164.robot.commands.SetTransmissionLowGear;
 import org.usfirst.frc.team1164.robot.commands.SetConfiguration;
-import org.usfirst.frc.team1164.robot.commands.ArmDebug;
 import org.usfirst.frc.team1164.robot.subsystems.Chassis;
 
 import edu.wpi.first.wpilibj.XboxController;
@@ -40,7 +39,6 @@ public class OI {
 		buttonCloseClaw.whenPressed(new CloseClaw());
 		buttonHighGear.whenPressed(new SetTransmissionHighGear());
 		buttonLowGear.whenPressed(new SetTransmissionLowGear());
-		buttonRecord.whenPressed(new ArmDebug());
 		
 		if (driverStick.getRawButton(8)) {
 			buttonPTO_Init.whenPressed(new SetConfiguration(Chassis.Config.Climbing));
