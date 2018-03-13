@@ -62,8 +62,8 @@ public class RobotMap {
 	public static final double speedReducer = 1;	
 	
 	// encoders
-	public static final int CHE_Left_channelA = 0;
-	public static final int CHE_Left_channelB = 1;
+	public static final int CHE_Left_channelA = 2;
+	public static final int CHE_Left_channelB = 3;
 	public static final boolean CHE_Left_reversed = true;
 	
 	public static final int CHE_Right_channelA = 2;
@@ -95,11 +95,11 @@ public class RobotMap {
 	
 // arm options
 	public static final int ARM_Victor_Channel = 3;
-	public static final int ARM_Encoder_ChannelA = 0;
-	public static final int ARM_Encoder_ChannelB = 1;
+	public static final int ARM_Encoder_ChannelA = 4;
+	public static final int ARM_Encoder_ChannelB = 5;
 	public static final boolean ARM_Encoder_IsInverted = false;
 	public static final CounterBase.EncodingType ARM_Encoder_EncodingType = CounterBase.EncodingType.k4X; //k is for konstant
 	public static final int ARM_Pot_Channel = 0;
-	public static final int ARM_Forward_Stop = 3;
-	public static final int ARM_Reverse_Stop = 4;
+	public static final int ARM_Forward_Stop = 6;
+	public static final int ARM_Reverse_Stop = 7;
 }
