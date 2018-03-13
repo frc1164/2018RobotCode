@@ -54,6 +54,10 @@ public class Arm extends Subsystem {
 	 public void UnfoldArm() {
 		 FoldingPiston.set(DoubleSolenoid.Value.kReverse);
 	 }
+	 
+	 public enum ArmPositions{
+		 Low, Scale, Switch
+	 }
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.

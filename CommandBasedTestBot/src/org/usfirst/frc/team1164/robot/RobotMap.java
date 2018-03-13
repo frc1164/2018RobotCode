@@ -105,5 +105,10 @@ public class RobotMap {
 
 	public static final int ARM_FoldingPiston_ForwardChannel = 6;
 	public static final int ARM_FoldingPiston_ReverseChannel = 7;
+	
+	public static final double ARM_ScalePosition_Volts = 3.141;
+	public static final double ARM_SwitchPosition_Volts = 4.945;
+	public static final double ARM_BottomPosition_Volts = 2.455;
+	
 
 }
