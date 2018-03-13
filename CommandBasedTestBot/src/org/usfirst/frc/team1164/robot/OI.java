@@ -7,12 +7,16 @@
 
 package org.usfirst.frc.team1164.robot;
 
+import org.usfirst.frc.team1164.robot.commands.ClimbingConfiguration;
 import org.usfirst.frc.team1164.robot.commands.CloseClaw;
+import org.usfirst.frc.team1164.robot.commands.FoldArm;
 import org.usfirst.frc.team1164.robot.commands.OpenClaw;
 import org.usfirst.frc.team1164.robot.commands.SetTransmissionHighGear;
 import org.usfirst.frc.team1164.robot.commands.SetTransmissionLowGear;
-import org.usfirst.frc.team1164.robot.commands.SetConfiguration;
-import org.usfirst.frc.team1164.robot.subsystems.Chassis;
+
+import org.usfirst.frc.team1164.robot.commands.StartingConfiguration;
+import org.usfirst.frc.team1164.robot.commands.UnfoldArm;
+import org.usfirst.frc.team1164.robot.commands.setArmSpeed;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -25,28 +29,36 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public class OI {
 	private static XboxController driverStick = new XboxController(RobotMap.driverPort);
 	private static XboxController operatorStick = new XboxController(RobotMap.operatorPort);
-	private Button buttonOpenClaw = new JoystickButton(operatorStick, 1);
-	private Button buttonCloseClaw = new JoystickButton(operatorStick, 2);
-	private Button buttonHighGear = new JoystickButton(driverStick, 6);
-	private Button buttonLowGear = new JoystickButton(driverStick, 5);
-	private Button buttonPTO_Init = new JoystickButton(driverStick, 6);
-	private Button buttonChassis_Init = new JoystickButton(driverStick, 5);
-	private Button buttonRecord = new JoystickButton(operatorStick, 8);
+	
+	private Button buttonOpenClaw = new JoystickButton(operatorStick, 1); //a
+	private Button buttonCloseClaw = new JoystickButton(operatorStick, 2); //b
+	
+	private Button buttonHighGear = new JoystickButton(driverStick, 6); // lbutton
+	private Button buttonLowGear = new JoystickButton(driverStick, 5); //rbutton
+	private Button buttonPTO_Init = new JoystickButton(operatorStick, 7); //back
+	private Button buttonChassis_Init = new JoystickButton (operatorStick, 8); //start
 
+
+	private Button foldArm = new JoystickButton(operatorStick, 3);
+	private Button unfoldArm = new JoystickButton(operatorStick, 4);
+	
+	private Button increaseArmSpeed = new JoystickButton(operatorStick, 6); // lbutton
+	private Button decreaseArmSpeed = new JoystickButton(operatorStick, 5); // rbutton
+	
+	public static double armSpeed = 0.15;
 	
 	public OI() {
 		buttonOpenClaw.whenPressed(new OpenClaw());
 		buttonCloseClaw.whenPressed(new CloseClaw());
 		buttonHighGear.whenPressed(new SetTransmissionHighGear());
 		buttonLowGear.whenPressed(new SetTransmissionLowGear());
-		
-		if (driverStick.getRawButton(8)) {
-			buttonPTO_Init.whenPressed(new SetConfiguration(Chassis.Config.Climbing));
-			buttonChassis_Init.whenPressed(new SetConfiguration(Chassis.Config.Starting));
-		}
-		
-
-	}
+    
+		buttonPTO_Init.whenPressed(new ClimbingConfiguration());
+		buttonChassis_Init.whenPressed(new StartingConfiguration());
+		increaseArmSpeed.whenPressed(new setArmSpeed(0.01));
+		decreaseArmSpeed.whenPressed(new setArmSpeed(-0.01));
+		foldArm.whenPressed(new FoldArm());
+		unfoldArm.whenPressed(new UnfoldArm());
 	
 	public static double getControllerAxis(int AxisChannel) {
 		return driverStick.getRawAxis(AxisChannel);
@@ -54,7 +66,10 @@ public class OI {
 	public static boolean getControllerButton(int ButtonChannel) {
 		return driverStick.getRawButton(ButtonChannel);
 	}
-	
+
+	public static double getOperatorAxis(int AxisChannel) {
+		return operatorStick.getRawAxis(AxisChannel);
+	}
 	
 	//// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a
