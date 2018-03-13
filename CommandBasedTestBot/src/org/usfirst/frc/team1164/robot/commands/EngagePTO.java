@@ -1,16 +1,13 @@
 package org.usfirst.frc.team1164.robot.commands;
 
-import org.usfirst.frc.team1164.robot.Robot;
-
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class OpenClaw extends Command {
+public class EngagePTO extends Command {
 
-    public OpenClaw() {
-    	requires(Robot.kClaw);
+    public EngagePTO() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -21,13 +18,11 @@ public class OpenClaw extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (!Robot.kClaw.getOpenState())
-    		Robot.kClaw.Open();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     // Called once after isFinished returns true

@@ -8,10 +8,9 @@
 package org.usfirst.frc.team1164.robot;
 
 import org.usfirst.frc.team1164.logic.autoDecissionMattrix;
-import org.usfirst.frc.team1164.robot.commands.Auto.AutoTurn;
-import org.usfirst.frc.team1164.robot.subsystems.Chassis;
-import org.usfirst.frc.team1164.robot.subsystems.Claw;
-import org.usfirst.frc.team1164.robot.subsystems.Winch;
+import org.usfirst.frc.team1164.robot.subsystems.*;
+import org.usfirst.frc.team1164.robot.commands.*;
+import org.usfirst.frc.team1164.robot.commands.Auto.DriveForward;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -19,7 +18,12 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.hal.PDPJNI;
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+
+import java.util.concurrent.TimeUnit;
+import java.lang.System;
 
 
 /**
@@ -33,15 +37,19 @@ public class Robot extends TimedRobot {
 	
 	public static final Chassis kChassis = new Chassis();
 	public static final Claw kClaw = new Claw();
-	public static final Winch kWinch = new Winch();
-	
+	public static final Arm kArm = new Arm();
+	private Compressor RobotCompressor;
+	public LiveWindow lw;
 	public static OI m_oi;
+	public static PDPJNI PDP = new PDPJNI();
 
 //	private Command m_autonomousCommand;
 	
 //	private Command autoForward;
 	//private Command autoCommand;
 	private Command autocommand;
+	private Command ChassisInit;
+	private Command AutoChassisInit;
 	
 	
 	private int mode = 1;
@@ -61,8 +69,6 @@ public class Robot extends TimedRobot {
 		m_chooser.addObject("Testing", 4);
 		SmartDashboard.putData("Positions", m_chooser);
 		
-		CameraServer Camera = CameraServer.getInstance();
-		Camera.addAxisCamera("10.11.64.13");
 
 		
 	}
@@ -73,9 +79,7 @@ public class Robot extends TimedRobot {
 	 * the robot is disabled.
 	 */
 	@Override
-	public void disabledInit() {
-
-	}
+	public void disabledInit() {}
 
 	@Override
 	public void disabledPeriodic() {
@@ -95,17 +99,26 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-
+		AutoChassisInit = new StartingConfiguration();
+		ChassisInit = new StartingConfiguration();
+		if (AutoChassisInit != null) {
+			AutoChassisInit.start();
+		}
+		try {
+		TimeUnit.SECONDS.sleep(1);
+		}
+		catch (InterruptedException ex){
+			System.out.println(ex);
+		}
 		mode = m_chooser.getSelected();
 		String gameData = DriverStation.getInstance().getGameSpecificMessage();
 		
 		autocommand = autoDecissionMattrix.decide(mode, gameData);
 		//autocommand = new AutoTurn(90, 0.25);
-		
+
 		if (autocommand != null) {
 			autocommand.start();
-		}
-		
+		} 
 	}
 	
 
@@ -123,8 +136,15 @@ public class Robot extends TimedRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
+		ChassisInit = new StartingConfiguration();
 		if (autocommand != null) {
 			autocommand.cancel();
+		}
+	/*	if (ChassisInit != null) {
+			ChassisInit.start();
+		}*/
+		if (ChassisInit != null) {
+			ChassisInit.start();
 		}
 	}
 
@@ -141,8 +161,26 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void testPeriodic() {
-		SmartDashboard.putNumber("Left Encoder", kChassis.GetLeftEncoder());
+	/*	SmartDashboard.putNumber("Left Encoder", kChassis.GetLeftEncoder());
 		SmartDashboard.putNumber("Right Encoder", kChassis.GetRightEncoder());
+		if (OI.getControllerButton(5) == true) {
+			Robot.kChassis.SetHighGear();
+		}
+		else if (OI.getControllerButton(6) == true) {
+			Robot.kChassis.SetLowGear();
+		}
+		if (OI.getControllerButton(1) == true) {
+			Robot.kChassis.EngageNeutralizer();
+		}
+		else if (OI.getControllerButton(2) == true){
+			Robot.kChassis.DisengageNeutralizer();
+		}
+		if (OI.getControllerButton(3) == true) {
+			Robot.kChassis.EngagePTO();
+		}
+		else if (OI.getControllerButton(4) == true){
+			Robot.kChassis.DisengagePTO();
+		}*/
 		
 	}
 }

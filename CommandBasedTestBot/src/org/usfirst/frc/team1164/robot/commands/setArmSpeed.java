@@ -1,18 +1,20 @@
 package org.usfirst.frc.team1164.robot.commands;
 
-import org.usfirst.frc.team1164.robot.Robot;
-
 import edu.wpi.first.wpilibj.command.Command;
+import org.usfirst.frc.team1164.robot.OI;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
-public class OpenClaw extends Command {
+public class setArmSpeed extends Command {
 
-    public OpenClaw() {
-    	requires(Robot.kClaw);
+	private double speed;
+	
+    public setArmSpeed(double speed) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    	this.speed = speed; 
     }
 
     // Called just before this Command runs the first time
@@ -21,8 +23,11 @@ public class OpenClaw extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (!Robot.kClaw.getOpenState())
-    		Robot.kClaw.Open();
+    	OI.armSpeed += speed;
+    	if (OI.armSpeed >= 1 || OI.armSpeed <= 0) {
+    		OI.armSpeed = 0;
+    	}
+    	SmartDashboard.putNumber("armSpeed", OI.armSpeed);
     }
 
     // Make this return true when this Command no longer needs to run execute()

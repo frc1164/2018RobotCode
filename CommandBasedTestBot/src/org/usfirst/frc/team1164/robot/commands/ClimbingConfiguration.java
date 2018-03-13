@@ -1,16 +1,18 @@
 package org.usfirst.frc.team1164.robot.commands;
 
+import edu.wpi.first.wpilibj.command.Command;
+import org.usfirst.frc.team1164.robot.subsystems.Chassis;
 import org.usfirst.frc.team1164.robot.Robot;
 
-import edu.wpi.first.wpilibj.command.Command;
+import java.util.concurrent.TimeUnit;
+import java.lang.System;
 
 /**
  *
  */
-public class OpenClaw extends Command {
+public class ClimbingConfiguration extends Command {
 
-    public OpenClaw() {
-    	requires(Robot.kClaw);
+    public ClimbingConfiguration() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -21,8 +23,20 @@ public class OpenClaw extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (!Robot.kClaw.getOpenState())
-    		Robot.kClaw.Open();
+    	
+    	//sets high gear to move stem of the solenoid away from neutralizer, as to prevent grinding
+		Robot.kChassis.SetHighGear();
+		
+		//Engages neutralizer and PTO
+    		Robot.kChassis.EngageNeutralizer();
+    		try {
+    		TimeUnit.SECONDS.sleep(1);
+    		}
+    		catch (InterruptedException ex){
+    			System.out.println(ex);
+    		}
+    		Robot.kChassis.SetLowGear();
+    		Robot.kChassis.EngagePTO();
     }
 
     // Make this return true when this Command no longer needs to run execute()

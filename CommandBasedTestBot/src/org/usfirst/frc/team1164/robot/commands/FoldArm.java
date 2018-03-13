@@ -7,12 +7,12 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class OpenClaw extends Command {
+public class FoldArm extends Command {
 
-    public OpenClaw() {
-    	requires(Robot.kClaw);
+    public FoldArm() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    	requires(Robot.kArm);
     }
 
     // Called just before this Command runs the first time
@@ -21,8 +21,7 @@ public class OpenClaw extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (!Robot.kClaw.getOpenState())
-    		Robot.kClaw.Open();
+    	Robot.kArm.FoldArm();
     }
 
     // Make this return true when this Command no longer needs to run execute()

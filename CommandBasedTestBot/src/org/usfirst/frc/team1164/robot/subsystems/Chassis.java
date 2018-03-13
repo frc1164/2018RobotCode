@@ -2,15 +2,20 @@ package org.usfirst.frc.team1164.robot.subsystems;
 
 import org.usfirst.frc.team1164.robot.RobotMap;
 import org.usfirst.frc.team1164.robot.commands.CustomDriveWithXbox;
+import org.usfirst.frc.team1164.robot.OI;
+import org.usfirst.frc.team1164.robot.commands.ClimbingConfiguration;
 
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.command.Command;
+
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Servo;
-
 
 import com.kauailabs.navx.frc.AHRS;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
@@ -21,9 +26,11 @@ public class Chassis extends Subsystem {
 	private WPI_VictorSPX Right1, Right2, Right3, Left1, Left2, Left3;
 	private Encoder LeftEncoder, RightEncoder;
 	private AHRS Navx;
-	private DoubleSolenoid Transmission;
-	private Servo Neutralizer;
-	
+	private DoubleSolenoid Transmission, PTO;
+	private Servo LeftNeutralizer, RightNeutralizer;
+	public boolean IsClimbingConfiguration, IsHighGear;
+	private Command ClimbingConfiguration = new ClimbingConfiguration();
+
 
 	@Override
 	protected void initDefaultCommand() {
@@ -40,6 +47,18 @@ public class Chassis extends Subsystem {
 		Right2 = new WPI_VictorSPX(RobotMap.CHV_Right_2);
 		Right3 = new WPI_VictorSPX(RobotMap.CHV_Right_3);
 		
+		
+		
+		//LiveWindow.add("Chassis");
+		LiveWindow.add(Left2);
+		LiveWindow.add(Left3);
+		LiveWindow.add(Right1);
+		LiveWindow.add(Right2);
+		LiveWindow.add(Right3);
+		LiveWindow.add(Navx);
+		LiveWindow.add(LeftEncoder);
+		LiveWindow.add(RightEncoder);
+
 		try {
 			Navx = new AHRS(SPI.Port.kMXP);
 		}
@@ -53,11 +72,19 @@ public class Chassis extends Subsystem {
 		RightEncoder = new Encoder(RobotMap.CHE_Right_channelA, RobotMap.CHE_Right_channelB, 
 				RobotMap.CHE_Right_reversed, Encoder.EncodingType.k2X);
 		
+		LeftEncoder.setName("Chassis", "LeftEncoder");
+		RightEncoder.setName("Chassis", "RightEncoder");
+		
 		Transmission = new DoubleSolenoid(RobotMap.CHT_Forward_Channel,RobotMap.CHT_Reverse_Channel);
+		PTO = new DoubleSolenoid(RobotMap.CHP_Forward_Channel, RobotMap.CHP_Reverse_Channel);
 		
-		Neutralizer = new Servo(RobotMap.CHN_Channel);
+		LeftNeutralizer = new Servo(RobotMap.CHN_Left_Channel);
+		RightNeutralizer = new Servo(RobotMap.CHN_Right_Channel);
 		
-		//configuration 
+		IsClimbingConfiguration = false;
+		IsHighGear = false;
+		
+		//object configuration options
 		
 			LeftEncoder.reset();
 			RightEncoder.reset();
@@ -72,6 +99,15 @@ public class Chassis extends Subsystem {
 			Right2.setInverted(true);
 		
 			Navx.reset();
+			
+			Left1.setName("Chassis", "Left1");
+			Left2.setName("Chassis", "Left2");
+			Left3.setName("Chassis", "Left3");
+			Right1.setName("Chassis", "Right1");
+			Right2.setName("Chassis", "Right2");
+			Right3.setName("Chassis", "Right3");
+			Navx.setName("Chassis", "NavX");
+			
 		
 	}
 	
@@ -107,6 +143,7 @@ public class Chassis extends Subsystem {
 	public void ResetNavx() {
 		Navx.reset();
 	}
+	
 	public void Brake() {
 		Right1.set(ControlMode.PercentOutput, 0);
 		Right2.set(ControlMode.PercentOutput, 0);
@@ -118,15 +155,37 @@ public class Chassis extends Subsystem {
 	
 	public void SetHighGear() {
 		Transmission.set(DoubleSolenoid.Value.kForward);
+		IsHighGear = true;
 	}
 	
 	public void SetLowGear() {
 		Transmission.set(DoubleSolenoid.Value.kReverse);
+		IsHighGear = false;
 	}
 	
 	public void EngageNeutralizer() {
-		Neutralizer.setAngle(RobotMap.CHN_EngageAngle);
+		LeftNeutralizer.set(RobotMap.CHN_Left_EngageAngle);
+		RightNeutralizer.set(RobotMap.CHN_Right_EngageAngle);
+	}
+	public void DisengageNeutralizer() {
+		LeftNeutralizer.set(RobotMap.CHN_Left_DisengageAngle);
+		RightNeutralizer.set(RobotMap.CHN_Right_DisengageAngle);
 	}
 	
+	public void EngagePTO() {
+		PTO.set(DoubleSolenoid.Value.kForward);
+	}
+	public void DisengagePTO() {
+		PTO.set(DoubleSolenoid.Value.kReverse);
+	} 
+	public void Climb() {
+		if (OI.getControllerButton(3) == true) {
+			ClimbingConfiguration.start();
+		}
+	}
+	
+	public enum Config{
+		Starting, Climbing
+	}
 	
 }

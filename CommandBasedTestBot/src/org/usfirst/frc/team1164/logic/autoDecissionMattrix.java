@@ -52,7 +52,7 @@ public class autoDecissionMattrix {
 			}
 		}
 		else {
-			autoCommand = new AutoTurn(90, 0.1);
+			autoCommand = new AutoRun();
 		}
 		return autoCommand;
 	}

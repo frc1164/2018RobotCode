@@ -7,8 +7,15 @@
 
 package org.usfirst.frc.team1164.robot;
 
+import org.usfirst.frc.team1164.robot.commands.ClimbingConfiguration;
 import org.usfirst.frc.team1164.robot.commands.CloseClaw;
+import org.usfirst.frc.team1164.robot.commands.FoldArm;
 import org.usfirst.frc.team1164.robot.commands.OpenClaw;
+import org.usfirst.frc.team1164.robot.commands.SetTransmissionHighGear;
+import org.usfirst.frc.team1164.robot.commands.SetTransmissionLowGear;
+import org.usfirst.frc.team1164.robot.commands.StartingConfiguration;
+import org.usfirst.frc.team1164.robot.commands.UnfoldArm;
+import org.usfirst.frc.team1164.robot.commands.setArmSpeed;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -19,23 +26,49 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	public static final int remotePort = 0;
-	private static XboxController stick = new XboxController(remotePort);
-	Button buttonOpenClaw = new JoystickButton(stick, 1);
-	Button buttonCloseClaw = new JoystickButton(stick, 2);
+	private static XboxController driverStick = new XboxController(RobotMap.driverPort);
+	private static XboxController operatorStick = new XboxController(RobotMap.operatorPort);
+	
+	private Button buttonOpenClaw = new JoystickButton(operatorStick, 1); //a
+	private Button buttonCloseClaw = new JoystickButton(operatorStick, 2); //b
+	
+	private Button buttonHighGear = new JoystickButton(driverStick, 6); // lbutton
+	private Button buttonLowGear = new JoystickButton(driverStick, 5); //rbutton
+	private Button buttonPTO_Init = new JoystickButton(operatorStick, 7); //back
+	private Button buttonChassis_Init = new JoystickButton (operatorStick, 8); //start
+
+	private Button foldArm = new JoystickButton(operatorStick, 3);
+	private Button unfoldArm = new JoystickButton(operatorStick, 4);
+	
+	
+	private Button increaseArmSpeed = new JoystickButton(operatorStick, 6); // lbutton
+	private Button decreaseArmSpeed = new JoystickButton(operatorStick, 5); // rbutton
+	
+	public static double armSpeed = 0.15;
 	
 	public OI() {
 		buttonOpenClaw.whenPressed(new OpenClaw());
 		buttonCloseClaw.whenPressed(new CloseClaw());
+		buttonHighGear.whenPressed(new SetTransmissionHighGear());
+		buttonLowGear.whenPressed(new SetTransmissionLowGear());
+		buttonPTO_Init.whenPressed(new ClimbingConfiguration());
+		buttonChassis_Init.whenPressed(new StartingConfiguration());
+		increaseArmSpeed.whenPressed(new setArmSpeed(0.01));
+		decreaseArmSpeed.whenPressed(new setArmSpeed(-0.01));
+		foldArm.whenPressed(new FoldArm());
+		unfoldArm.whenPressed(new UnfoldArm());
 	}
 	
 	public static double getControllerAxis(int AxisChannel) {
-		return stick.getRawAxis(AxisChannel);
+		return driverStick.getRawAxis(AxisChannel);
 	}
 	public static boolean getControllerButton(int ButtonChannel) {
-		return stick.getRawButton(ButtonChannel);
+		return driverStick.getRawButton(ButtonChannel);
 	}
-	
+
+	public static double getOperatorAxis(int AxisChannel) {
+		return operatorStick.getRawAxis(AxisChannel);
+	}
 	
 	//// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a
