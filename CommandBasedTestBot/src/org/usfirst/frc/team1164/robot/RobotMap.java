@@ -62,6 +62,7 @@ public class RobotMap {
 	public static final double speedReducer = 1;	
 	
 	// encoders
+
 	public static final int CHE_Left_channelA = 0;
 	public static final int CHE_Left_channelB = 1;
 	public static final boolean CHE_Left_reversed = false;
@@ -92,6 +93,9 @@ public class RobotMap {
 // claw options
 	public static final int CL_Forward_Channel = 5;
 	public static final int CL_Reverse_Channel = 4;
+
+	public static final int CL_Forward_Channel = 4;
+	public static final int CL_Reverse_Channel = 5;
 	
 // arm options
 	public static final int ARM_Victor_Channel = 3;
@@ -102,6 +106,10 @@ public class RobotMap {
 	public static final int ARM_Pot_Channel = 3;
 	public static final int ARM_Forward_Stop = 6;
 	public static final int ARM_Reverse_Stop = 7;
+	public static final int ARM_Pot_Channel = 0;
+	public static final int ARM_Forward_Stop = 6;
+	public static final int ARM_Reverse_Stop = 7;
+
 	public static final int ARM_FoldingPiston_ForwardChannel = 6;
 	public static final int ARM_FoldingPiston_ReverseChannel = 7;
 
