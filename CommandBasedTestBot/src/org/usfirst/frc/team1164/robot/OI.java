@@ -59,6 +59,7 @@ public class OI {
 		decreaseArmSpeed.whenPressed(new setArmSpeed(-0.01));
 		foldArm.whenPressed(new FoldArm());
 		unfoldArm.whenPressed(new UnfoldArm());
+	}
 	
 	public static double getControllerAxis(int AxisChannel) {
 		return driverStick.getRawAxis(AxisChannel);
