@@ -11,9 +11,9 @@ import org.usfirst.frc.team1164.robot.commands.ClimbingConfiguration;
 import org.usfirst.frc.team1164.robot.commands.CloseClaw;
 import org.usfirst.frc.team1164.robot.commands.FoldArm;
 import org.usfirst.frc.team1164.robot.commands.OpenClaw;
+import org.usfirst.frc.team1164.robot.commands.SetArmPosition;
 import org.usfirst.frc.team1164.robot.commands.SetTransmissionHighGear;
 import org.usfirst.frc.team1164.robot.commands.SetTransmissionLowGear;
-
 import org.usfirst.frc.team1164.robot.commands.StartingConfiguration;
 import org.usfirst.frc.team1164.robot.commands.UnfoldArm;
 import org.usfirst.frc.team1164.robot.commands.setArmSpeed;
@@ -45,6 +45,10 @@ public class OI {
 	private Button increaseArmSpeed = new JoystickButton(operatorStick, 6); // lbutton
 	private Button decreaseArmSpeed = new JoystickButton(operatorStick, 5); // rbutton
 	
+	private Button SetArmLow = new JoystickButton(driverStick, 1); //a
+	private Button SetArmSwitch = new JoystickButton(driverStick, 2); //b
+	private Button SetArmScale = new JoystickButton(driverStick, 4); //y
+	
 	public static double armSpeed = 0.15;
 	
 	public OI() {
@@ -59,6 +63,11 @@ public class OI {
 		decreaseArmSpeed.whenPressed(new setArmSpeed(-0.01));
 		foldArm.whenPressed(new FoldArm());
 		unfoldArm.whenPressed(new UnfoldArm());
+		
+		SetArmLow.whenPressed(new SetArmPosition(RobotMap.ARM_BottomPosition_Volts));
+		SetArmSwitch.whenPressed(new SetArmPosition(RobotMap.ARM_SwitchPosition_Volts));
+		SetArmScale.whenPressed(new SetArmPosition(RobotMap.ARM_ScalePosition_Volts));
+
 	}
 	
 	public static double getControllerAxis(int AxisChannel) {
