@@ -1,13 +1,14 @@
 package org.usfirst.frc.team1164.robot.subsystems;
 
-import org.usfirst.frc.team1164.robot.RobotMap;
 import org.usfirst.frc.team1164.logic.NeoUtil;
+import org.usfirst.frc.team1164.robot.RobotMap;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -21,6 +22,7 @@ public class Arm extends Subsystem {
 	private AnalogInput ArmPot = new AnalogInput(RobotMap.ARM_Pot_Channel);
 	private DigitalInput ForwardStop = new DigitalInput(RobotMap.ARM_Forward_Stop);
 	private DigitalInput ReverseStop = new DigitalInput(RobotMap.ARM_Reverse_Stop);
+	private DoubleSolenoid FoldingPiston = new DoubleSolenoid(RobotMap.ARM_FoldingPiston_ForwardChannel, RobotMap.ARM_FoldingPiston_ReverseChannel);
    
 	// Put methods for controlling this subsystem
     // here. Call these from Commands.
@@ -45,6 +47,12 @@ public class Arm extends Subsystem {
 	 }
 	 public double getArmEncoder() {
 		 return ArmEncoder.get();
+	 }
+	 public void FoldArm() {
+		 FoldingPiston.set(DoubleSolenoid.Value.kForward);
+	 }
+	 public void UnfoldArm() {
+		 FoldingPiston.set(DoubleSolenoid.Value.kReverse);
 	 }
 
     public void initDefaultCommand() {

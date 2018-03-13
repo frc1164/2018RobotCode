@@ -102,4 +102,8 @@ public class RobotMap {
 	public static final int ARM_Pot_Channel = 0;
 	public static final int ARM_Forward_Stop = 6;
 	public static final int ARM_Reverse_Stop = 7;
+
+	public static final int ARM_FoldingPiston_ForwardChannel = 6;
+	public static final int ARM_FoldingPiston_ReverseChannel = 7;
+
 }
