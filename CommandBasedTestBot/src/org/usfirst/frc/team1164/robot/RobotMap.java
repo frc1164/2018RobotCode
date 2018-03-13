@@ -7,13 +7,8 @@
 
 package org.usfirst.frc.team1164.robot;
 
-<<<<<<< HEAD
-import edu.wpi.first.wpilibj.CounterBase;
-import edu.wpi.first.wpilibj.Encoder;
 
 
-=======
->>>>>>> origin/Devon
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -71,18 +66,6 @@ public final class RobotMap {
 	//													 //
 	//---------------------------------------------------//
 	
-<<<<<<< HEAD
-	// encoders
-	public static final int CHE_Left_channelA = 0;
-	public static final int CHE_Left_channelB = 1;
-	public static final boolean CHE_Left_reversed = false;
-	
-	public static final int CHE_Right_channelA = 2;
-	public static final int CHE_Right_channelB = 3;
-	public static final boolean CHE_Right_reversed = true;
-	//
-	public static final double kDistancePerPulse = 0.249364;
-=======
 	public static final double 	Drive_turnModifier		= 0.5;
 	
 	public static final String 	CH_name 				= "Chassis";
@@ -91,25 +74,16 @@ public final class RobotMap {
 	//---------------------= Motors =--------------------//
 
 	public static final double 	CH_victor_speedReducer	= 1;
->>>>>>> origin/Devon
 	
 	public static final int 	CH_victor_left1_port 	= 0;
 	public static final boolean CH_victor_left1_invert 	= true;
 	public static final String 	CH_victor_left1_name 	= "Left Motor 1";
 	
-<<<<<<< HEAD
-	//Neutralizer
-	public static final int CHN_Left_Channel = 1;
-	public static final int CHN_Right_Channel = 0;
-	public static final double CHN_Left_DisengageAngle = .25;
-	public static final double CHN_Left_EngageAngle = 1;
-	public static final double CHN_Right_DisengageAngle = .75;
-	public static final double CHN_Right_EngageAngle = 0;
-=======
+
 	public static final int 	CH_victor_left2_port 	= 1;
 	public static final boolean CH_victor_left2_invert 	= false;
 	public static final String 	CH_victor_left2_name 	= "Left Motor 2";
->>>>>>> origin/Devon
+
 	
 	public static final int 	CH_victor_left3_port 	= 2;
 	public static final boolean CH_victor_left3_invert 	= false;
@@ -129,24 +103,6 @@ public final class RobotMap {
 	
 	//-------------------= Encoders =--------------------//
 
-<<<<<<< HEAD
-// claw options
-	public static final int CL_Forward_Channel = 5;
-	public static final int CL_Reverse_Channel = 4;
-	
-// arm options
-	public static final int ARM_Victor_Channel = 3;
-	public static final int ARM_Encoder_ChannelA = 4;
-	public static final int ARM_Encoder_ChannelB = 5;
-	public static final boolean ARM_Encoder_IsInverted = false;
-	public static final CounterBase.EncodingType ARM_Encoder_EncodingType = CounterBase.EncodingType.k4X; //k is for konstant
-	public static final int ARM_Pot_Channel = 3;
-	public static final int ARM_Forward_Stop = 6;
-	public static final int ARM_Reverse_Stop = 7;
-	public static final int ARM_FoldingPiston_ForwardChannel = 6;
-	public static final int ARM_FoldingPiston_ReverseChannel = 7;
-
-=======
 	public static final double 	CH_encoder_DPP			= 0.249364;
 	
 	public static final int 	CH_encoder_left_APort	= 0;
@@ -213,5 +169,4 @@ public final class RobotMap {
 	public static final double 	Arm_limit_top_speed		= 0.40;
 	public static final double 	Arm_limit_bot_speed		= 0.1;
 	
->>>>>>> origin/Devon
 }

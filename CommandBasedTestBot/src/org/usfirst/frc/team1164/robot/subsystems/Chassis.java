@@ -1,11 +1,5 @@
 package org.usfirst.frc.team1164.robot.subsystems;
 
-<<<<<<< HEAD
-import org.usfirst.frc.team1164.robot.RobotMap;
-import org.usfirst.frc.team1164.robot.commands.CustomDriveWithXbox;
-import org.usfirst.frc.team1164.robot.OI;
-import org.usfirst.frc.team1164.robot.commands.ClimbingConfiguration;
-=======
 import static org.usfirst.frc.team1164.robot.RobotMap.CH_PTOEnabled;
 import static org.usfirst.frc.team1164.robot.RobotMap.CH_PTO_forwardPort;
 import static org.usfirst.frc.team1164.robot.RobotMap.CH_PTO_reversePort;
@@ -49,8 +43,6 @@ import static org.usfirst.frc.team1164.robot.RobotMap.CH_victor_right3_invert;
 import static org.usfirst.frc.team1164.robot.RobotMap.CH_victor_right3_name;
 import static org.usfirst.frc.team1164.robot.RobotMap.CH_victor_right3_port;
 import static org.usfirst.frc.team1164.robot.RobotMap.CH_victor_speedReducer;
->>>>>>> origin/Devon
-
 import org.usfirst.frc.team1164.robot.commands.chassis.driving;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -61,21 +53,10 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SPI;
-<<<<<<< HEAD
-import edu.wpi.first.wpilibj.command.Command;
 
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Servo;
-
-import com.kauailabs.navx.frc.AHRS;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-import com.ctre.phoenix.motorcontrol.ControlMode;
-=======
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
->>>>>>> origin/Devon
 
 
 public class Chassis extends Subsystem {
@@ -85,18 +66,10 @@ public class Chassis extends Subsystem {
 	// driving
 	private Encoder leftEncoder, rightEncoder;
 	private AHRS Navx;
-<<<<<<< HEAD
-	private DoubleSolenoid Transmission, PTO;
-	private Servo LeftNeutralizer, RightNeutralizer;
-	public boolean IsClimbingConfiguration, IsHighGear;
-	private Command ClimbingConfiguration = new ClimbingConfiguration();
-
-=======
 	// Gear box
 	private DoubleSolenoid transmission, PTO;
 	private Servo leftNeutralizer, rightNeutralizer;
 	public boolean neutralizerEnabled, highGearEnabled, PTOEnabled;
->>>>>>> origin/Devon
 
 	@Override
 	protected void initDefaultCommand() {
@@ -133,19 +106,7 @@ public class Chassis extends Subsystem {
 		rightMotor1 = new WPI_VictorSPX(CH_victor_right1_port);
 		rightMotor1.setInverted(CH_victor_right1_invert);
 		rightMotor1.setName(CH_name, CH_victor_right1_name);
-		
-<<<<<<< HEAD
-		//LiveWindow.add("Chassis");
-		LiveWindow.add(Left2);
-		LiveWindow.add(Left3);
-		LiveWindow.add(Right1);
-		LiveWindow.add(Right2);
-		LiveWindow.add(Right3);
-		LiveWindow.add(Navx);
-		LiveWindow.add(LeftEncoder);
-		LiveWindow.add(RightEncoder);
 
-=======
 		rightMotor2 = new WPI_VictorSPX(CH_victor_right2_port);
 		rightMotor2.setInverted(CH_victor_right2_invert);
 		rightMotor2.setName(CH_name, CH_victor_right2_name);
@@ -156,7 +117,7 @@ public class Chassis extends Subsystem {
 	}
 	
 	public void initializeNavx() {
->>>>>>> origin/Devon
+
 		try {
 			Navx = new AHRS(SPI.Port.kMXP);
 			Navx.reset();
@@ -174,50 +135,7 @@ public class Chassis extends Subsystem {
 		leftEncoder.setName(CH_name, CH_encoder_left_name);
 		leftEncoder.reset();
 		
-<<<<<<< HEAD
-		LeftEncoder = new Encoder(RobotMap.CHE_Left_channelA, RobotMap.CHE_Left_channelB,
-				RobotMap.CHE_Left_reversed, Encoder.EncodingType.k2X);
-		RightEncoder = new Encoder(RobotMap.CHE_Right_channelA, RobotMap.CHE_Right_channelB, 
-				RobotMap.CHE_Right_reversed, Encoder.EncodingType.k2X);
-		
-		LeftEncoder.setName("Chassis", "LeftEncoder");
-		RightEncoder.setName("Chassis", "RightEncoder");
-		
-		Transmission = new DoubleSolenoid(RobotMap.CHT_Forward_Channel,RobotMap.CHT_Reverse_Channel);
-		PTO = new DoubleSolenoid(RobotMap.CHP_Forward_Channel, RobotMap.CHP_Reverse_Channel);
-		
-		LeftNeutralizer = new Servo(RobotMap.CHN_Left_Channel);
-		RightNeutralizer = new Servo(RobotMap.CHN_Right_Channel);
-		
-		IsClimbingConfiguration = false;
-		IsHighGear = false;
-		
-		//object configuration options
-		
-			LeftEncoder.reset();
-			RightEncoder.reset();
-			LeftEncoder.setDistancePerPulse(RobotMap.kDistancePerPulse);
-			RightEncoder.setDistancePerPulse(RobotMap.kDistancePerPulse);
-		
-			// Because of the setup of the transmission, motors 0, 13, and 15 need to be inverted. 
-			//These correspond to victors Left1, Right1, and Right2
-		
-			Left1.setInverted(true);
-			Right1.setInverted(true);
-			Right2.setInverted(true);
-		
-			Navx.reset();
-			
-			Left1.setName("Chassis", "Left1");
-			Left2.setName("Chassis", "Left2");
-			Left3.setName("Chassis", "Left3");
-			Right1.setName("Chassis", "Right1");
-			Right2.setName("Chassis", "Right2");
-			Right3.setName("Chassis", "Right3");
-			Navx.setName("Chassis", "NavX");
-			
-=======
->>>>>>> origin/Devon
+
 		
 		rightEncoder = new Encoder(CH_encoder_right_APort, CH_encoder_right_BPort, 
 								   CH_encoder_right_invert, Encoder.EncodingType.k2X);
@@ -287,20 +205,11 @@ public class Chassis extends Subsystem {
 		rightEncoder.reset();
 	}
 	
-<<<<<<< HEAD
-	public void Brake() {
-		Right1.set(ControlMode.PercentOutput, 0);
-		Right2.set(ControlMode.PercentOutput, 0);
-		Right3.set(ControlMode.PercentOutput, 0);
-		Left1.set(ControlMode.PercentOutput, 0);
-		Left2.set(ControlMode.PercentOutput, 0);
-		Left3.set(ControlMode.PercentOutput, 0);
-=======
+
 	//------------------------------------------//
 	
 	public double getNavxAngle() {
 		return Navx.getAngle();
->>>>>>> origin/Devon
 	}
 	
 	public void resetNavx() {
@@ -332,15 +241,7 @@ public class Chassis extends Subsystem {
 	public boolean getNeutralizer() {
 		return neutralizerEnabled;
 	}
-<<<<<<< HEAD
-	public void DisengagePTO() {
-		PTO.set(DoubleSolenoid.Value.kReverse);
-	} 
-	public void Climb() {
-		if (OI.getControllerButton(3) == true) {
-			ClimbingConfiguration.start();
-		}
-=======
+
 
 	//------------------------------------------//
 	
@@ -348,15 +249,12 @@ public class Chassis extends Subsystem {
 		PTO.set(engaged ? DoubleSolenoid.Value.kForward :
 						  DoubleSolenoid.Value.kReverse);
 		PTOEnabled = engaged;
->>>>>>> origin/Devon
 	}
 	
 	public boolean getPTO() {
 		return PTOEnabled;
 	}
 	
-<<<<<<< HEAD
-=======
 	//TODO: fix climb command
 	
 //	public void climb() {
@@ -369,5 +267,4 @@ public class Chassis extends Subsystem {
 //		Starting, Climbing
 //	}
 	
->>>>>>> origin/Devon
 }

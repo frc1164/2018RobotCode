@@ -18,9 +18,7 @@ public class NeoUtil{
 			writer.append(data);
 			writer.close();
 	}
-<<<<<<< HEAD
-=======
-	
+
 	public static boolean inRange(double x, double min, double max) {
 		return (x < max && x > min);
 	}
@@ -28,5 +26,5 @@ public class NeoUtil{
 	public static boolean outRange(double x, double min, double max) {
 		return (x < min || x > max);
 	}
->>>>>>> origin/Devon
+
 }
