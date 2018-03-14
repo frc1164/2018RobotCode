@@ -148,8 +148,8 @@ public final class RobotMap {
 	public static final boolean Arm_victor_inverted 	= false;
 	public static final String	Arm_victor_name			= "Arm motor";
 	
-	public static final int 	Arm_encoder_APort		= 4;
-	public static final int 	Arm_encoder_BPort		= 5;
+	public static final int 	Arm_encoder_APort		= 5;
+	public static final int 	Arm_encoder_BPort		= 6;
 	public static final boolean Arm_encoder_invert 		= false;
 	public static final String 	Arm_encoder_name		= "Arm Encoder";
 	
@@ -159,9 +159,9 @@ public final class RobotMap {
 	public static final int 	Arm_fold_forwardPort 	= 6;
 	public static final int 	Arm_fold_reversePort 	= 7;
 
-	public static final double 	Arm_limit_top			= 4.55;
-	public static final double	Arm_limit_bot			= 2.1;
-	public static final double	Arm_limit_bot_folded	= 3.99;
+	public static final double 	Arm_limit_top			= 5.0;
+	public static final double	Arm_limit_bot			= 1.8655;
+	public static final double	Arm_limit_bot_folded	= 4;
 	public static final double 	Arm_limit_top_speed		= 0.40;
 	public static final double 	Arm_limit_bot_speed		= 0.1;
 	

@@ -69,6 +69,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void disabledPeriodic() {
+		SmartDashboard.putNumber("arm encoder", kArm.getArmEncoder());
 		Scheduler.getInstance().run();
 	}
 
@@ -118,6 +119,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
+		SmartDashboard.putNumber("arm pot", kArm.getArmPot());
 		Scheduler.getInstance().run();
 	}
 

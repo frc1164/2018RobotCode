@@ -23,7 +23,7 @@ public class Arm extends Subsystem {
 	private DoubleSolenoid foldingPiston;
 	private boolean isFolded;
 	private double armSpeed;
-
+	
 	public void initDefaultCommand() {
 		setDefaultCommand(new MoveArm());
 	}
@@ -31,6 +31,11 @@ public class Arm extends Subsystem {
 	//------------------------------------------//
 	
 	public Arm() {
+		armEncoder = new Encoder(5, 6, false, Encoder.EncodingType.k2X);
+		armEncoder.setDistancePerPulse(CH_encoder_DPP);
+		armEncoder.setName(CH_name, CH_encoder_left_name);
+		armEncoder.reset();
+
 		isFolded = Arm_isFolded;
 		armSpeed = 0.15;
 		
@@ -50,7 +55,7 @@ public class Arm extends Subsystem {
 	public void initializeEncoder() {
 		armEncoder = new Encoder(Arm_encoder_APort, Arm_encoder_BPort, 
 				 				 Arm_encoder_invert, EncodingType.k4X);
-		armEncoder.setName(Arm_encoder_name);
+//		armEncoder.setName("Temp");
 		armEncoder.reset();
 		
 	}
@@ -85,7 +90,7 @@ public class Arm extends Subsystem {
 	//------------------------------------------//
 	
 	public double getArmEncoder() {
-		return armEncoder.get();
+		return armEncoder.getDistance();
 	}
 
 	public double getArmPot() {
