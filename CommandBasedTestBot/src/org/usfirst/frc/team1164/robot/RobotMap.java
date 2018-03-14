@@ -43,6 +43,8 @@ public final class RobotMap {
 	public static final int RAxis = 4;
 	public static final int driverPort = 0;
 	public static final int operatorPort = 1;
+	public static final double timeFrame = .02;
+	public static final double encoderToFt = 1;
 
 	//---------------------------------------------------//
 	//													 //

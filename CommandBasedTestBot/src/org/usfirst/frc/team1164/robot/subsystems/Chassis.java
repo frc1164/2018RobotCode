@@ -43,6 +43,7 @@ import static org.usfirst.frc.team1164.robot.RobotMap.CH_victor_right3_invert;
 import static org.usfirst.frc.team1164.robot.RobotMap.CH_victor_right3_name;
 import static org.usfirst.frc.team1164.robot.RobotMap.CH_victor_right3_port;
 import static org.usfirst.frc.team1164.robot.RobotMap.CH_victor_speedReducer;
+import static org.usfirst.frc.team1164.robot.RobotMap.encoderToFt;
 
 import org.usfirst.frc.team1164.robot.commands.chassis.driving;
 
@@ -209,7 +210,9 @@ public class Chassis extends Subsystem {
 	public double getRightEncoder() {
 		return rightEncoder.getDistance();
 	}
-
+	public double getAverageEncoderFt() {
+		return ((this.getLeftEncoder() + this.getRightEncoder()) / 2) * encoderToFt;
+	}
 	public void resetEncoders() {
 		leftEncoder.reset();
 		rightEncoder.reset();
