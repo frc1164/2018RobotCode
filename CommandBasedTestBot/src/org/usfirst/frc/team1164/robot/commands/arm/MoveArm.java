@@ -27,36 +27,35 @@ public class MoveArm extends Command {
 //    	SmartDashboard.putNumber("RTrigger", OI.getOperatorAxis(3));
     	
     	/* sudo-code for below: 
+    	 * arm speed = 0
     	 * if right trigger is pressed
     	 * 		if arm position is less that the arms top limit
-    	 * 			move arm up
+    	 * 			arm speed = +
     	 * else if left trigger is pressed
     	 * 		limit = lowest arm can go based on wether arm is folded
     	 * 		if arm position is higher that lowest limit
-    	 * 			move arm down
-    	 * else
-    	 * 		stop arm
+    	 * 			arm speed = -
     	 */
+    	
+    	
     	
     	SmartDashboard.putNumber("arm speed", kArm.getArmSpeed());
     	
-    	
+    	double speed = 0;
     	if (m_oi.getOperatorAxis(RT.toInt()) > 0.2) {
     		if (Arm_limit_top > kArm.getArmPot()) {
-    			kArm.setArmVictor(kArm.getArmSpeed());
+    			speed = kArm.getArmSpeed();
     	    	SmartDashboard.putNumber("arm speed", kArm.getArmSpeed());
     		}
     	} else if (m_oi.getOperatorAxis(LT.toInt()) > 0.2) { 
     		double limit = (kArm.getArmFolded() ? Arm_limit_bot_folded : 
     											  Arm_limit_bot);
     		if (limit < kArm.getArmPot()) {
-    			kArm.setArmVictor(-kArm.getArmSpeed());
+    			speed = -kArm.getArmSpeed();
     	    	SmartDashboard.putNumber("arm speed", -kArm.getArmSpeed());
     		}
-    	} else {
-    		kArm.setArmVictor(0);
-        	SmartDashboard.putNumber("arm speed", 0);
-    	}
+    	} 
+    	kArm.setArmVictor(speed);
     	
     }
 
