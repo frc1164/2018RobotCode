@@ -1,10 +1,10 @@
 package org.usfirst.frc.team1164.logic;
 
-import org.usfirst.frc.team1164.robot.commands.Auto.AutoRun;
-import org.usfirst.frc.team1164.robot.commands.Auto.AutoTurn;
-import org.usfirst.frc.team1164.robot.commands.Auto.MidSwitch;
-import org.usfirst.frc.team1164.robot.commands.Auto.ScoreScale;
-import org.usfirst.frc.team1164.robot.commands.Auto.ScoreSwitch;
+import org.usfirst.frc.team1164.robot.commands.auto.AutoRun;
+import org.usfirst.frc.team1164.robot.commands.auto.AutoTurn;
+import org.usfirst.frc.team1164.robot.commands.auto.MidSwitch;
+import org.usfirst.frc.team1164.robot.commands.auto.ScoreScale;
+import org.usfirst.frc.team1164.robot.commands.auto.ScoreSwitch;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
