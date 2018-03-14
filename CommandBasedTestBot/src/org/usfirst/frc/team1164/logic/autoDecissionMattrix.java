@@ -6,6 +6,7 @@ import org.usfirst.frc.team1164.robot.commands.auto.MidSwitch;
 import org.usfirst.frc.team1164.robot.commands.auto.ScoreScale;
 import org.usfirst.frc.team1164.robot.commands.auto.ScoreSwitch;
 
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -52,7 +53,7 @@ public class autoDecissionMattrix {
 			}
 		}
 		else {
-			autoCommand = new AutoRun();
+			autoCommand = new AutoTurn(Preferences.getInstance().getDouble("DegreesToTurn", 0.0));
 		}
 		return autoCommand;
 	}
