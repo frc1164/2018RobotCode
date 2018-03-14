@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team1164.robot;
 
+import org.usfirst.frc.team1164.logic.autoDecissionMattrix;
 import org.usfirst.frc.team1164.robot.subsystems.Arm;
 import org.usfirst.frc.team1164.robot.subsystems.Chassis;
 import org.usfirst.frc.team1164.robot.subsystems.Claw;
@@ -87,6 +88,8 @@ public class Robot extends TimedRobot {
 	public void autonomousInit() {
 		mode = m_chooser.getSelected();
 		String gameData = DriverStation.getInstance().getGameSpecificMessage();
+		
+		autoDecissionMattrix.decide(mode, gameData);
 		
 		autoCommand = null;
 		if (autoCommand != null) 
