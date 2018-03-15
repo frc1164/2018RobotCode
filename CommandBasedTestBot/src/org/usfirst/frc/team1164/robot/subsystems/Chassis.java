@@ -16,6 +16,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Servo;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
+import edu.wpi.first.wpilibj.hal.PDPJNI;
 
 import com.kauailabs.navx.frc.AHRS;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
@@ -46,10 +48,111 @@ public class Chassis extends Subsystem {
 		Right1 = new WPI_VictorSPX(RobotMap.CHV_Right_1);
 		Right2 = new WPI_VictorSPX(RobotMap.CHV_Right_2);
 		Right3 = new WPI_VictorSPX(RobotMap.CHV_Right_3);
+//		_______________________
+//		|					  |
+//		|  SmartDashBoard UI  |
+//		|_____________________|
+		
+		SmartDashboard.putData("Chassis", LeftEncoder);
+		SmartDashboard.putData("Chassis", RightEncoder);
+		SmartDashboard.putData("Chassis", Navx);
+		SmartDashboard.putData("Chassis", Transmission);
+		SmartDashboard.putData("Chassis", PTO);
+		SmartDashboard.putData("Chassis", LeftNeutralizer);
+		SmartDashboard.putData("Chassis", RightNeutralizer);
+		SmartDashboard.putBoolean("Chassis", IsClimbingConfiguration);
+		SmartDashboard.putBoolean("Chassis", IsHighGear);
+		SmartDashboard.putData("Chassis", ClimbingConfiguration);
+		
+		//SmartDashboard Motor Hardware Diagnostics
+		
+		/*
+		 * Motor Diagnostics
+		 * Below, what is provided for each motor, in order, is, Bus Voltage,
+		 * MotorOutputVoltage, OutputCurrent, Temperature, and BaseID,
+		 * for Troubleshooting and Diagnostic purposes, the following are
+		 * defined:
+		 * 
+		 * ***Bus Voltage: Battery Voltage- tells you whether you have raw
+		 * power available to complete the motor's task
+		 * 
+		 * ***Motor Output Voltage- What is being put out from the speed 
+		 * controllers to the motors-Tells you the voltage each motor receives
+		 * 
+		 * ***Output Current: What is the actual motor current being drawn from
+		 * the speed controllers, battery.
+		 * 
+		 * ***Temperature: Currently, the current acceptable temperature range is
+		 * the ambient temperature + 2 degrees. Currently, research must be conducted
+		 * to determine the measurement system used
+		 * 
+		 * ***BaseID: CAN Bus ID: Can be referenced with the RoboRIO Webdashboard
+		 * at 
+		 * 172.22.11.2 for USB Connection
+		 * 10.11.64.2  current static IP for event
+		 * RoboRIO-1164-frc.local for ping, browser
+		 * 
+		 * Diagnostic Chain Follows Order: Battery --> Speed Controller --> Motor
+		 */
 		
 		
+		//Left1 Hardware Diagnostics
+		SmartDashboard.putNumber("Left1 HD- BusVoltage", Left1.getBusVoltage());
+		SmartDashboard.putNumber("Left1 HD-MotorOutputVoltage", Left1.getMotorOutputVoltage());
+		SmartDashboard.putNumber("Left1 HD-OutputCurrent", Left1.getOutputCurrent());
+		SmartDashboard.putNumber("Left1 HD-Temperature", Left1.getTemperature());
+		SmartDashboard.putNumber("Left1 HD- BaseID", Left1.getBaseID());
 		
-		//LiveWindow.add("Chassis");
+		
+		//Left2 Hardware Diagnostics
+		SmartDashboard.putNumber("Left2 HD - BusVoltage", Left2.getBusVoltage());
+		SmartDashboard.putNumber("Left2 HD- MotorOutputVoltage", Left2.getMotorOutputVoltage());
+		SmartDashboard.putNumber("Left2 HD - OutputCurrent", Left2.getOutputCurrent());
+		SmartDashboard.putNumber("Left2 HD - Temperature", Left2.getTemperature());
+		SmartDashboard.putNumber("Left2 HD - BaseID", Left2.getBaseID());
+		
+		//Left3 Hardware Diagnostics
+		SmartDashboard.putNumber("Left3 HD - BusVoltage", Left3.getBusVoltage());
+		SmartDashboard.putNumber("Left3 HD- MotorOutputVoltage", Left3.getMotorOutputVoltage());
+		SmartDashboard.putNumber("Left3 HD - OutputCurrent", Left3.getOutputCurrent());
+		SmartDashboard.putNumber("Left3 HD - Temperature", Left3.getTemperature());
+		SmartDashboard.putNumber("Left3 HD - BaseID", Left3.getBaseID());
+		
+		//Right1 Hardware Diagnostics
+		SmartDashboard.putNumber("Right1 HD - BusVoltage", Right1.getBusVoltage());
+		SmartDashboard.putNumber("Right1 HD- MotorOutputVoltage", Right1.getMotorOutputVoltage());
+		SmartDashboard.putNumber("Right1 HD - OutputCurrent", Right1.getOutputCurrent());
+		SmartDashboard.putNumber("Right1 HD - Temperature", Right1.getTemperature());
+		SmartDashboard.putNumber("Right1 HD - BaseID", Right1.getBaseID());
+		
+		//Right2 Hardware Diagnostics
+		SmartDashboard.putNumber("Right2 HD - BusVoltage", Right2.getBusVoltage());
+		SmartDashboard.putNumber("Right2 HD- MotorOutputVoltage", Right2.getMotorOutputVoltage());
+		SmartDashboard.putNumber("Right2 HD - OutputCurrent", Right2.getOutputCurrent());
+		SmartDashboard.putNumber("Right2 HD - Temperature", Right2.getTemperature());
+		SmartDashboard.putNumber("Right2 HD - BaseID", Right2.getBaseID());
+		
+		//Right3 Hardware Diagnostics
+		SmartDashboard.putNumber("Right3 HD - BusVoltage", Right3.getBusVoltage());
+		SmartDashboard.putNumber("Right3 HD- MotorOutputVoltage", Right3.getMotorOutputVoltage());
+		SmartDashboard.putNumber("Right3 HD - OutputCurrent", Right3.getOutputCurrent());
+		SmartDashboard.putNumber("Right3 HD - Temperature", Right3.getTemperature());
+		SmartDashboard.putNumber("Right3 HD - BaseID", Right3.getBaseID());
+		
+		// For all questions and concerns regarding the diagnostics system, 
+		//please refer to the CTRE documentation at
+		//http://www.ctr-electronics.com/downloads/api/java/html/index.html
+		
+		
+		//SmartDashboard Pneumatics Hardware Diagnostics
+		
+		
+//		___________________
+//		|				  |
+//		|  LiveWindow UI  |
+//		|_________________|
+		
+		LiveWindow.add(Left1);
 		LiveWindow.add(Left2);
 		LiveWindow.add(Left3);
 		LiveWindow.add(Right1);
@@ -58,6 +161,10 @@ public class Chassis extends Subsystem {
 		LiveWindow.add(Navx);
 		LiveWindow.add(LeftEncoder);
 		LiveWindow.add(RightEncoder);
+		
+		
+		
+
 
 		try {
 			Navx = new AHRS(SPI.Port.kMXP);
