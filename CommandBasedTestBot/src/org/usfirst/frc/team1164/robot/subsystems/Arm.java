@@ -49,7 +49,7 @@ public class Arm extends Subsystem {
 	
 	public void initializeEncoder() {
 		armEncoder = new Encoder(Arm_encoder_APort, Arm_encoder_BPort, 
-				 				 Arm_encoder_invert, EncodingType.k4X);
+				 				 Arm_encoder_invert, EncodingType.k2X);
 		armEncoder.setName(Arm_encoder_name);
 		armEncoder.reset();
 		
@@ -60,8 +60,8 @@ public class Arm extends Subsystem {
 	}
 	
 	public void initializeLimitSwitch() {
-		forwardLimitSwitch = new DigitalInput(Arm_limiter_forwardPort);
-		reverseLimitSwitch = new DigitalInput(Arm_limiter_reversePort);
+//		forwardLimitSwitch = new DigitalInput(Arm_limiter_forwardPort);
+//		reverseLimitSwitch = new DigitalInput(Arm_limiter_reversePort);
 	}
 	
 	public void initializeFoldingPiston() {

@@ -37,14 +37,11 @@ public final class RobotMap {
 	
 // controller options
 	
-	public static final int LTriggerAxis = 2;
-	public static final int RTriggerAxis = 3;
-	public static final int LAxis = 0;
-	public static final int RAxis = 4;
 	public static final int driverPort = 0;
 	public static final int operatorPort = 1;
+	
 	public static final double timeFrame = .02;
-	public static final double encoderToFt = 1;
+	public static final double encoderToFt = (1 / 30.20);
 
 	//---------------------------------------------------//
 	//													 //
@@ -150,8 +147,8 @@ public final class RobotMap {
 	public static final boolean Arm_victor_inverted 	= false;
 	public static final String	Arm_victor_name			= "Arm motor";
 	
-	public static final int 	Arm_encoder_APort		= 4;
-	public static final int 	Arm_encoder_BPort		= 5;
+	public static final int 	Arm_encoder_APort		= 5;
+	public static final int 	Arm_encoder_BPort		= 6;
 	public static final boolean Arm_encoder_invert 		= false;
 	public static final String 	Arm_encoder_name		= "Arm Encoder";
 	

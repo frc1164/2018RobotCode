@@ -7,13 +7,14 @@
 
 package org.usfirst.frc.team1164.robot;
 
-import org.usfirst.frc.team1164.logic.autoDecissionMattrix;
+import org.usfirst.frc.team1164.robot.commands.InitDrive;
+import org.usfirst.frc.team1164.robot.commands.auto.DriveForward;
 import org.usfirst.frc.team1164.robot.subsystems.Arm;
 import org.usfirst.frc.team1164.robot.subsystems.Chassis;
 import org.usfirst.frc.team1164.robot.subsystems.Claw;
 
 import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -70,6 +71,11 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void disabledPeriodic() {
+		SmartDashboard.putNumber("arm pot", kArm.getArmPot());
+		SmartDashboard.putNumber("Encoder average", kChassis.getAverageEncoderFt());
+		SmartDashboard.putNumber("Left Encoder", kChassis.getLeftEncoder());
+		SmartDashboard.putNumber("Right Encoder", kChassis.getAverageEncoderFt());
+		SmartDashboard.putNumber("Arm encoder", kArm.getArmEncoder());
 		Scheduler.getInstance().run();
 	}
 
@@ -86,12 +92,16 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		mode = m_chooser.getSelected();
+		/*mode = m_chooser.getSelected();
 		String gameData = DriverStation.getInstance().getGameSpecificMessage();
 		
-		autoDecissionMattrix.decide(mode, gameData);
+		autoDecissionMattrix.decide(mode, gameData);*/
 		
-		autoCommand = null;
+		Command setup = new InitDrive();
+		setup.start();
+		
+		autoCommand = new DriveForward(Preferences.getInstance().getDouble("DistanceToGo", 0.0));
+		
 		if (autoCommand != null) 
 			autoCommand.start();
 	}
@@ -121,6 +131,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
+		SmartDashboard.putNumber("Arm encoder", kArm.getArmEncoder());
 		Scheduler.getInstance().run();
 	}
 

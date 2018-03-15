@@ -24,7 +24,7 @@ public class MotionProfiler {
 		this.vMax = vMax;
 		SmartDashboard.putString("start", String.format("%f and %f", aMax, vMax));
 		// creates the acceleration block
-		//int ffGainLength = (int) (vMax / (aMax * RobotMap.timeFrame));
+		//  int ffGainLength = (int) (vMax / (aMax * RobotMap.timeFrame));
 		int ffGainLength = (int) (1 / (aMax * RobotMap.timeFrame));
 		SmartDashboard.putString("start2", String.format("%d", ffGainLength));
 		double[] ffGain = new double[ffGainLength];
