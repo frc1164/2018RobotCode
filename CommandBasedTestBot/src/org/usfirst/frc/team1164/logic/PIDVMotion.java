@@ -10,8 +10,13 @@ public class PIDVMotion extends PIDMotion {
 	}
 	
 	public double getOutput(double actualPos) {
+		//updates the Motion Profiler with next set point
 		MP.update();
+		
+		//passes the set point to the PID controller
 		P.setNextPoint(MP.getPos());
+		
+		//adds the kV to the PID controller's output
 		return P.getOutput(actualPos) + (MP.getVel() * kV);
 	}
 }

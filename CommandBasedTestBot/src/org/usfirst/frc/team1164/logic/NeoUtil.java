@@ -26,4 +26,12 @@ public class NeoUtil{
 	public static boolean outRange(double x, double min, double max) {
 		return (x < min || x > max);
 	}
+	public static double deadband(double tolerance, double numberInput) {
+		if (Math.abs(numberInput) >= tolerance) {
+			return numberInput;
+		}
+		else {
+			return 0;
+		}
+	}
 }
