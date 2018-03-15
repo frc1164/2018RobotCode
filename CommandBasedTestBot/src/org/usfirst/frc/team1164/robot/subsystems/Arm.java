@@ -53,10 +53,10 @@ public class Arm extends Subsystem {
 	}
 	
 	public void initializeEncoder() {
-		armEncoder = new Encoder(Arm_encoder_APort, Arm_encoder_BPort, 
-				 				 Arm_encoder_invert, EncodingType.k4X);
+//		armEncoder = new Encoder(Arm_encoder_APort, Arm_encoder_BPort, 
+//				 				 Arm_encoder_invert, EncodingType.k4X);
 //		armEncoder.setName("Temp");
-		armEncoder.reset();
+//		armEncoder.reset();
 		
 	}
 
