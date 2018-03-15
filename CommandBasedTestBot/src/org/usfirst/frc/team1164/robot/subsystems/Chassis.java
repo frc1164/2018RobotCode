@@ -144,7 +144,23 @@ public class Chassis extends Subsystem {
 		//http://www.ctr-electronics.com/downloads/api/java/html/index.html
 		
 		
-		//SmartDashboard Pneumatics Hardware Diagnostics
+		//SmartDashboard Encoder Diagnostics
+		/*
+		 *                  ***NOTICE***
+		 * 
+		 * Due to the nature of the program documentation,
+		 * Hardware Diagnostics is unavailable from the
+		 * software application.  This is left to implicit
+		 * troubleshooting from the methods providing encoder
+		 * nature, available from the Encoder class, whose 
+		 * documentation is available on the wpi java documentation
+		 * website under "Encoder"
+		 * 
+		 *                ***NOTICE END***
+		 *                
+		 *                
+		 */
+		SmartDashboard.putNumber("LeftEncoder Diagnostics", LeftEncoder.getFPGAIndex());
 		
 		
 //		___________________
