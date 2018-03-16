@@ -7,12 +7,14 @@
 
 package org.usfirst.frc.team1164.robot;
 
+import org.usfirst.frc.team1164.robot.commands.InitDrive;
+import org.usfirst.frc.team1164.robot.commands.auto.DriveForward;
 import org.usfirst.frc.team1164.robot.subsystems.Arm;
 import org.usfirst.frc.team1164.robot.subsystems.Chassis;
 import org.usfirst.frc.team1164.robot.subsystems.Claw;
 
 import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -86,10 +88,16 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		mode = m_chooser.getSelected();
+		/*mode = m_chooser.getSelected();
 		String gameData = DriverStation.getInstance().getGameSpecificMessage();
 		
-		autoCommand = null;
+		autoDecissionMattrix.decide(mode, gameData);*/
+		
+		Command setup = new InitDrive();
+		setup.start();
+		
+		autoCommand = new DriveForward(Preferences.getInstance().getDouble("DistanceToGo", 0.0));
+		
 		if (autoCommand != null) 
 			autoCommand.start();
 	}

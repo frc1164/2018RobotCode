@@ -58,7 +58,8 @@ public final class RobotMap {
 	//---------------------------------------------------//
 	
 	public static final double auto_armHeight_tolerance = 100;
-	
+	public static final double timeFrame = 0.02;
+	public static final double encoderToFt = (1/30.20);
 	
 	//---------------------------------------------------//
 	//													 //

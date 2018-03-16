@@ -1,9 +1,9 @@
 package org.usfirst.frc.team1164.robot.commands.auto;
 
 import static org.usfirst.frc.team1164.robot.Robot.kArm;
-
-import org.usfirst.frc.team1164.logic.ArmPositioner;
 import static org.usfirst.frc.team1164.robot.RobotMap.auto_armHeight_tolerance;
+
+import org.usfirst.frc.team1164.logic.NeoUtil;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -17,7 +17,7 @@ public class setArmHeight extends Command {
 	
     public setArmHeight(float height_cm) {
     	requires(kArm);
-    	this.angleToGoTo = ArmPositioner.getAngle(height_cm);
+    	this.angleToGoTo = NeoUtil.getAngle(height_cm);
     }
 
     protected void initialize() {

@@ -340,6 +340,10 @@ public class Chassis extends Subsystem {
 		return rightEncoder.getDistance();
 	}
 
+	public double getAverageEncoder() {
+		return (getLeftEncoder() + getRightEncoder())/2;
+	}
+	
 	public void resetEncoders() {
 		leftEncoder.reset();
 		rightEncoder.reset();
