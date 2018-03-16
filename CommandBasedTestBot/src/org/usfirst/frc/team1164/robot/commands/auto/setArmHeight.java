@@ -2,19 +2,22 @@ package org.usfirst.frc.team1164.robot.commands.auto;
 
 import static org.usfirst.frc.team1164.robot.Robot.kArm;
 
+import org.usfirst.frc.team1164.logic.ArmPositioner;
+import static org.usfirst.frc.team1164.robot.RobotMap.auto_armHeight_tolerance;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
 public class setArmHeight extends Command {
-
-	private double height;
+	
+	private double angleToGoTo;
 	private boolean isDone;
 	
-    public setArmHeight(double height) {
+    public setArmHeight(float height_cm) {
     	requires(kArm);
-    	this.height = height;
+    	this.angleToGoTo = ArmPositioner.getAngle(height_cm);
     }
 
     protected void initialize() {
@@ -22,11 +25,11 @@ public class setArmHeight extends Command {
     }
 
     protected void execute() {
-    	double distanceToGo = kArm.getArmPot() - height;
+    	double distanceToGo = kArm.getArmEncoder() - angleToGoTo;
     	
-    	if (distanceToGo < -0.05) {
+    	if (distanceToGo < -auto_armHeight_tolerance) {
     		kArm.setArmVictor(0.1);
-    	} else if (distanceToGo > 0.05) {
+    	} else if (distanceToGo > auto_armHeight_tolerance) {
     		kArm.setArmVictor(-0.1);
     	} else {
     		isDone = true;

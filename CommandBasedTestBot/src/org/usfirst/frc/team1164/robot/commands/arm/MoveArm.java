@@ -25,6 +25,7 @@ public class MoveArm extends Command {
 //		SmartDashboard.putNumber("arm pot", Robot.kArm.getArmEncoder());
 //    	SmartDashboard.putNumber("lTrigger", OI.getOperatorAxis(2));
 //    	SmartDashboard.putNumber("RTrigger", OI.getOperatorAxis(3));
+    	//SmartDashboard.putData("Command Name", new Command());
     	
     	/* sudo-code for below: 
     	 * arm speed = 0
@@ -43,14 +44,14 @@ public class MoveArm extends Command {
     	
     	double speed = 0;
     	if (m_oi.getOperatorAxis(RT.toInt()) > 0.2) {
-    		if (Arm_limit_top > kArm.getArmPot()) {
+    		if (Arm_limit_top > kArm.getArmEncoder()) {
     			speed = kArm.getArmSpeed();
     	    	SmartDashboard.putNumber("arm speed", kArm.getArmSpeed());
     		}
     	} else if (m_oi.getOperatorAxis(LT.toInt()) > 0.2) { 
     		double limit = (kArm.getArmFolded() ? Arm_limit_bot_folded : 
     											  Arm_limit_bot);
-    		if (limit < kArm.getArmPot()) {
+    		if (limit < kArm.getArmEncoder()) {
     			speed = -kArm.getArmSpeed();
     	    	SmartDashboard.putNumber("arm speed", -kArm.getArmSpeed());
     		}

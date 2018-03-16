@@ -51,8 +51,8 @@ public class OI {
 	}
 
 	private void initializeControllers() {
-		driverStick = new XboxController(RobotMap.driverPort);
-		operatorStick = new XboxController(RobotMap.operatorPort);
+		driverStick = new XboxController(0);
+		operatorStick = new XboxController(1);
 	}
 	
 	private void initializeOperatorControls() {

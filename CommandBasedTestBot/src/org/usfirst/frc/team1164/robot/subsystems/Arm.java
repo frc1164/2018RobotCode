@@ -31,10 +31,6 @@ public class Arm extends Subsystem {
 	//------------------------------------------//
 	
 	public Arm() {
-		armEncoder = new Encoder(5, 6, false, Encoder.EncodingType.k2X);
-		armEncoder.setDistancePerPulse(CH_encoder_DPP);
-		armEncoder.setName(CH_name, CH_encoder_left_name);
-		armEncoder.reset();
 
 		isFolded = Arm_isFolded;
 		armSpeed = 0.15;
@@ -53,10 +49,10 @@ public class Arm extends Subsystem {
 	}
 	
 	public void initializeEncoder() {
-//		armEncoder = new Encoder(Arm_encoder_APort, Arm_encoder_BPort, 
-//				 				 Arm_encoder_invert, EncodingType.k4X);
-//		armEncoder.setName("Temp");
-//		armEncoder.reset();
+		armEncoder = new Encoder(Arm_encoder_APort, Arm_encoder_BPort, 
+				 				 Arm_encoder_invert, EncodingType.k2X);
+		armEncoder.setName("Temp");
+		armEncoder.reset();
 		
 	}
 
@@ -65,8 +61,8 @@ public class Arm extends Subsystem {
 	}
 	
 	public void initializeLimitSwitch() {
-		forwardLimitSwitch = new DigitalInput(Arm_limiter_forwardPort);
-		reverseLimitSwitch = new DigitalInput(Arm_limiter_reversePort);
+//		forwardLimitSwitch = new DigitalInput(Arm_limiter_forwardPort);
+//		reverseLimitSwitch = new DigitalInput(Arm_limiter_reversePort);
 	}
 	
 	public void initializeFoldingPiston() {

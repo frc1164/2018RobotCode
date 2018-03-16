@@ -35,14 +35,7 @@ public final class RobotMap {
 	 */
 	
 	
-// controller options
 	
-	public static final int LTriggerAxis = 2;
-	public static final int RTriggerAxis = 3;
-	public static final int LAxis = 0;
-	public static final int RAxis = 4;
-	public static final int driverPort = 0;
-	public static final int operatorPort = 1;
 
 	//---------------------------------------------------//
 	//													 //
@@ -58,6 +51,15 @@ public final class RobotMap {
 	public static final boolean Arm_isFolded = false;
 	
 
+	//---------------------------------------------------//
+	//													 //
+	// 					Auto Options					 //
+	//													 //
+	//---------------------------------------------------//
+	
+	public static final double auto_armHeight_tolerance = 100;
+	
+	
 	//---------------------------------------------------//
 	//													 //
 	// 					chassis options					 //
@@ -159,9 +161,9 @@ public final class RobotMap {
 	public static final int 	Arm_fold_forwardPort 	= 6;
 	public static final int 	Arm_fold_reversePort 	= 7;
 
-	public static final double 	Arm_limit_top			= 5.0;
-	public static final double	Arm_limit_bot			= 1.8655;
-	public static final double	Arm_limit_bot_folded	= 4;
+	public static final double 	Arm_limit_top			= 2200;
+	public static final double	Arm_limit_bot			= 0;
+	public static final double	Arm_limit_bot_folded	= 770;
 	public static final double 	Arm_limit_top_speed		= 0.40;
 	public static final double 	Arm_limit_bot_speed		= 0.1;
 	

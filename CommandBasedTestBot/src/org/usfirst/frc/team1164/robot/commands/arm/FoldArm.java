@@ -5,9 +5,6 @@ import static org.usfirst.frc.team1164.robot.RobotMap.*;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-/**
- *
- */
 public class FoldArm extends Command {
 
     public FoldArm() {
@@ -17,7 +14,7 @@ public class FoldArm extends Command {
     protected void initialize() {}
 
     protected void execute() {
-    	if (Robot.kArm.getArmPot() > Arm_limit_bot_folded) {
+    	if (Robot.kArm.getArmEncoder() > Arm_limit_bot_folded) {
     		Robot.kArm.setArmFolded(true);
     	}
     }
