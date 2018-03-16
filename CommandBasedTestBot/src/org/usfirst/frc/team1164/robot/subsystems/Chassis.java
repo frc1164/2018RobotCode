@@ -164,7 +164,8 @@ public class Chassis extends Subsystem {
 		SmartDashboard.putNumber("LeftEncoder Diagnostics - Left Encoding Scale", LeftEncoder.getEncodingScale());
 		SmartDashboard.putBoolean("LeftEncoder Diagnostics- Encoder Running Status", LeftEncoder.getStopped());
 		SmartDashboard.putString("LeftEncoder Diagnostics - Encoder Direction", encoderDirection());
-		SmartDashboard.
+		SmartDashboard.putString("LeftEncoder Diagnostics", "Hello");
+		//githubstuff
 		
 		
 		
