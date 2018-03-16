@@ -160,7 +160,13 @@ public class Chassis extends Subsystem {
 		 *                
 		 *                
 		 */
-		SmartDashboard.putNumber("LeftEncoder Diagnostics", LeftEncoder.getFPGAIndex());
+		SmartDashboard.putNumber("LeftEncoder Diagnostics - Left FPGA", LeftEncoder.getFPGAIndex());
+		SmartDashboard.putNumber("LeftEncoder Diagnostics - Left Encoding Scale", LeftEncoder.getEncodingScale());
+		SmartDashboard.putBoolean("LeftEncoder Diagnostics- Encoder Running Status", LeftEncoder.getStopped());
+		SmartDashboard.putString("LeftEncoder Diagnostics - Encoder Direction", encoderDirection());
+		SmartDashboard.
+		
+		
 		
 		
 //		___________________
@@ -232,6 +238,13 @@ public class Chassis extends Subsystem {
 			Navx.setName("Chassis", "NavX");
 			
 		
+	}
+	
+	public String encoderDirection() {
+		if(LeftEncoder.getDirection() == true) {
+			return "ClockWise";
+		}
+		else return "CounterClockWise";
 	}
 	
 	public void setLeftMotorSpeed(double speed) {
