@@ -13,7 +13,7 @@ public class DisengageNeutralizer extends Command {
     protected void initialize() {}
 
     protected void execute() {
-    	if (kChassis.getGear()) {
+    	if (!kChassis.getGear()) {
     		kChassis.setNeutralizer(false);
     	}
     }

@@ -378,6 +378,9 @@ public class Chassis extends Subsystem {
 									  CH_neut_left_disable);
 		rightNeutralizer.set(engaged ? CH_neut_right_enable : 
 									   CH_neut_right_disable);
+
+		SmartDashboard.putNumber("Left neut", (engaged ? CH_neut_left_enable : CH_neut_left_disable));
+		SmartDashboard.putNumber("right neut", (engaged ? CH_neut_right_enable : CH_neut_right_disable));
 		neutralizerEnabled = engaged;
 	}
 	

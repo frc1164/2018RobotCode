@@ -21,10 +21,12 @@ import org.usfirst.frc.team1164.robot.commands.InitDrive;
 import org.usfirst.frc.team1164.robot.commands.arm.FoldArm;
 import org.usfirst.frc.team1164.robot.commands.arm.UnfoldArm;
 import org.usfirst.frc.team1164.robot.commands.arm.changeArmSpeed;
+import org.usfirst.frc.team1164.robot.commands.auto.setArmHeight;
 import org.usfirst.frc.team1164.robot.commands.chassis.DisengageHighGear;
 import org.usfirst.frc.team1164.robot.commands.chassis.EngageHighGear;
 import org.usfirst.frc.team1164.robot.commands.claw.CloseClaw;
 import org.usfirst.frc.team1164.robot.commands.claw.OpenClaw;
+import org.usfirst.frc.team1164.robot.commands.claw.ToggleClaw;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -42,8 +44,12 @@ public class OI {
 	private Button initDriving, initClimbing;
 	private Button foldArm, unfoldArm;
 	private Button increaseArmSpeed, decreaseArmSpeed;
+	
+	private Button testButton1, testButton2;
 
 	public OI() {
+//		testButton1 = new JoystickButton(driverStick, A.toInt());
+//		testButton2 = new JoystickButton(driverStick, B.toInt());
 		initializeControllers();
 		initializeOperatorControls();
 		initializeDriverControls();
@@ -89,6 +95,9 @@ public class OI {
 		
 		highGear.whenPressed(new EngageHighGear());
 		lowGear.whenPressed(new DisengageHighGear());
+		
+//		testButton1.whenPressed(new ToggleClaw());
+//		testButton2.whenPressed(new setArmHeight(600));
 	}
 	
 	

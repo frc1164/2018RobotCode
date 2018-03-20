@@ -88,6 +88,10 @@ public class Arm extends Subsystem {
 	public double getArmEncoder() {
 		return armEncoder.getDistance();
 	}
+	
+	public void resetArmEncoder() {
+		armEncoder.reset();
+	}
 
 	public double getArmPot() {
 		return armPot.getVoltage();

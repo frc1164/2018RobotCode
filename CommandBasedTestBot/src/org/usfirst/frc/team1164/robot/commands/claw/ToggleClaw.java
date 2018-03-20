@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class ToggleClaw extends Command {
 	
     public ToggleClaw() {
-    	requires(kClaw);
+//    	requires(kClaw);
     }
 
     protected void initialize() {}

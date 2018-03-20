@@ -162,7 +162,7 @@ public final class RobotMap {
 	public static final int 	Arm_fold_forwardPort 	= 6;
 	public static final int 	Arm_fold_reversePort 	= 7;
 
-	public static final double 	Arm_limit_top			= 2200;
+	public static final double 	Arm_limit_top			= 2000;
 	public static final double	Arm_limit_bot			= 0;
 	public static final double	Arm_limit_bot_folded	= 770;
 	public static final double 	Arm_limit_top_speed		= 0.40;

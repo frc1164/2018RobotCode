@@ -1,6 +1,9 @@
 package org.usfirst.frc.team1164.robot.commands;
 
 import static org.usfirst.frc.team1164.robot.Robot.kChassis;
+
+import java.util.concurrent.TimeUnit;
+
 import org.usfirst.frc.team1164.robot.commands.chassis.DisengageHighGear;
 import org.usfirst.frc.team1164.robot.commands.chassis.EngageHighGear;
 import org.usfirst.frc.team1164.robot.commands.chassis.EngageNeutralizer;
@@ -15,7 +18,13 @@ public class InitClimb extends CommandGroup {
     	addSequential(new EngageHighGear());
     	addSequential(new EngageNeutralizer());
 //    	addSequential(new waitCommand());
-    	addParallel(new DisengageHighGear());
+    	try {
+    		TimeUnit.SECONDS.sleep(1);
+    	}
+    	catch (InterruptedException ex){
+    		System.out.println(ex);
+    	}
+    	addSequential(new DisengageHighGear());
     	addSequential(new EngagePTO());
     }
 }

@@ -6,6 +6,7 @@ import static org.usfirst.frc.team1164.robot.RobotMap.auto_armHeight_tolerance;
 import org.usfirst.frc.team1164.logic.NeoUtil;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *

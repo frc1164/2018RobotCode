@@ -1,5 +1,8 @@
 package org.usfirst.frc.team1164.robot.commands;
 
+import java.util.concurrent.TimeUnit;
+
+import org.usfirst.frc.team1164.robot.Robot;
 import org.usfirst.frc.team1164.robot.commands.chassis.DisengageHighGear;
 import org.usfirst.frc.team1164.robot.commands.chassis.DisengageNeutralizer;
 import org.usfirst.frc.team1164.robot.commands.chassis.DisengagePTO;
@@ -9,10 +12,18 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class InitDrive extends CommandGroup {
     public InitDrive() {
-        addParallel(new EngageHighGear());
-        addParallel(new DisengagePTO());
+    	requires(Robot.kChassis);
+    	
+    	addSequential(new EngageHighGear());
+    	addSequential(new DisengagePTO());
         addSequential(new DisengageNeutralizer());
-//        addSequential(new waitCommand());
-        addSequential(new DisengageHighGear());
+//		addSequential(new waitCommand());
+//    	try {
+//    		TimeUnit.SECONDS.sleep(1);
+//    	}
+//    	catch (InterruptedException ex){
+//    		System.out.println(ex);
+//    	}
+//		addSequential(new DisengageHighGear());
     }
 }
