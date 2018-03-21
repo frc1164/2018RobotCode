@@ -44,19 +44,19 @@ public class Arm extends Subsystem {
 	 }
 
   public void moveArmDown(double speed) {
-		 if (speed < 0.2 && getArmEncoder() > 2.1) {
+//		 if (speed < 0.2 && getArmEncoder() > 2.1) {
 			 ArmVictor.set(speed);
-		 } else {
-			 ArmVictor.set(0);
-		 }
+//		 } else {
+//			 ArmVictor.set(0);
+//		 }
 	 }
 	 
 	 public void moveArmUp(double speed) {
-		 if (speed < 0.2 && getArmEncoder() < 4.94) {
+//		 if (speed < 0.2 && getArmEncoder() < 4.94) {
 			 ArmVictor.set(speed);
-		 } else {
-			 ArmVictor.set(0);
-		 }
+//		 } else {
+//			 ArmVictor.set(0);
+//		 }
 	 }
 	 
 	 public void armBreak() {
