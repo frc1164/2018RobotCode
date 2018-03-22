@@ -44,14 +44,16 @@ public class MoveArm extends Command {
     	
     	double speed = 0;
     	if (m_oi.getOperatorAxis(RT.toInt()) > 0.2) {
-    		if (Arm_limit_top > kArm.getArmEncoder()) {
+    		//move arm up
+    		if (Arm_limit_top > kArm.getArmEncoder() && !kArm.upperLimitSwitchIsTriggered()) {
     			speed = kArm.getArmSpeed();
     	    	SmartDashboard.putNumber("arm speed", kArm.getArmSpeed());
     		}
     	} else if (m_oi.getOperatorAxis(LT.toInt()) > 0.2) { 
+    		//move arm down
     		double limit = (kArm.getArmFolded() ? Arm_limit_bot_folded : 
     											  Arm_limit_bot);
-    		if (limit < kArm.getArmEncoder()) {
+    		if (limit < kArm.getArmEncoder() && !kArm.lowerLimitSwitchIsTriggered()) {
     			speed = -kArm.getArmSpeed();
     	    	SmartDashboard.putNumber("arm speed", -kArm.getArmSpeed());
     		}

@@ -2,6 +2,7 @@ package org.usfirst.frc.team1164.robot.commands.auto;
 import org.usfirst.frc.team1164.robot.commands.claw.OpenClaw;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
@@ -11,31 +12,17 @@ public class ScoreSwitch extends CommandGroup {
 	public static final boolean LEFT = false;
 	
     public ScoreSwitch(boolean side) {
+		addSequential(new DriveForward(12));
+		SmartDashboard.putString("Completed Drive Forward", "Sucess!");
     	if (side == RIGHT) {
-    		addSequential(new DriveForward(12));
     		addSequential(new AutoTurn(45.0));
-    		addSequential(new OpenClaw());
     	}
     	else {
-    		addSequential(new DriveForward(12));
     		addSequential(new AutoTurn(-45.0));
-    		addSequential(new OpenClaw());
     	}
-        // Add Commands here:
-        // e.g. addSequential(new Command1());
-        //      addSequential(new Command2());
-        // these will run in order.
+		SmartDashboard.putString("Completed AutoTurn", "Sucess!");
+		addSequential(new OpenClaw());
+		SmartDashboard.putString("Completed OpenClaw", "Sucess!");
 
-        // To run multiple commands at the same time,
-        // use addParallel()
-        // e.g. addParallel(new Command1());
-        //      addSequential(new Command2());
-        // Command1 and Command2 will run in parallel.
-
-        // A command group will require all of the subsystems that each member
-        // would require.
-        // e.g. if Command1 requires chassis, and Command2 requires arm,
-        // a CommandGroup containing them would require both the chassis and the
-        // arm.
     }
 }

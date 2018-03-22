@@ -61,8 +61,15 @@ public class Arm extends Subsystem {
 	}
 	
 	public void initializeLimitSwitch() {
+// This throws an exception, the robot won't run
 //		forwardLimitSwitch = new DigitalInput(Arm_limiter_forwardPort);
 //		reverseLimitSwitch = new DigitalInput(Arm_limiter_reversePort);
+	}
+	public boolean upperLimitSwitchIsTriggered () {
+		return forwardLimitSwitch.get();
+	}
+	public boolean lowerLimitSwitchIsTriggered () {
+		return reverseLimitSwitch.get();
 	}
 	
 	public void initializeFoldingPiston() {

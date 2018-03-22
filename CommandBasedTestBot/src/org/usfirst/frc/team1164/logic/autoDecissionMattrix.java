@@ -4,6 +4,7 @@ import org.usfirst.frc.team1164.robot.commands.auto.AutoTurn;
 import org.usfirst.frc.team1164.robot.commands.auto.MidSwitch;
 import org.usfirst.frc.team1164.robot.commands.auto.ScoreScale;
 import org.usfirst.frc.team1164.robot.commands.auto.ScoreSwitch;
+import org.usfirst.frc.team1164.robot.commands.auto.DriveForward;
 
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
@@ -12,7 +13,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class autoDecissionMattrix {
 	public static Command decide(int mode, String gameData) {
 		Command autoCommand = null;
-		
+		//mode is our starting position from left to right
 		if (mode == 1) {
 			if(gameData.charAt(0) == 'L') {
 				SmartDashboard.putString("AutoCommand", "Score Switch Right");
@@ -24,7 +25,7 @@ public class autoDecissionMattrix {
 			} 
 			else {
 				SmartDashboard.putString("AutoCommand", "AutoRun");
-//				autoCommand = new AutoRun();
+				autoCommand = new DriveForward(8);
 			}
 		}
 		else if (mode == 2) {
@@ -34,7 +35,7 @@ public class autoDecissionMattrix {
 			}
 			else {
 				SmartDashboard.putString("AutoCommand", "AutoRun");
-//				autoCommand = new AutoRun();
+				autoCommand = new DriveForward(8);
 			}
 		}
 		else if (mode == 3) {
@@ -48,7 +49,7 @@ public class autoDecissionMattrix {
 			} 
 			else {
 				SmartDashboard.putString("AutoCommand", "AutoRun");
-//				autoCommand = new AutoRun();
+				autoCommand = new DriveForward(8);
 			}
 		}
 		else {

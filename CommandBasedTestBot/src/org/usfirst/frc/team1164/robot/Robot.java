@@ -12,6 +12,7 @@ import org.usfirst.frc.team1164.robot.commands.auto.DriveForward;
 import org.usfirst.frc.team1164.robot.subsystems.Arm;
 import org.usfirst.frc.team1164.robot.subsystems.Chassis;
 import org.usfirst.frc.team1164.robot.subsystems.Claw;
+import org.usfirst.frc.team1164.logic.autoDecissionMattrix;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Preferences;
@@ -22,6 +23,7 @@ import edu.wpi.first.wpilibj.hal.PDPJNI;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.DriverStation;
 
 
 /**
@@ -87,17 +89,15 @@ public class Robot extends TimedRobot {
 	 * to the switch structure below with additional strings & commands.
 	 */
 	@Override
-	public void autonomousInit() {
-		/*mode = m_chooser.getSelected();
-		String gameData = DriverStation.getInstance().getGameSpecificMessage();
-		
-		autoDecissionMattrix.decide(mode, gameData);*/
-		
+	public void autonomousInit() {		
 		Command setup = new InitDrive();
 		setup.start();
+		SmartDashboard.putBoolean ("InitDrive Completed", true);
+//		autoCommand = new DriveForward(Preferences.getInstance().getDouble("DistanceToGo", 0.0));
+		mode = m_chooser.getSelected();
+		String gameData = DriverStation.getInstance().getGameSpecificMessage();
 		
-		autoCommand = new DriveForward(Preferences.getInstance().getDouble("DistanceToGo", 0.0));
-		
+		autoDecissionMattrix.decide(mode, gameData);
 		if (autoCommand != null) 
 			autoCommand.start();
 	}
