@@ -90,8 +90,8 @@ public class OI {
 		foldArm.whenPressed(new FoldArm());
 		unfoldArm.whenPressed(new UnfoldArm());
 		
-		increaseArmSpeed.whenPressed(new changeArmSpeed(0.01));
-		decreaseArmSpeed.whenPressed(new changeArmSpeed(-0.01));
+//		increaseArmSpeed.whenPressed(new changeArmSpeed(0.01));
+//		decreaseArmSpeed.whenPressed(new changeArmSpeed(-0.01));
 		
 		highGear.whenPressed(new EngageHighGear());
 		lowGear.whenPressed(new DisengageHighGear());
