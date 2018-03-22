@@ -68,11 +68,11 @@ public class OI {
 		initClimbing = new JoystickButton(operatorStick, BACK.toInt());
 		initDriving = new JoystickButton (operatorStick, START.toInt());
 		
-		foldArm = new JoystickButton(operatorStick, X.toInt());
-		unfoldArm = new JoystickButton(operatorStick, Y.toInt());
+		foldArm = new JoystickButton(operatorStick, LB.toInt());
+		unfoldArm = new JoystickButton(operatorStick, RB.toInt());
 		
-		increaseArmSpeed = new JoystickButton(operatorStick, LB.toInt()); 
-		decreaseArmSpeed = new JoystickButton(operatorStick, RB.toInt());
+//		increaseArmSpeed = new JoystickButton(operatorStick, LB.toInt()); 
+//		decreaseArmSpeed = new JoystickButton(operatorStick, RB.toInt());
 	}
 	
 	private void initializeDriverControls() {
@@ -81,9 +81,9 @@ public class OI {
 	}
 	
 	private void initializeButtons() {
-		openClaw.whenPressed(new OpenClaw());
-		closeClaw.whenPressed(new CloseClaw());
-		
+//		openClaw.whenPressed(new OpenClaw());
+//		closeClaw.whenPressed(new CloseClaw());
+//		
 		initClimbing.whenPressed(new InitClimb());
 		initDriving.whenPressed(new InitDrive());
 		
