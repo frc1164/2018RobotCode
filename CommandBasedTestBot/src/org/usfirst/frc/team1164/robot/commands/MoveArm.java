@@ -31,9 +31,9 @@ public class MoveArm extends Command {
     	SmartDashboard.putNumber("lTrigger", OI.getOperatorAxis(2));
     	SmartDashboard.putNumber("RTrigger", OI.getOperatorAxis(3));
     	
-    	if (OI.getOperatorAxis(3) > 0.2) {
+    	if (OI.getOperatorAxis(1) > 0.2) {
     		Robot.kArm.moveArmUp(OI.armSpeed);
-    	} else if (OI.getOperatorAxis(2) > 0.2) {
+    	} else if (OI.getOperatorAxis(1) < -0.2) {
     		Robot.kArm.moveArmDown(-OI.armSpeed);
     	} else {
     		Robot.kArm.armBreak();
