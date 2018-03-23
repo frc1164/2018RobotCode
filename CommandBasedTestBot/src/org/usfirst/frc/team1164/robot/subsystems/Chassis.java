@@ -178,10 +178,13 @@ public class Chassis extends Subsystem {
 		 * ---An Index Channel that provides a reference point for the quadrature decoder to reset quadrature logging,
 		 * a "reset" channel. 
 		 * 
+		 * For Diagnostic purposes, knowing the index channel may help understand where a lapse in encoder
+		 * reading occurs, possibly.
+		 * 
 		 * Provided are:
 		 * FPGA INDEX: May potentially provide the "reset" signal as defined above
 		 * Raw Values:  The actual, un-scaled "edge" count of the encoder, the number of data signals read.
-		 * Sampling Rate: The rotational rate in distance/second as defined by the setDistancePerPulse() method.
+		 * Rate: The rotational rate in distance/second as defined by the setDistancePerPulse() method.
 		 * Encoding Scale: The edge count per revolution, as previously defined, this provides the number of data
 		 * signals to be "decoded" per electrical phase.
 		 * The getStopped() Method: Returns whether or not the encoder has stopped running
