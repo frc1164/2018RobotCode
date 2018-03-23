@@ -95,7 +95,7 @@ public class Chassis extends Subsystem {
 		 * RoboRIO-1164-frc.local for ping, browser
 		 * 
 		 * Diagnostic Chain Follows Order: Battery --> Speed Controller --> Motor
-		 * All Credit Goes to Mr. Douglass Furr, who provided the information necessary to give diagnostic value to the provided
+		 * All Credit Goes to Douglass Furr, who provided the information necessary to give diagnostic value to the provided
 		 * methods.
 		 * 														***NOTICE END***
 		 */
@@ -173,14 +173,17 @@ public class Chassis extends Subsystem {
 		 * the number of edges, or data signals provided by the encoder, so that it may accurately interpret the 
 		 * signals depending on their availability.  In an encoder, Cycles Per Revolution (CPR) is defined
 		 * by the number of electrical phases per revolution, in which are contained the aforementioned 
-		 * data signal types.  
+		 * data signal types. 
+		 * 
+		 *  For More information regarding quadrature in encoders visit: http://www.gurley.com/Encoders/Understanding_Quadrature.pdf
 		 * 
 		 * While the following information may not be entirely accurate, it may help understand the use of
 		 * FPGA Indicies in programming.  Encoder Data may receive signals from three possible channels: 
 		 * ---An A Channel that, in it's contrast to the B Channel, may define one direction of motion
 		 * ---A B Channel that, in it's contrast to the A Channel, may define another direction of motion
 		 * ---An Index Channel that provides a reference point for the quadrature decoder to reset quadrature logging,
-		 * a "reset" channel. 
+		 * a "reset" channel. Alternitavely, An index channel provides a quarter cycle, which outputs only one data
+		 * signal per cyle.
 		 * 
 		 * For Diagnostic purposes, knowing the index channel may help understand where a lapse in encoder
 		 * reading occurs, possibly.
