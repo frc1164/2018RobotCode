@@ -12,7 +12,7 @@ public class ScoreSwitch extends CommandGroup {
 	public static final boolean LEFT = false;
 	
     public ScoreSwitch(boolean side) {
-		addSequential(new DriveForward(12, .25));
+		addSequential(new DriveForward(12));
 		SmartDashboard.putString("Completed Drive Forward", "Sucess!");
     	if (side == RIGHT) {
     		addSequential(new AutoTurn(45.0, .25));

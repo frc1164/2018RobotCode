@@ -10,7 +10,7 @@ public class ScoreScale extends CommandGroup {
 	public static final boolean LEFT = false;
 	
     public ScoreScale(boolean side) {
-    	addSequential(new DriveForward(25, .25));
+    	addSequential(new DriveForward(25));
     	if (side == RIGHT) {
 	    	addSequential(new AutoTurn(45.0, .25));
     	}
