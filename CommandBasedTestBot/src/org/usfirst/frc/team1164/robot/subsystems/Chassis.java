@@ -7,6 +7,7 @@ import org.usfirst.frc.team1164.robot.commands.ClimbingConfiguration;
 
 
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -161,19 +162,65 @@ public class Chassis extends Subsystem {
 		 *                
 		 */
 		SmartDashboard.putNumber("LeftEncoder Diagnostics - Left FPGA", LeftEncoder.getFPGAIndex());
+		SmartDashboard.putNumber("LeftEncoder Diagnostics - Raw Encoding Values", LeftEncoder.getRaw());
+		SmartDashboard.putNumber("LeftEncoder Diagnostics - Encoding Rate", LeftEncoder.getRate());
 		SmartDashboard.putNumber("LeftEncoder Diagnostics - Left Encoding Scale", LeftEncoder.getEncodingScale());
 		SmartDashboard.putBoolean("LeftEncoder Diagnostics- Encoder Running Status", LeftEncoder.getStopped());
-		SmartDashboard.putString("LeftEncoder Diagnostics - Encoder Direction", encoderDirection());
-		SmartDashboard.putString("LeftEncoder Diagnostics", "Hello");
-		//githubstuff
+		//SmartDashboard.putString("LeftEncoder Diagnostics - Encoder Direction", encoderDirection());
+		SmartDashboard.putString("LeftEncoder Diagnostics - PID Source Type Troubleshoot", pidSourceTypeLeft());
+		
+		SmartDashboard.putNumber("RightEncoder Diagnostics- Right FPGA", RightEncoder.getFPGAIndex());
+		SmartDashboard.putNumber("RightEncoder Diagnostics- Raw Encoding Values", RightEncoder.getRaw());
+		SmartDashboard.putNumber("RightEncoder Diagnostics - Encoding Rate", RightEncoder.getRate());
+		SmartDashboard.putNumber("RightEncoder Diagnostics - Right Encoding Scale", RightEncoder.getEncodingScale());
+		SmartDashboard.putString("Encoder Diagnostics Notice", "If value is false, the encoder is running");
+		SmartDashboard.putBoolean("RightEncoder Diagnostics - Right Running Status", RightEncoder.getStopped());
+		SmartDashboard.putString("RightEncoder Diagnostics - PID Source Type TroubleShoot", pidSourceTypeRight());
+		
+		//Transmission & PTO Diagnostics
+		
+		/*
+		 * 			***NOTICE***
+		 * 	Under the blacklist return method
+		 * what is referenced are the solenoids 
+		 * shut down if they are shorted.  Once
+		 * the solenoid's channel shorts, the 
+		 * PCM will blacklist it and shut it down,
+		 * it will then add it to the blacklist,
+		 * which can be read from the method provided
+		 * 		  ***NOTICE END***
+		 */
+		SmartDashboard.putString("Transmission Status", transmissionStatus());
+		SmartDashboard.putNumber("Transmission BlackList", Transmission.getPCMSolenoidBlackList());
+		
+		SmartDashboard.putString("PTO Status", ptoStatus());
+		SmartDashboard.putNumber("PTO BlackList", PTO.getPCMSolenoidBlackList());
+		
+		//Neutralizer Diagnostics
+		SmartDashboard.putNumber("Raw Left Servo Position", LeftNeutralizer.getPosition());
+		SmartDashboard.putString("Raw Left Servo Position", "For Reference, Engage angle for left is 1, Disengage Angle is .25");
+		//SmartDashboard.putNumber("Servo Data", LeftNeutralizer.getRawBounds());
 		
 		
+		SmartDashboard.putNumber("Raw Right Servo Position", RightNeutralizer.getPosition());
+		SmartDashboard.putString("Raw Right Servo Position", "For Reference, Engage angle for Right is 0, disengage angle is .75");
+		//SmartDashboard.put("Servo Data", RightNeutralizer.getRawBounds());
 		
-		
+		//NavX Diagnostics
+		/*
+		 * NavX Calibration:
+		 * 	
+		 */
+		SmartDashboard.putString("NavX Diagnostics - Calibration Status", navXCalibrationStatus());
+		SmartDashboard.putString("NavX Diagnostics - Disturbance Status", navXMagneticDisturbanceDetection());
+		SmartDashboard.putString("NavX Diagnostics - NavX Rotational Sensing Status", navXRotationalStatus());
+		SmartDashboard.putString("NavX Diagnostics - NavX Movement Sensing Status", navXMotionStatus());
+		SmartDashboard.putString("NavX Diagnostics - NavX Connection", navXConnectionStatus());
 //		___________________
 //		|				  |
 //		|  LiveWindow UI  |
 //		|_________________|
+		
 		
 		LiveWindow.add(Left1);
 		LiveWindow.add(Left2);
@@ -241,12 +288,142 @@ public class Chassis extends Subsystem {
 		
 	}
 	
-	public String encoderDirection() {
-		if(LeftEncoder.getDirection() == true) {
-			return "ClockWise";
+	//START OF DIAGNOSTICS LOGIC CODE
+
+	
+	public String pidSourceTypeLeft() {
+		if(LeftEncoder.getPIDSourceType() == PIDSourceType.kDisplacement ) {
+			return "Displacement";
+		}else if(LeftEncoder.getPIDSourceType() == PIDSourceType.kRate) {
+			return "Rate";
+		}else {
+			return "Error";
 		}
-		else return "CounterClockWise";
+		
 	}
+//	public String referenceYawAxis() {
+//		
+//	}
+	/*
+	 * 			_________________________________
+	 * 			|								|
+	 * 			|	NavX Diagnostics Logic		|
+	 * 			|_______________________________|
+	 */
+	public String navXCalibrationStatus() {
+		SmartDashboard.putString("***NOTICE***", "Magnetometer Calibration is recommended for precision applications, it is not required");
+		if(Navx.isMagnetometerCalibrated() == true) {
+			return "NavX Magnetometer is Calibrated";
+		}else if(Navx.isMagnetometerCalibrated()== false) {
+			return "NavX Magnetometer is not Calibrated, if you do not have the software, please download calibration software at https://www.pdocs.kauailabs.com/navx-mxp/software/tools/magnetometer-calibration/";
+			
+		}
+		else {
+			return "Error";
+		}
+	}
+	public String navXRotationalStatus() {
+		SmartDashboard.putNumber("Current Yaw Value", Navx.getYaw());
+		if(Navx.isRotating() == true) {
+			return "Navx is reading Rotation";
+		}else if(Navx.isRotating() == false) {
+			return "Navx is not reading rotation, possible insufficient gyro calibration";
+		}
+		else {
+			return "Error";
+		}
+		
+	}
+	public String navXMagneticDisturbanceDetection() {
+		SmartDashboard.putString("***NOTICE***", "Magnetic Disturbances will not be detected until Magnometer on NavX has been calibrated, see code for details");
+		if(Navx.isMagneticDisturbance()== true) {
+			return "Magnetic Disturbance Detected, NavX values may be affected";
+		}else if(Navx.isMagneticDisturbance()== false) {
+			return "Magnetic Disturbance Not Detected: Possible that magnometer was not calibrated, otherwise, no anomalies detected";
+		}
+		else {
+			return "Error";
+		}
+	}
+	
+	public String navXMotionStatus() {
+		SmartDashboard.putNumber("Current X-Axis (Roll) Value", Navx.getRoll());
+		SmartDashboard.putNumber("Current Y-Axis (Pitch) Value", Navx.getPitch());
+		if(Navx.isMoving() == true) {
+			return "Movement is Detected";
+		}else if(Navx.isMoving() == false) {
+			return "Movement not Detected";
+		}
+		else {
+			return "Error";
+		}
+	}
+	
+	public String navXConnectionStatus() {
+		if(Navx.isConnected() == true) {
+			return "NavX is Connected";
+		}else if (Navx.isConnected() == false) {
+			return "NavX Is Not Connected";
+		}
+		else {
+			return "Error";
+		}
+	}
+	/*
+	 * 
+	 * 		___________________________________
+	 * 		|							 	  |
+	 * 		|   PNEUMATIC DIAGNOSTICS LOGIC	  |
+	 * 		|_________________________________|
+	 */
+	public String transmissionStatus() {
+		if(Transmission.getPCMSolenoidVoltageFault()== true) {
+			return "Common highside voltage rail is too low - A solenoid is in fault state - most likely shorted chanel";
+		}else if(Transmission.getPCMSolenoidVoltageStickyFault() == true) {
+			return "Common highside voltage rail is too low - Solenoid StickyFault is set - most likely shorted chanel";
+		}
+		
+	}
+	public String ptoStatus() {
+		if(PTO.getPCMSolenoidVoltageFault()== true) {
+			return "Common highside voltage rail is too low - A solenoid is in fault state - most likely shorted chanel";
+		}else if(PTO.getPCMSolenoidVoltageStickyFault() == true) {
+			return "Common highside voltage rail is too low - Solenoid StickyFault is set - most likely shorted chanel";
+		}
+	}
+	/*
+	 * 		_________________________________
+	 * 		|								|
+	 * 		|	ENCODER DIAGNOSTICS LOGIC	|
+	 * 		|_______________________________|
+	 * 
+	 */
+	
+	public String pidSourceTypeRight() {
+		if(RightEncoder.getPIDSourceType() == PIDSourceType.kDisplacement ) {
+			return "Displacement used as a process control variable";
+		}else if(RightEncoder.getPIDSourceType() == PIDSourceType.kRate) {
+			return "Rate used as a process control variable";
+		}else {
+			return "Error";
+		}
+		
+	}
+	
+//	public String encoderDirection() {
+//	if(LeftEncoder.getDirection() == true) {
+//		return "ClockWise";
+//	}
+//	else return "CounterClockWise";
+//}
+	
+	/*
+	 * 		______________________________
+	 * 		|							 |
+	 * 		|	MOTOR DIAGNOSTICS LOGIC  |
+	 * 		|____________________________|
+	 * 	
+	 */
 	
 	public void setLeftMotorSpeed(double speed) {
 		Left1.set(ControlMode.PercentOutput, speed*RobotMap.speedReducer);
@@ -261,7 +438,7 @@ public class Chassis extends Subsystem {
 		Right3.set(ControlMode.PercentOutput, speed*RobotMap.speedReducer);
 	}
 	
-	
+	//END OF DIAGNOSTICS LOGIC
 	public void ResetEncoders() {
 		LeftEncoder.reset();
 		RightEncoder.reset();
