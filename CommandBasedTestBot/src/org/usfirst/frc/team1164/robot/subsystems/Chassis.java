@@ -157,6 +157,37 @@ public class Chassis extends Subsystem {
 		 * documentation is available on the wpi java documentation
 		 * website under "Encoder"
 		 * 
+		 * ENCODER FUNCTIONALITY:
+		 * 	In an encoder, two electrical data signals, 90 degrees out of phase with each other, are
+		 * used to measure revolution direction, revolution count, and revolution speed depending on 
+		 * the amount of data signals available, what format they are available in, and the time in-
+		 * between data signals.  These data signals are referred to as "edges", and, depending on 
+		 * how many edges there are in a revolution, (there may be 1, 2, or 4), the Quadrature Encoding
+		 * value may be 1x, 2x, or 4x.  Today, Quadrature decoding can be cheaply done via Field Programmable
+		 * Gate Arrays (FPGA), which are customizable circuits capable of being programmed to run any number of different
+		 * possible functions depending on the task provided; in context of the encoder used, it's input is 
+		 * the number of edges, or data signals provided by the encoder, so that it may accurately interpret the 
+		 * signals depending on their availability.  In an encoder, Cycles Per Revolution (CPR) is defined
+		 * by the number of electrical phases per revolution, in which are contained the aforementioned 
+		 * data signal types.  
+		 * 
+		 * While the following information may not be entirely accurate, it may help understand the use of
+		 * FPGA Indicies in programming.  Encoder Data may receive signals from three possible channels: 
+		 * ---An A Channel that, in it's contrast to the B Channel, may define one direction of motion
+		 * ---A B Channel that, in it's contrast to the A Channel, may define another direction of motion
+		 * ---An Index Channel that provides a reference point for the quadrature decoder to reset quadrature logging,
+		 * a "reset" channel. 
+		 * 
+		 * Provided are:
+		 * FPGA INDEX: May potentially provide the "reset" signal as defined above
+		 * Raw Values:  The actual, un-scaled "edge" count of the encoder, the number of data signals read.
+		 * Sampling Rate: The rotational rate in distance/second as defined by the setDistancePerPulse() method.
+		 * Encoding Scale: The edge count per revolution, as previously defined, this provides the number of data
+		 * signals to be "decoded" per electrical phase.
+		 * The getStopped() Method: Returns whether or not the encoder has stopped running
+		 * Source Type: The available PID provides two reference sources, displacement, and rate, to the 
+		 * appropriate application.
+		 * 
 		 *                ***NOTICE END***
 		 *                
 		 *                
@@ -165,7 +196,7 @@ public class Chassis extends Subsystem {
 		SmartDashboard.putNumber("LeftEncoder Diagnostics - Raw Encoding Values", LeftEncoder.getRaw());
 		SmartDashboard.putNumber("LeftEncoder Diagnostics - Encoding Rate", LeftEncoder.getRate());
 		SmartDashboard.putNumber("LeftEncoder Diagnostics - Left Encoding Scale", LeftEncoder.getEncodingScale());
-		SmartDashboard.putBoolean("LeftEncoder Diagnostics- Encoder Running Status", LeftEncoder.getStopped());
+		SmartDashboard.putBoolean("LeftEncoder Diagnostics- Left Running Status", LeftEncoder.getStopped());
 		//SmartDashboard.putString("LeftEncoder Diagnostics - Encoder Direction", encoderDirection());
 		SmartDashboard.putString("LeftEncoder Diagnostics - PID Source Type Troubleshoot", pidSourceTypeLeft());
 		
