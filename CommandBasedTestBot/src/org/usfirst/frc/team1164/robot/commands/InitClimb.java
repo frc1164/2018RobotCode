@@ -18,12 +18,6 @@ public class InitClimb extends CommandGroup {
     	addSequential(new EngageHighGear());
     	addSequential(new EngageNeutralizer());
 //    	addSequential(new waitCommand());
-    	try {
-    		TimeUnit.SECONDS.sleep(1);
-    	}
-    	catch (InterruptedException ex){
-    		System.out.println(ex);
-    	}
     	addSequential(new DisengageHighGear());
     	addSequential(new EngagePTO());
     }

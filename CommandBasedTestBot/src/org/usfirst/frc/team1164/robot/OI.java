@@ -87,7 +87,7 @@ public class OI {
 		initClimbing.whenPressed(new InitClimb());
 		initDriving.whenPressed(new InitDrive());
 		
-//		foldArm.whenPressed(new FoldArm());
+		foldArm.whenPressed(new FoldArm());
 		unfoldArm.whenPressed(new UnfoldArm());
 		
 //		increaseArmSpeed.whenPressed(new changeArmSpeed(0.01));
