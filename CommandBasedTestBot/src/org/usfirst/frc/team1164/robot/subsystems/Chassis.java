@@ -238,13 +238,26 @@ public class Chassis extends Subsystem {
 		SmartDashboard.putNumber("PTO BlackList", PTO.getPCMSolenoidBlackList());
 		
 		//Neutralizer Diagnostics
+		
+		/*
+		 * 
+		 * 			***NOTICE***
+		 * Due to the nature of the methods provided,
+		 * the only current diagnostic tools provided
+		 * are neutralizer position.  More will be added
+		 * as soon as possible
+		 * 	      ***NOTICE END***
+		 */
+		
 		SmartDashboard.putNumber("Raw Left Servo Position", LeftNeutralizer.getPosition());
 		SmartDashboard.putString("Raw Left Servo Position", "For Reference, Engage angle for left is 1, Disengage Angle is .25");
 		//SmartDashboard.putNumber("Servo Data", LeftNeutralizer.getRawBounds());
+		SmartDashboard.putNumber("Left Neutralizer Channel", LeftNeutralizer.getChannel());
 		
 		
 		SmartDashboard.putNumber("Raw Right Servo Position", RightNeutralizer.getPosition());
 		SmartDashboard.putString("Raw Right Servo Position", "For Reference, Engage angle for Right is 0, disengage angle is .75");
+		SmartDashboard.putNumber("Right Neutralizer Channel", RightNeutralizer.getChannel());
 		//SmartDashboard.put("Servo Data", RightNeutralizer.getRawBounds());
 		
 		//NavX Diagnostics
