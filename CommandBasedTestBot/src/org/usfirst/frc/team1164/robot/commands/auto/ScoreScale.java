@@ -10,13 +10,13 @@ public class ScoreScale extends CommandGroup {
 	public static final boolean LEFT = false;
 	
     public ScoreScale(boolean side) {
-    	addSequential(new DriveForward(25));
+    	addSequential(new DriveForward(25, .25));
     	if (side == RIGHT) {
-	    	addSequential(new AutoTurn(45.0));
+	    	addSequential(new AutoTurn(45.0, .25));
     	}
     	else
     	{
-    		addSequential(new AutoTurn(-45.0));
+    		addSequential(new AutoTurn(-45.0, .25));
     	}
     	addSequential(new OpenClaw());
     }

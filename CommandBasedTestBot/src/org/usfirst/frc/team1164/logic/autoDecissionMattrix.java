@@ -25,7 +25,7 @@ public class autoDecissionMattrix {
 			} 
 			else {
 				SmartDashboard.putString("AutoCommand", "AutoRun");
-				autoCommand = new DriveForward(8);
+				autoCommand = new DriveForward(8, .25);
 			}
 		}
 		else if (mode == 2) {
@@ -35,7 +35,7 @@ public class autoDecissionMattrix {
 			}
 			else {
 				SmartDashboard.putString("AutoCommand", "AutoRun");
-				autoCommand = new DriveForward(8);
+				autoCommand = new DriveForward(8, .25);
 			}
 		}
 		else if (mode == 3) {
@@ -49,11 +49,11 @@ public class autoDecissionMattrix {
 			} 
 			else {
 				SmartDashboard.putString("AutoCommand", "AutoRun");
-				autoCommand = new DriveForward(8);
+				autoCommand = new DriveForward(8, .25);
 			}
 		}
 		else {
-			autoCommand = new AutoTurn(Preferences.getInstance().getDouble("DegreesToTurn", 0.0));
+			autoCommand = new AutoTurn(45, .25);
 		}
 		return autoCommand;
 	}

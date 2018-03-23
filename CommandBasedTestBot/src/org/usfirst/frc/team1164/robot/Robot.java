@@ -97,7 +97,7 @@ public class Robot extends TimedRobot {
 		mode = m_chooser.getSelected();
 		String gameData = DriverStation.getInstance().getGameSpecificMessage();
 		
-		autoDecissionMattrix.decide(mode, gameData);
+		autoCommand = autoDecissionMattrix.decide(mode, gameData);
 		if (autoCommand != null) 
 			autoCommand.start();
 	}

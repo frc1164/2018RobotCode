@@ -12,13 +12,13 @@ public class ScoreSwitch extends CommandGroup {
 	public static final boolean LEFT = false;
 	
     public ScoreSwitch(boolean side) {
-		addSequential(new DriveForward(12));
+		addSequential(new DriveForward(12, .25));
 		SmartDashboard.putString("Completed Drive Forward", "Sucess!");
     	if (side == RIGHT) {
-    		addSequential(new AutoTurn(45.0));
+    		addSequential(new AutoTurn(45.0, .25));
     	}
     	else {
-    		addSequential(new AutoTurn(-45.0));
+    		addSequential(new AutoTurn(-45.0, .25));
     	}
 		SmartDashboard.putString("Completed AutoTurn", "Sucess!");
 		addSequential(new OpenClaw());
