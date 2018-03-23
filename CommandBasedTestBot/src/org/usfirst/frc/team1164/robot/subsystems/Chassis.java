@@ -265,6 +265,7 @@ public class Chassis extends Subsystem {
 		 * 			experimental "getDisplacementX/Y()" methods, so, caution is advised in using these readings.
 		 * 			---NavX Diagnostics-- NavX Connection: This will provide the user with a statement in reagrds to whether or not
 		 * 			the NavX component is connected to it's host computer; in this case, the roboRIO.
+		 * 			---NavX AutoCalibration Status: Provides the user with a statement regarding automatic gyro/accelerometer calibration.
 		 * 													      ***NOTICE END***
 		 * 
 		 * NavX Calibration:
@@ -275,6 +276,8 @@ public class Chassis extends Subsystem {
 		SmartDashboard.putString("NavX Diagnostics - NavX Rotational Sensing Status", navXRotationalStatus());
 		SmartDashboard.putString("NavX Diagnostics - NavX Movement Sensing Status", navXMotionStatus());
 		SmartDashboard.putString("NavX Diagnostics - NavX Connection", navXConnectionStatus());
+		SmartDashboard.putString("NavX AutoCalibration Status", navXAutoCalibrationStatus());
+		
 //		___________________
 //		|				  |
 //		|  LiveWindow UI  |
@@ -379,6 +382,17 @@ public class Chassis extends Subsystem {
 		}
 		else {
 			return "Error";
+		}
+	}
+	public String navXAutoCalibrationStatus() {
+		if(Navx.isCalibrating()== true) {
+			do {
+			SmartDashboard.putString("***NOTICE***", "NAVX GYRO/ACCELOROMETER IS CALIBRATING");
+			}while (Navx.isCalibrating() == true);
+			return "NAVX CALIBRATION COMPLETE";
+			
+		}else if(Navx.isCalibrating() == false) {
+			return "NAVX GYRO/ACCELEROMETER NOT CURRENTLY CALIBRATING";
 		}
 	}
 	public String navXRotationalStatus() {
