@@ -17,10 +17,9 @@ public class ToggleClaw extends Command {
 //    	kClaw.setOpened(!kClaw.isOpen());
     	if (Robot.m_oi.getOperatorAxis(Controls.RT.toInt()) > 0.5) {
     		Robot.kClaw.setOpened(true);
-    	} else if (Robot.m_oi.getOperatorAxis(Controls.RT.toInt()) > 0.5) {
+    	} else if (Robot.m_oi.getOperatorAxis(Controls.LT.toInt()) > 0.5) {
     		Robot.kClaw.setOpened(false);
     	}
-    	
     }
 
     protected boolean isFinished() {

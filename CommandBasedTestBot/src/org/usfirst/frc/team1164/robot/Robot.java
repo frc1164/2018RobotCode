@@ -7,9 +7,9 @@
 
 package org.usfirst.frc.team1164.robot;
 
-import org.usfirst.frc.team1164.logic.autoDecissionMattrix;
 import org.usfirst.frc.team1164.robot.commands.InitDrive;
 import org.usfirst.frc.team1164.robot.commands.resetArmEncoder;
+import org.usfirst.frc.team1164.robot.commands.auto.setArmHeight;
 import org.usfirst.frc.team1164.robot.subsystems.Arm;
 import org.usfirst.frc.team1164.robot.subsystems.Chassis;
 import org.usfirst.frc.team1164.robot.subsystems.Claw;
@@ -99,7 +99,9 @@ public class Robot extends TimedRobot {
 		Command setup = new InitDrive();
 		setup.start();
 		
-		autoCommand = autoDecissionMattrix.decide(mode, gameData);
+//		autoCommand = autoDecissionMattrix.decide(mode, gameData);
+		
+		autoCommand = new setArmHeight(73);
 		
 		if (autoCommand != null) 
 			autoCommand.start();

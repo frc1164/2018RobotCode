@@ -27,12 +27,16 @@ public class setArmHeight extends Command {
 
     protected void execute() {
     	double distanceToGo = kArm.getArmEncoder() - angleToGoTo;
-    	
+
+		SmartDashboard.putNumber("distance to go", distanceToGo);
     	if (distanceToGo < -auto_armHeight_tolerance) {
+    		SmartDashboard.putNumber("Move direction", 0.1);
     		kArm.setArmVictor(0.1);
     	} else if (distanceToGo > auto_armHeight_tolerance) {
+    		SmartDashboard.putNumber("Move direction", -0.1);
     		kArm.setArmVictor(-0.1);
     	} else {
+    		SmartDashboard.putNumber("Move direction", 0);
     		isDone = true;
     	}
     }

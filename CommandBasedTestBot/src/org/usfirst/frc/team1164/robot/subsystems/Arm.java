@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Arm extends Subsystem {
 	
@@ -33,7 +34,7 @@ public class Arm extends Subsystem {
 	public Arm() {
 
 		isFolded = Arm_isFolded;
-		armSpeed = 0.28;
+		armSpeed = 0.27;
 		
 		initializeMotor();
 		initializeEncoder();
@@ -80,6 +81,7 @@ public class Arm extends Subsystem {
 	//------------------------------------------//
 	
 	public void setArmVictor(double speed) {
+		SmartDashboard.putNumber("HEYOOO", speed);
 		armVictor.set(speed);
 	}
 
