@@ -68,6 +68,7 @@ public class Chassis extends Subsystem {
 		//SmartDashboard Motor Hardware Diagnostics
 		
 		/*
+		 * 														***NOTICE***
 		 * Motor Diagnostics
 		 * Below, what is provided for each motor, in order, is, Bus Voltage,
 		 * MotorOutputVoltage, OutputCurrent, Temperature, and BaseID,
@@ -94,6 +95,9 @@ public class Chassis extends Subsystem {
 		 * RoboRIO-1164-frc.local for ping, browser
 		 * 
 		 * Diagnostic Chain Follows Order: Battery --> Speed Controller --> Motor
+		 * All Credit Goes to Mr. Douglass Furr, who provided the information necessary to give diagnostic value to the provided
+		 * methods.
+		 * 														***NOTICE END***
 		 */
 		
 		
@@ -147,7 +151,7 @@ public class Chassis extends Subsystem {
 		
 		//SmartDashboard Encoder Diagnostics
 		/*
-		 *                  ***NOTICE***
+		 *                 									 ***NOTICE***
 		 * 
 		 * Due to the nature of the program documentation,
 		 * Hardware Diagnostics is unavailable from the
@@ -191,7 +195,7 @@ public class Chassis extends Subsystem {
 		 * Source Type: The available PID provides two reference sources, displacement, and rate, to the 
 		 * appropriate application.
 		 * 
-		 *                ***NOTICE END***
+		 *                										***NOTICE END***
 		 *                
 		 *                
 		 */
@@ -242,6 +246,24 @@ public class Chassis extends Subsystem {
 		
 		//NavX Diagnostics
 		/*
+		 * 															***NOTICE***
+		 * 			The following Diagnostic Tools are defined below:
+		 * 			---NavX Diagnostics - Calibration Status: On board the NavX is a magnetometer that must be calibrated to achieve
+		 * 			the most accurate values available.  While it is not a required field for basic functionality, it is required
+		 * 			for the next diagnostic method available.
+		 * 			---NavX Diagnostics - Disturbance Status: Once the Magnetometer has been calibrated, it will be able to detect
+		 * 			magnetic disturbances that may alter it's functionality on the field.  Understanding this, measures may be taken
+		 * 			to mitigate damage to robot function.
+		 * 			---NavX Diagnostics-- NavX Rotational Sensing Status: This will provide the user with a statement in regards to 
+		 * 			whether or not the NavX is actively reading rotation on board.  It will additionally provide the user with the 
+		 * 			Yaw Angle sensed from the NavX in degrees, from -180 to 180 degrees.
+		 * 			---NavX Diagnostics-- NavX Movement Sensing Status: This will provide the user with a statement in regards to 
+		 * 			whether or not the NavX is actively reading movement on the robot's X or Y axes.  It currently makes use of the 
+		 * 			experimental "getDisplacementX/Y()" methods, so, caution is advised in using these readings.
+		 * 			---NavX Diagnostics-- NavX Connection: This will provide the user with a statement in reagrds to whether or not
+		 * 			the NavX component is connected to it's host computer; in this case, the roboRIO.
+		 * 													      ***NOTICE END***
+		 * 
 		 * NavX Calibration:
 		 * 	
 		 */
@@ -381,8 +403,8 @@ public class Chassis extends Subsystem {
 	}
 	
 	public String navXMotionStatus() {
-		SmartDashboard.putNumber("Current X-Axis (Roll) Value", Navx.getRoll());
-		SmartDashboard.putNumber("Current Y-Axis (Pitch) Value", Navx.getPitch());
+		SmartDashboard.putNumber("Current X-Axis (Roll) Value", Navx.getDisplacementX());
+		SmartDashboard.putNumber("Current Y-Axis (Pitch) Value", Navx.getDisplacementY());
 		if(Navx.isMoving() == true) {
 			return "Movement is Detected";
 		}else if(Navx.isMoving() == false) {
