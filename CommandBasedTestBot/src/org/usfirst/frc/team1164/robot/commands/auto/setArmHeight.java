@@ -16,9 +16,9 @@ public class setArmHeight extends Command {
 	private double angleToGoTo;
 	private boolean isDone;
 	
-    public setArmHeight(float height_cm) {
+    public setArmHeight(float height, boolean in_CM) {
     	requires(kArm);
-    	this.angleToGoTo = NeoUtil.getAngle(height_cm);
+    	this.angleToGoTo = in_CM ? NeoUtil.getAngle(height) : height;
     }
 
     protected void initialize() {
@@ -31,10 +31,10 @@ public class setArmHeight extends Command {
 		SmartDashboard.putNumber("distance to go", distanceToGo);
     	if (distanceToGo < -auto_armHeight_tolerance) {
     		SmartDashboard.putNumber("Move direction", 0.1);
-    		kArm.setArmVictor(0.1);
+    		kArm.setArmVictor(0.18);
     	} else if (distanceToGo > auto_armHeight_tolerance) {
     		SmartDashboard.putNumber("Move direction", -0.1);
-    		kArm.setArmVictor(-0.1);
+    		kArm.setArmVictor(-0.18);
     	} else {
     		SmartDashboard.putNumber("Move direction", 0);
     		isDone = true;

@@ -25,18 +25,23 @@ public class driving extends Command {
     	double backward = m_oi.getControllerAxis(LT.toInt());
     	double rotate = m_oi.getControllerAxis(RS_X.toInt());
     	double turn = m_oi.getControllerAxis(LS_X.toInt());
+    	if (Math.abs(turn) < 0.1) {
+    		turn = 0;
+    	}
+    	
     	
     	double LSpeed = 0;
     	double RSpeed = 0;
     	
-    	if (forward > 0.1|| backward > 0.1) {
+    	if (forward > 0.1 || backward > 0.1) {
         	double speed = forward - backward;
-        	LSpeed = speed - (turn < 0 ? (Drive_turnModifier*speed*turn) : 0);
+        	LSpeed = speed - (turn < 0 ? (Drive_turnModifier*speed*turn*-1) : 0);
         	RSpeed = speed - (turn > 0 ? (Drive_turnModifier*speed*turn) : 0);
     	} else if (rotate < -0.1 || rotate > 0.1) {
     		LSpeed = rotate;
     		RSpeed = -rotate;
     	}
+    	SmartDashboard.putNumber("Turn", turn);
     	SmartDashboard.putNumber("LSpeed", LSpeed);
     	SmartDashboard.putNumber("RSpeed", RSpeed);
     	kChassis.setLeftSpeed(LSpeed);

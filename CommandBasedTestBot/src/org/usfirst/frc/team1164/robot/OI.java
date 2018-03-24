@@ -13,20 +13,15 @@ import static org.usfirst.frc.team1164.logic.Controls.BACK;
 import static org.usfirst.frc.team1164.logic.Controls.LB;
 import static org.usfirst.frc.team1164.logic.Controls.RB;
 import static org.usfirst.frc.team1164.logic.Controls.START;
-import static org.usfirst.frc.team1164.logic.Controls.X;
-import static org.usfirst.frc.team1164.logic.Controls.Y;
 
 import org.usfirst.frc.team1164.robot.commands.InitClimb;
 import org.usfirst.frc.team1164.robot.commands.InitDrive;
 import org.usfirst.frc.team1164.robot.commands.arm.FoldArm;
 import org.usfirst.frc.team1164.robot.commands.arm.UnfoldArm;
 import org.usfirst.frc.team1164.robot.commands.arm.changeArmSpeed;
-import org.usfirst.frc.team1164.robot.commands.auto.setArmHeight;
+import org.usfirst.frc.team1164.robot.commands.calibration.CalibrateTest;
 import org.usfirst.frc.team1164.robot.commands.chassis.DisengageHighGear;
 import org.usfirst.frc.team1164.robot.commands.chassis.EngageHighGear;
-import org.usfirst.frc.team1164.robot.commands.claw.CloseClaw;
-import org.usfirst.frc.team1164.robot.commands.claw.OpenClaw;
-import org.usfirst.frc.team1164.robot.commands.claw.ToggleClaw;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -48,7 +43,6 @@ public class OI {
 	private Button testButton1, testButton2;
 
 	public OI() {
-//		testButton1 = new JoystickButton(driverStick, A.toInt());
 //		testButton2 = new JoystickButton(driverStick, B.toInt());
 		initializeControllers();
 		initializeOperatorControls();
@@ -71,11 +65,12 @@ public class OI {
 		foldArm = new JoystickButton(operatorStick, LB.toInt());
 		unfoldArm = new JoystickButton(operatorStick, RB.toInt());
 		
-//		increaseArmSpeed = new JoystickButton(operatorStick, LB.toInt()); 
-//		decreaseArmSpeed = new JoystickButton(operatorStick, RB.toInt());
+		increaseArmSpeed = new JoystickButton(operatorStick, A.toInt()); 
+		decreaseArmSpeed = new JoystickButton(operatorStick, B.toInt());
 	}
 	
 	private void initializeDriverControls() {
+//		testButton1 = new JoystickButton(driverStick, A.toInt());
 		highGear = new JoystickButton(driverStick, RB.toInt());
 		lowGear = new JoystickButton(driverStick, LB.toInt());
 	}
@@ -90,13 +85,13 @@ public class OI {
 		foldArm.whenPressed(new FoldArm());
 		unfoldArm.whenPressed(new UnfoldArm());
 		
-//		increaseArmSpeed.whenPressed(new changeArmSpeed(0.01));
-//		decreaseArmSpeed.whenPressed(new changeArmSpeed(-0.01));
+		increaseArmSpeed.whenPressed(new changeArmSpeed(0.01));
+		decreaseArmSpeed.whenPressed(new changeArmSpeed(-0.01));
 		
 		highGear.whenPressed(new EngageHighGear());
 		lowGear.whenPressed(new DisengageHighGear());
 		
-//		testButton1.whenPressed(new ToggleClaw());
+//		testButton1.whenPressed(new CalibrateTest());
 //		testButton2.whenPressed(new setArmHeight(600));
 	}
 	

@@ -136,8 +136,8 @@ public final class RobotMap {
 	//													 //
 	//---------------------------------------------------//
 	
-	public static final int 	Cl_forwardPort			= 4;
-	public static final int 	CL_reversePort			= 5;
+	public static final int 	Cl_forwardPort			= 5;
+	public static final int 	CL_reversePort			= 4;
 
 	//---------------------------------------------------//
 	//													 //
@@ -157,15 +157,15 @@ public final class RobotMap {
 	public static final String 	Arm_encoder_name		= "Arm Encoder";
 	
 	public static final int 	Arm_pot_channel 		= 3;
-	public static final int 	Arm_limiter_forwardPort = 6;
-	public static final int 	Arm_limiter_reversePort = 7;
+	public static final int 	Arm_limiter_topPort		= 4;
+	public static final int 	Arm_limiter_botPort 	= 7;
 	public static final int 	Arm_fold_forwardPort 	= 6;
 	public static final int 	Arm_fold_reversePort 	= 7;
 
-	public static final double 	Arm_limit_top			= 2000;
-	public static final double	Arm_limit_bot			= 0;
+	public static final double 	Arm_limit_top			= 1900;
+	public static final double	Arm_limit_bot			= 100;
 	public static final double	Arm_limit_bot_folded	= 770;
 	public static final double 	Arm_limit_top_speed		= 0.40;
-	public static final double 	Arm_limit_bot_speed		= 0.1;
+	public static final double 	Arm_limit_bot_speed		= 0.2;
 	
 }

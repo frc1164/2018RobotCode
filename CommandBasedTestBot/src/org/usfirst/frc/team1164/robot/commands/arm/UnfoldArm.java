@@ -23,6 +23,10 @@ public class UnfoldArm extends Command {
         return true;
     }
 
+    public boolean finished() {
+    	return true;
+    }
+    
     protected void end() {}
 
     protected void interrupted() {}

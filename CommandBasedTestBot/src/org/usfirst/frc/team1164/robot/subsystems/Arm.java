@@ -1,8 +1,16 @@
 package org.usfirst.frc.team1164.robot.subsystems;
 
-import static org.usfirst.frc.team1164.robot.RobotMap.*;
+import static org.usfirst.frc.team1164.robot.RobotMap.Arm_encoder_APort;
+import static org.usfirst.frc.team1164.robot.RobotMap.Arm_encoder_BPort;
+import static org.usfirst.frc.team1164.robot.RobotMap.Arm_encoder_invert;
+import static org.usfirst.frc.team1164.robot.RobotMap.Arm_isFolded;
+import static org.usfirst.frc.team1164.robot.RobotMap.Arm_pot_channel;
+import static org.usfirst.frc.team1164.robot.RobotMap.Arm_victor_inverted;
+import static org.usfirst.frc.team1164.robot.RobotMap.Arm_victor_name;
+import static org.usfirst.frc.team1164.robot.RobotMap.Arm_victor_port;
 
 import org.usfirst.frc.team1164.logic.NeoUtil;
+import org.usfirst.frc.team1164.robot.RobotMap;
 import org.usfirst.frc.team1164.robot.commands.arm.MoveArm;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
@@ -20,7 +28,7 @@ public class Arm extends Subsystem {
 	private WPI_VictorSPX armVictor;
 	private Encoder armEncoder;
 	private AnalogInput armPot;
-	private DigitalInput forwardLimitSwitch, reverseLimitSwitch;
+	private DigitalInput topLimitSwitch, botLimitSwitch;
 	private DoubleSolenoid foldingPiston;
 	private boolean isFolded;
 	private double armSpeed;
@@ -34,7 +42,7 @@ public class Arm extends Subsystem {
 	public Arm() {
 
 		isFolded = Arm_isFolded;
-		armSpeed = 0.27;
+		armSpeed = 0.3;
 		
 		initializeMotor();
 		initializeEncoder();
@@ -53,7 +61,7 @@ public class Arm extends Subsystem {
 		armEncoder = new Encoder(Arm_encoder_APort, Arm_encoder_BPort, 
 				 				 Arm_encoder_invert, EncodingType.k2X);
 		armEncoder.setName("Temp");
-		armEncoder.reset();
+//		armEncoder.reset();
 		
 	}
 
@@ -62,12 +70,12 @@ public class Arm extends Subsystem {
 	}
 	
 	public void initializeLimitSwitch() {
-//		forwardLimitSwitch = new DigitalInput(Arm_limiter_forwardPort);
-//		reverseLimitSwitch = new DigitalInput(Arm_limiter_reversePort);
+		topLimitSwitch = new DigitalInput(RobotMap.Arm_limiter_topPort);
+		botLimitSwitch = new DigitalInput(RobotMap.Arm_limiter_botPort);
 	}
 	
 	public void initializeFoldingPiston() {
-		foldingPiston = new DoubleSolenoid(Arm_fold_forwardPort, Arm_fold_reversePort);
+		foldingPiston = new DoubleSolenoid(RobotMap.Arm_fold_forwardPort, RobotMap.Arm_fold_reversePort);
 //		foldingPiston.set(isFolded ? DoubleSolenoid.Value.kForward :
 //								   	 DoubleSolenoid.Value.kReverse);
 	}
@@ -105,12 +113,12 @@ public class Arm extends Subsystem {
 
 	//------------------------------------------//
 	
-	public boolean getForwardLimiter() {
-		return forwardLimitSwitch.get();
+	public boolean getTopSwitch() {
+		return topLimitSwitch.get();
 	}
 	
-	public boolean getReverseLimiter() {
-		return reverseLimitSwitch.get();
+	public boolean getBotSwitch() {
+		return botLimitSwitch.get();
 	}
 
 	//------------------------------------------//
@@ -134,6 +142,13 @@ public class Arm extends Subsystem {
 	public double getArmSpeed() {
 		return armSpeed;
 	}
+
+	//------------------------------------------//
+	
+	
+	
+	
+	
 //	public void moveArmDown(double speed) {
 //		if (speed < 0.4 && getArmEncoder() > 2.1) {
 //			armVictor.set(speed);

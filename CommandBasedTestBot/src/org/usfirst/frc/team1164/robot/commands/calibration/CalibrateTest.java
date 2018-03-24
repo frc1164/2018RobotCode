@@ -1,28 +1,23 @@
-package org.usfirst.frc.team1164.robot.commands;
+package org.usfirst.frc.team1164.robot.commands.calibration;
 
-import java.util.concurrent.TimeUnit;
-
+import org.usfirst.frc.team1164.robot.Robot;
 import org.usfirst.frc.team1164.robot.commands.arm.FoldArm;
+import org.usfirst.frc.team1164.robot.commands.arm.UnfoldArm;
 import org.usfirst.frc.team1164.robot.commands.auto.setArmHeight;
-import org.usfirst.frc.team1164.robot.commands.claw.CloseClaw;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
  */
-public class testStartPosition extends CommandGroup {
+public class CalibrateTest extends CommandGroup {
 
-    public testStartPosition() {
-    	addSequential(new setArmHeight(150));
+    public CalibrateTest() {
+    	requires(Robot.kArm);
+    	addSequential(new UnfoldArm());
+    	addSequential(new CallibrateArmEncoder());
+    	addSequential(new setArmHeight(1000, false));
     	addSequential(new FoldArm());
-    	try {
-    		TimeUnit.SECONDS.sleep(4);
-    	}
-    	catch (InterruptedException ex){
-    		System.out.println(ex);
-    	}
-    	addSequential(new CloseClaw());
     	
         // Add Commands here:
         // e.g. addSequential(new Command1());

@@ -1,29 +1,42 @@
 package org.usfirst.frc.team1164.robot.commands;
 
-import java.util.concurrent.TimeUnit;
-
 import org.usfirst.frc.team1164.robot.Robot;
-import org.usfirst.frc.team1164.robot.commands.chassis.DisengageHighGear;
-import org.usfirst.frc.team1164.robot.commands.chassis.DisengageNeutralizer;
-import org.usfirst.frc.team1164.robot.commands.chassis.DisengagePTO;
-import org.usfirst.frc.team1164.robot.commands.chassis.EngageHighGear;
 
-import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.Command;
 
-public class InitDrive extends CommandGroup {
+/**
+ *
+ */
+public class InitDrive extends Command {
+
     public InitDrive() {
-    	requires(Robot.kChassis);
+        // Use requires() here to declare subsystem dependencies
+        requires(Robot.kChassis);
+    }
+
+    // Called just before this Command runs the first time
+    protected void initialize() {
+    }
+
+    // Called repeatedly when this Command is scheduled to run
+    protected void execute() {
+    	Robot.kChassis.setGear(true);
+    	Robot.kChassis.setPTO(false);
+    	Robot.kChassis.setNeutralizer(false);
     	
-    	addSequential(new EngageHighGear());
-    	addSequential(new DisengagePTO());
-        addSequential(new DisengageNeutralizer());
-//		addSequential(new waitCommand());
-//    	try {
-//    		TimeUnit.SECONDS.sleep(1);
-//    	}
-//    	catch (InterruptedException ex){
-//    		System.out.println(ex);
-//    	}
-//		addSequential(new DisengageHighGear());
+    }
+
+    // Make this return true when this Command no longer needs to run execute()
+    protected boolean isFinished() {
+        return true;
+    }
+
+    // Called once after isFinished returns true
+    protected void end() {
+    }
+
+    // Called when another command which requires one or more of the same
+    // subsystems is scheduled to run
+    protected void interrupted() {
     }
 }

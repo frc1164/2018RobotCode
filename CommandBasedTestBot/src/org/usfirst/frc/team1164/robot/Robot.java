@@ -8,9 +8,10 @@
 package org.usfirst.frc.team1164.robot;
 
 import org.usfirst.frc.team1164.robot.commands.InitDrive;
-import org.usfirst.frc.team1164.robot.commands.resetArmEncoder;
-import org.usfirst.frc.team1164.robot.commands.testStartPosition;
-import org.usfirst.frc.team1164.robot.commands.auto.setArmHeight;
+import org.usfirst.frc.team1164.robot.commands.arm.resetArmEncoder;
+import org.usfirst.frc.team1164.robot.commands.calibration.CalibrateAuto;
+import org.usfirst.frc.team1164.robot.commands.calibration.CalibrateTeleop;
+import org.usfirst.frc.team1164.robot.commands.calibration.CalibrateTest;
 import org.usfirst.frc.team1164.robot.subsystems.Arm;
 import org.usfirst.frc.team1164.robot.subsystems.Chassis;
 import org.usfirst.frc.team1164.robot.subsystems.Claw;
@@ -59,7 +60,7 @@ public class Robot extends TimedRobot {
 		m_chooser.addDefault("Position 1", 1);
 		m_chooser.addObject("Position 2", 2);
 		m_chooser.addObject("Position 3", 3);
-		m_chooser.addObject("Testing", 4);
+		m_chooser.addObject("setup", 4);
 		SmartDashboard.putData("Positions", m_chooser);
 	}
 
@@ -75,6 +76,8 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void disabledPeriodic() {
+		SmartDashboard.putBoolean("Top switch", kArm.getTopSwitch());
+		SmartDashboard.putBoolean("Bot switch", kArm.getBotSwitch());
 		SmartDashboard.putNumber("arm encoder", kArm.getArmEncoder());
 		Scheduler.getInstance().run();
 	}
@@ -100,9 +103,11 @@ public class Robot extends TimedRobot {
 		Command setup = new InitDrive();
 		setup.start();
 		
+		runCalibration("auto");
+		
 //		autoCommand = autoDecissionMattrix.decide(mode, gameData);
 		
-		autoCommand = new testStartPosition();
+//		autoCommand = new ;
 		
 		if (autoCommand != null) 
 			autoCommand.start();
@@ -123,6 +128,7 @@ public class Robot extends TimedRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
+		runCalibration("teleop");
 		if (autoCommand != null) {
 			autoCommand.cancel();
 		}
@@ -141,8 +147,17 @@ public class Robot extends TimedRobot {
 	/**
 	 * This function is called periodically during test mode.
 	 */
+	
+	private boolean testInit = false;
+	
 	@Override
 	public void testPeriodic() {
+		if (!testInit) {
+			testInit = true;
+			runCalibration("test");
+		}
+		
+		
 	/*	SmartDashboard.putNumber("Left Encoder", kChassis.GetLeftEncoder());
 		SmartDashboard.putNumber("Right Encoder", kChassis.GetRightEncoder());
 		if (OI.getControllerButton(5) == true) {
@@ -164,5 +179,23 @@ public class Robot extends TimedRobot {
 			Robot.kChassis.DisengagePTO();
 		}*/
 		
+	}
+	
+	public void runCalibration(String type) {
+		Command t = null;
+		switch(type) {
+		case "auto":
+			t = new CalibrateAuto();
+			break;
+		case "teleop":
+			t = new CalibrateTeleop();
+			break;
+		case "test":
+			t = new CalibrateTest();
+			break;
+		}
+		if (t != null) {
+			t.start();
+		}
 	}
 }
