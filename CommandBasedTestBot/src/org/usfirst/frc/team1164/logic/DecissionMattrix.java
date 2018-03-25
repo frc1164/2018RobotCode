@@ -82,7 +82,7 @@ public class DecissionMattrix {
 			returnCommand = new BaseDriveForward(244, .25);
 		}
 		else if (mode == 5) {
-			returnCommand = new AutoDrive(10);
+			returnCommand = new AutoDrive(32);
 		}
 		else {
 			returnCommand = new AutoTurn(90);

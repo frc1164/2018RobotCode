@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1164.robot.commands.auto.advanced;
 import org.usfirst.frc.team1164.robot.commands.auto.base.AutoDrive;
+import org.usfirst.frc.team1164.robot.commands.auto.base.AutoSetArmHeight;
 import org.usfirst.frc.team1164.robot.commands.auto.base.AutoTurn;
 import org.usfirst.frc.team1164.robot.commands.claw.OpenClaw;
 
@@ -12,17 +13,16 @@ public class ScoreScale extends CommandGroup {
 	public static final boolean LEFT = false;
 	
     public ScoreScale(boolean side) {
+    	addSequential(new AutoSetArmHeight(183, true));
+    	addSequential(new AutoDrive(25));
     	if (side == RIGHT) {
-	    	addSequential(new AutoDrive(25));
 	    	addSequential(new AutoTurn(45.0));
-	    	addSequential(new OpenClaw());
     	}
     	else
     	{
-    		addSequential(new AutoDrive(25));
     		addSequential(new AutoTurn(-45.0));
-    		addSequential(new OpenClaw());
     	}
+    	addSequential(new OpenClaw());
     	
     }
 }

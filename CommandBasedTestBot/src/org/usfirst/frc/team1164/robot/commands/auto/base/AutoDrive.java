@@ -14,6 +14,7 @@ public class AutoDrive extends Command {
 	private double distance;
 	private PIDMotion straightController;
 	private PIDMotion turnController;
+	private double startAngle;
 	
 	public AutoDrive(double distance) {
 		
@@ -41,11 +42,11 @@ public class AutoDrive extends Command {
 		
 		straightController.setEndpoint(distance);
 		turnController.setEndpoint(0.0);
+		startAngle = kChassis.getNavxAngle();
 	}
 	
 	public void initialize() {
 		kChassis.resetEncoders();
-		kChassis.resetNavx();
 	}
 	
 	public void execute() {
@@ -57,7 +58,7 @@ public class AutoDrive extends Command {
 		
 		double straight = straightController.getOutput(actualPos);
 //		actualPos = 0;
-    	double turn = turnController.getOutput(kChassis.getNavxAngle());
+    	double turn = turnController.getOutput(kChassis.getNavxAngle() - startAngle);
 //		double turn = 0;
 		
 		//double LSpeed = speed - (turn < 0 ? (Drive_turnModifier*speed*turn) : 0);

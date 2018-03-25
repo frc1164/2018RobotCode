@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1164.robot.commands.auto.advanced;
 
 import org.usfirst.frc.team1164.robot.commands.auto.base.AutoDrive;
+import org.usfirst.frc.team1164.robot.commands.auto.base.AutoSetArmHeight;
 import org.usfirst.frc.team1164.robot.commands.claw.OpenClaw;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -10,6 +11,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class MidSwitch extends CommandGroup {
 
     public MidSwitch() {
+    	addSequential(new AutoSetArmHeight(61, true));
     	addSequential (new AutoDrive(8));
     	addSequential (new OpenClaw());
         // Add Commands here:

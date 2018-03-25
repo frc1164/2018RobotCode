@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1164.robot.commands.auto.advanced;
 import org.usfirst.frc.team1164.robot.commands.auto.base.AutoDrive;
+import org.usfirst.frc.team1164.robot.commands.auto.base.AutoSetArmHeight;
 import org.usfirst.frc.team1164.robot.commands.auto.base.AutoTurn;
 import org.usfirst.frc.team1164.robot.commands.claw.OpenClaw;
 
@@ -13,16 +14,15 @@ public class ScoreSwitch extends CommandGroup {
 	public static final boolean LEFT = false;
 	
     public ScoreSwitch(boolean side) {
+		addSequential(new AutoSetArmHeight(61, true));
+		addSequential(new AutoDrive(12));
     	if (side == RIGHT) {
-    		addSequential(new AutoDrive(12));
     		addSequential(new AutoTurn(45.0));
-    		addSequential(new OpenClaw());
     	}
     	else {
-    		addSequential(new AutoDrive(12));
     		addSequential(new AutoTurn(-45.0));
-    		addSequential(new OpenClaw());
     	}
+		addSequential(new OpenClaw());
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
