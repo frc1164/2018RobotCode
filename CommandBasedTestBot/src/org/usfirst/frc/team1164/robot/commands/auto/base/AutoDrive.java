@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class AutoDrive extends Command {
 	private double distance;
-	private PIDMotion controller;
+	private PIDMotion straightController;
 	private PIDMotion turnController;
 	
 	public AutoDrive(double distance) {
@@ -22,7 +22,7 @@ public class AutoDrive extends Command {
 		this.distance = distance;
 		requires(kChassis);
 
-		controller = new PIDVMotion(pref.getDouble("StraightMaxA", 0.0), 
+		straightController = new PIDVMotion(pref.getDouble("StraightMaxA", 0.0), 
 								   pref.getDouble("StraightMaxV", 0.0),
 								   pref.getDouble("StraightP", 0.0),
 								   pref.getDouble("StraightI", 0.0),
@@ -36,7 +36,10 @@ public class AutoDrive extends Command {
 					pref.getDouble("TurnD", 0.0),
 					pref.getDouble("TurnV", 0.0));	
 		
-		controller.setEndpoint(distance);
+		SmartDashboard.putNumber("straightAccelBlockLength", straightController.getAccelLength());
+		SmartDashboard.putNumber("turnAccelBlockLength", turnController.getAccelLength());
+		
+		straightController.setEndpoint(distance);
 		turnController.setEndpoint(0.0);
 	}
 	
@@ -52,7 +55,7 @@ public class AutoDrive extends Command {
 		
 		double actualPos = kChassis.getAverageEncoder() * encoderToFt;
 		
-		double straight = controller.getOutput(actualPos);
+		double straight = straightController.getOutput(actualPos);
 //		actualPos = 0;
     	double turn = turnController.getOutput(kChassis.getNavxAngle());
 //		double turn = 0;
@@ -80,7 +83,8 @@ public class AutoDrive extends Command {
 		kChassis.setRightSpeed(right);
 		
 		
-		SmartDashboard.putNumber("Distance", actualPos+srn);
+		SmartDashboard.putNumber("DistanceActual", actualPos+srn);
+		SmartDashboard.putNumber("TurnActual", kChassis.getNavxAngle()+srn);
 		SmartDashboard.putNumber("OutputOfStraightController", straight);
 		SmartDashboard.putNumber("OutputOfTurnController", turn);
 		SmartDashboard.putNumber("AutoLeftSet", left);
@@ -90,6 +94,7 @@ public class AutoDrive extends Command {
 	@Override
 	protected boolean isFinished() {
 		return false;
+		//return straightController.isDone(10, 0.25) && turnController.isDone(10, 5.0);
 	}
 	
 	public void end() {

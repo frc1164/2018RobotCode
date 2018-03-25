@@ -60,6 +60,7 @@ public class AutoTurn extends Command {
     	
     	turnController.setEndpoint(TurnAngle);
     	
+    	SmartDashboard.putNumber("turnAccelBlockLength", turnController.getAccelLength());
     }
 
     // Called just before this Command runs the first time
@@ -69,24 +70,7 @@ public class AutoTurn extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	
-    	/*
-    	SmartDashboard.putNumber("Navx Angle", Robot.kChassis.getNavxAngle());
-    	
-    	if (TurnAngle > 0) {
-    		
-    		Robot.kChassis.setRightMotorSpeed(this.Speed);
-    		Robot.kChassis.setLeftMotorSpeed(-1*this.Speed);
-    		
-    	}
-    	else if (TurnAngle < 0) {
-    		
-    		Robot.kChassis.setRightMotorSpeed(-1*this.Speed);
-    		Robot.kChassis.setLeftMotorSpeed(this.Speed);
-    		
-    	}
-    	*/
-    	
+    	// small random number to update smart dashboard.
     	double srn = 0.001 * (Math.random() - 0.5);
 		
 		double actualTurn = kChassis.getNavxAngle();
@@ -97,43 +81,15 @@ public class AutoTurn extends Command {
 		kChassis.setRightSpeed(-speed);
 		
 		SmartDashboard.putNumber("Distance", actualTurn+srn);
-		//SmartDashboard.putNumber("speed", speed);
-		//SmartDashboard.putNumber("LeftEncoder", Robot.kChassis.getLeftEncoder());
-		//SmartDashboard.putNumber("RightEncoder", Robot.kChassis.getRightEncoder());
-    	
+		SmartDashboard.putNumber("turnControllerOutput", speed);
+		SmartDashboard.putNumber("LeftEncoder", kChassis.getLeftEncoder());
+		SmartDashboard.putNumber("RightEncoder", kChassis.getRightEncoder());
+		SmartDashboard.putNumber("turnActual", actualTurn);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	//The navx returns opposite direction of intented
-    	/*double currentAngle = -Robot.kChassis.getNavxAngle();
-        if (this.TurnAngle > 0 && this.TurnAngle <= currentAngle) {
-        	
-        	//checks if target angle is positive.
-        	
-        	//checks if the positive value of the current angle is greater than the positive value of the target angle, 
-        	//indicating it has turned a sufficient amount
-        	Robot.kChassis.brake();
-        	
-        	return true;
-        }
-        else if (this.TurnAngle < 0 && this.TurnAngle >= currentAngle) {
-        	
-        	//checks if target angle is negative.
-        	
-        	//checks if the negative value of the current angle is less than the negative value of the target angle, 
-        	//indicating it has turned a sufficient amount
-        	
-        	Robot.kChassis.brake();
-        	
-        	return true;
-        }
-        else {
-        	// if the target angle has not been reached, the command continues to run
-        	
-        	return false;
-        	}
-        */
+    	//return turnController.isDone(10, 5.0);
     	return false;
     }
 

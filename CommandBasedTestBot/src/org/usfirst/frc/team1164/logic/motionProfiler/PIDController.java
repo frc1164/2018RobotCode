@@ -12,7 +12,7 @@ public class PIDController {
 	
 	private double intergral;
 	
-	private int deadband;
+	//private int deadband;
 	private int inDeadband = 0;
 	
 	public PIDController(double kP, double kI, double kD) {
@@ -37,7 +37,7 @@ public class PIDController {
 		return output;
 	}
 	
-	public boolean isDone(int deadbandAllowance) {
+	public boolean isDone(int deadbandAllowance, double deadband) {
 		if (prevError < deadband || prevError > -deadband) {
 			inDeadband++;
 		}

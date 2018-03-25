@@ -5,6 +5,7 @@ import org.usfirst.frc.team1164.robot.commands.auto.advanced.ScoreScale;
 import org.usfirst.frc.team1164.robot.commands.auto.advanced.ScoreSwitch;
 import org.usfirst.frc.team1164.robot.commands.auto.base.AutoDrive;
 import org.usfirst.frc.team1164.robot.commands.auto.base.BaseDriveForward;
+import org.usfirst.frc.team1164.robot.commands.auto.base.AutoTurn;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
@@ -25,6 +26,8 @@ public class DecissionMattrix {
 		m_chooser.addObject("Position 2", 2);
 		m_chooser.addObject("Position 3", 3);
 		m_chooser.addObject("Degraded Mode", 4);
+		m_chooser.addObject("TestForward", 5);
+		m_chooser.addObject("TestTurn", 6);
 	}
 	
 	public void SmartDashboard() {
@@ -75,8 +78,14 @@ public class DecissionMattrix {
 				returnCommand = new AutoDrive(10);
 			}
 		}
-		else {
+		else if (mode == 4){
 			returnCommand = new BaseDriveForward(244, .25);
+		}
+		else if (mode == 5) {
+			returnCommand = new AutoDrive(10);
+		}
+		else {
+			returnCommand = new AutoTurn(90);
 		}
 		return returnCommand;
 	}

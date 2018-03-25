@@ -24,7 +24,9 @@ public class PIDMotion {
 	}
 	
 	
-	public boolean isDone(int deadbandAllowance) {
-		return P.isDone(deadbandAllowance);
+	public boolean isDone(int deadbandAllowance, double deadband) {
+		return P.isDone(deadbandAllowance, deadband);
 	}
+	
+	public int getAccelLength() { return MP.getAccelLength(); }
 }

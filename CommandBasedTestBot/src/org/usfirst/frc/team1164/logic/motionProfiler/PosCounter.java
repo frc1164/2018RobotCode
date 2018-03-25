@@ -69,7 +69,11 @@ public class PosCounter implements PIDSource {
 				output = 0;
 			}
 		}
-		SmartDashboard.putString("posCounter Output",String.format("%f", output));
+		
 		return output;
 	}
+	
+	// getGap
+	// output the given gap.
+	public int getGap() { return gap; }
 }
