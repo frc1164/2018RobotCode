@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1164.robot.commands.auto;
+package org.usfirst.frc.team1164.robot.commands.auto.base;
 
 import static org.usfirst.frc.team1164.robot.Robot.kArm;
 import static org.usfirst.frc.team1164.robot.RobotMap.auto_armHeight_tolerance;
@@ -11,12 +11,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-public class setArmHeight extends Command {
+public class AutoSetArmHeight extends Command {
 	
 	private double angleToGoTo;
 	private boolean isDone;
 	
-    public setArmHeight(float height, boolean in_CM) {
+    public AutoSetArmHeight(float height, boolean in_CM) {
     	requires(kArm);
     	this.angleToGoTo = in_CM ? NeoUtil.getAngle(height) : height;
     }

@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1164.robot.commands.auto;
+package org.usfirst.frc.team1164.robot.commands.auto.base;
 
 import static org.usfirst.frc.team1164.robot.Robot.kChassis;
 import static org.usfirst.frc.team1164.robot.RobotMap.encoderToFt;
@@ -10,20 +10,18 @@ import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class DriveForward extends Command {
+public class AutoDrive extends Command {
 	private double distance;
 	private PIDMotion controller;
 	private PIDMotion turnController;
 	
-	public DriveForward(double distance) {
+	public AutoDrive(double distance) {
 		
 		Preferences pref = Preferences.getInstance();
 		
-		SmartDashboard.putString("Enabled?", "1");
 		this.distance = distance;
 		requires(kChassis);
 
-		SmartDashboard.putString("Enabled?", "2");
 		controller = new PIDVMotion(pref.getDouble("StraightMaxA", 0.0), 
 								   pref.getDouble("StraightMaxV", 0.0),
 								   pref.getDouble("StraightP", 0.0),
@@ -38,10 +36,8 @@ public class DriveForward extends Command {
 					pref.getDouble("TurnD", 0.0),
 					pref.getDouble("TurnV", 0.0));	
 		
-		SmartDashboard.putString("Enabled?", "3");
 		controller.setEndpoint(distance);
 		turnController.setEndpoint(0.0);
-		SmartDashboard.putString("Enabled?", "4");
 	}
 	
 	public void initialize() {

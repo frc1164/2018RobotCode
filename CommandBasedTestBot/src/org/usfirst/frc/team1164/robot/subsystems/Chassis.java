@@ -399,6 +399,4 @@ public class Chassis extends Subsystem {
 	public boolean getPTO() {
 		return PTOEnabled;
 	}
-
-	//------------------------------------------//
 }

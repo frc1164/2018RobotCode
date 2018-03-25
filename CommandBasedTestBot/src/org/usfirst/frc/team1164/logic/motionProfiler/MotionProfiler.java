@@ -17,33 +17,33 @@ public class MotionProfiler {
 	
 	public MotionProfiler(double aMax, double vMax) {
 		
-		// sets the current position of the robot and endpoint
+//		 sets the current position of the robot and endpoint
 		curPos = 0;
 		endpoint = 0;
 		this.aMax = aMax;
 		this.vMax = vMax;
-		SmartDashboard.putString("start", String.format("%f and %f", aMax, vMax));
-		// creates the acceleration block
-		//  int ffGainLength = (int) (vMax / (aMax * RobotMap.timeFrame));
+//		SmartDashboard.putString("start", String.format("%f and %f", aMax, vMax));
+//		creates the acceleration block
+//		int ffGainLength = (int) (vMax / (aMax * RobotMap.timeFrame));
 		int ffGainLength = (int) (1 / (aMax * timeFrame));
-		SmartDashboard.putString("start2", String.format("%d", ffGainLength));
+//		SmartDashboard.putString("start2", String.format("%d", ffGainLength));
 		double[] ffGain = new double[ffGainLength];
 		for (int i = 0; i < ffGainLength; i++) {
 			ffGain[i] = vMax / ffGainLength;
 		}
 		
-		// creates the position block
+//		creates the position block
 		counter = new PosCounter(ffGainLength);
 		
-		// creates the filter "convultion"
+//		creates the filter "convultion"
 		double[] fbGain = {};
-		//SmartDashboard.putString("ffGains",String.format("%f %f", ffGain[0], ffGain[500]));
+//		SmartDashboard.putString("ffGains",String.format("%f %f", ffGain[0], ffGain[500]));
 		filter = new LinearDigitalFilter(counter, ffGain, fbGain);
 		filter.reset();
 	}
 	
 	public void update() {
-		// does the next convultion step
+//		does the next convultion step
 		double srn = 0.001 * (Math.random() - 0.5);
 		
 		curVel = filter.pidGet();
@@ -53,18 +53,18 @@ public class MotionProfiler {
 	}
 	
 	public void setEndpoint(double endpoint) {
-		// sets the final goal
+//		sets the final goal
 		this.endpoint = endpoint;
 		counter.setEndPoint((int) (endpoint/(vMax*timeFrame)));
 	}
 	
 	public double getVel() {
-		// return most recent velocity
+//		return most recent velocity
 		return curVel;
 	}
 	
 	public double getPos() {
-		// returns most recent position
+//		returns most recent position
 		return curPos;  
 	}
 	

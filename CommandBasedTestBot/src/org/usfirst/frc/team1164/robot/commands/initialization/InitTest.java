@@ -1,16 +1,13 @@
-package org.usfirst.frc.team1164.robot.commands.auto;
-
-import org.usfirst.frc.team1164.robot.commands.claw.OpenClaw;
+package org.usfirst.frc.team1164.robot.commands.initialization;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+
 /**
  *
  */
-public class MidSwitch extends CommandGroup {
+public class InitTest extends CommandGroup {
 
-    public MidSwitch() {
-    	addSequential (new DriveForward(8));
-    	addSequential (new OpenClaw());
+    public InitTest() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());

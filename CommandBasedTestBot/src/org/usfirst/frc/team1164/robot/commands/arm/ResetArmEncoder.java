@@ -1,32 +1,23 @@
 package org.usfirst.frc.team1164.robot.commands.arm;
 
-import static org.usfirst.frc.team1164.robot.Robot.kArm;
+import org.usfirst.frc.team1164.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-/**
- *
- */
-public class UnfoldArm extends Command {
+public class ResetArmEncoder extends Command {
 
-    public UnfoldArm() {
-    	requires(kArm);
-    }
+    public ResetArmEncoder() {}
 
     protected void initialize() {}
 
     protected void execute() {
-    	kArm.setArmFolded(false);;
+    	Robot.kArm.resetArmEncoder();
     }
 
     protected boolean isFinished() {
         return true;
     }
 
-    public boolean finished() {
-    	return true;
-    }
-    
     protected void end() {}
 
     protected void interrupted() {}

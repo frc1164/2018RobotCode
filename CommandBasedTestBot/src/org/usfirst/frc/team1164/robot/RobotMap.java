@@ -67,7 +67,7 @@ public final class RobotMap {
 	//													 //
 	//---------------------------------------------------//
 	
-	public static final double 	Drive_turnModifier		= 0.5;
+	public static final double 	Drive_turnModifier		= 0.8;
 	
 	public static final String 	CH_name 				= "Chassis";
 	public static final String	CH_nav_name				= "Navx";
@@ -162,8 +162,8 @@ public final class RobotMap {
 	public static final int 	Arm_fold_forwardPort 	= 6;
 	public static final int 	Arm_fold_reversePort 	= 7;
 
-	public static final double 	Arm_limit_top			= 1900;
-	public static final double	Arm_limit_bot			= 100;
+	public static final double 	Arm_limit_top			= 2000;
+	public static final double	Arm_limit_bot			= 0;
 	public static final double	Arm_limit_bot_folded	= 770;
 	public static final double 	Arm_limit_top_speed		= 0.40;
 	public static final double 	Arm_limit_bot_speed		= 0.2;

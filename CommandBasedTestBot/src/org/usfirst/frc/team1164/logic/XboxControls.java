@@ -1,7 +1,12 @@
 package org.usfirst.frc.team1164.logic;
 
-public enum Controls {
+/**
+ * This class is used to easily get the controls for
+ * an xbox controller so user doesn't have to go and
+ * find the control on the driver station
+ */
 
+public enum XboxControls {
 	A(1), 		// button
 	B(2), 		// button
 	X(3), 		// button
@@ -21,7 +26,7 @@ public enum Controls {
 	
 	private int controlNumber;
 	
-	Controls(int controlNumber) {
+	XboxControls(int controlNumber) {
 		this.controlNumber = controlNumber;
 	}
 	

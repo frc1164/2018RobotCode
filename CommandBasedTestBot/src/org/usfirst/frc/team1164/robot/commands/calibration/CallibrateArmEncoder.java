@@ -5,7 +5,9 @@ import org.usfirst.frc.team1164.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * moves the arm down till it hits the limit switch
+ * then simply resets the encoder to give us a good
+ * idea of the arm height
  */
 public class CallibrateArmEncoder extends Command {
 

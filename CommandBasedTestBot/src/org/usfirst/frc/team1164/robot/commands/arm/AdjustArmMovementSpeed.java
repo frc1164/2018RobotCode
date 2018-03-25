@@ -5,14 +5,21 @@ import static org.usfirst.frc.team1164.robot.RobotMap.*;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-/**
- *
- */
-public class changeArmSpeed extends Command {
 
+/**
+ * basically what the name says, this command will
+ * set the speed at which the arm moves, this way
+ * however is controlling can have some varation
+ * to something they feel comfortable with
+ * it can also be used for easier adjustments if
+ * the controller does so desire
+ */
+
+public class AdjustArmMovementSpeed extends Command {
+	
 	private double speed;
 	
-    public changeArmSpeed(double speedIncriment) {
+    public AdjustArmMovementSpeed(double speedIncriment) {
     	this.speed = speedIncriment; 
     }
 

@@ -6,6 +6,15 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class PosCounter implements PIDSource {
 	
+	/* this class is mainly used for just finding how much
+	 * farther the motion profiler has to go, if it needs
+	 * to go further it returns a 1, back is -1 and stay still
+	 * is 0
+	 */
+	
+	
+	
+	
 	private int endPoint;
 	private int curPosition;
 	private int itrNum;
@@ -26,14 +35,10 @@ public class PosCounter implements PIDSource {
 	}
 	
 	@Override
-	public void setPIDSourceType(PIDSourceType pidSource) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void setPIDSourceType(PIDSourceType pidSource) {}
 
 	@Override
 	public PIDSourceType getPIDSourceType() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

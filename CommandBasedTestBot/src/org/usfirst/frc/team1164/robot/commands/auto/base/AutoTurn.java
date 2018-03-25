@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1164.robot.commands.auto;
+package org.usfirst.frc.team1164.robot.commands.auto.base;
 
 import org.usfirst.frc.team1164.logic.motionProfiler.PIDMotion;
 import org.usfirst.frc.team1164.logic.motionProfiler.PIDVMotion;

@@ -4,7 +4,7 @@ import static org.usfirst.frc.team1164.robot.RobotMap.CL_reversePort;
 import static org.usfirst.frc.team1164.robot.RobotMap.Cl_forwardPort;
 import static org.usfirst.frc.team1164.robot.RobotMap.Cl_isOpen;
 
-import org.usfirst.frc.team1164.robot.commands.claw.ToggleClaw;
+import org.usfirst.frc.team1164.robot.commands.claw.DriveClaw;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -15,6 +15,11 @@ public class Claw extends Subsystem{
 	private DoubleSolenoid claw;
 	
 
+	@Override
+	protected void initDefaultCommand() {
+		setDefaultCommand(new DriveClaw());
+	}
+	
 	public Claw() {
 		isOpen = Cl_isOpen;
 		claw = new DoubleSolenoid(Cl_forwardPort, CL_reversePort);
@@ -27,11 +32,6 @@ public class Claw extends Subsystem{
 							 DoubleSolenoid.Value.kForward);
 	}
 
-	@Override
-	protected void initDefaultCommand() {
-		setDefaultCommand(new ToggleClaw());
-	}
-	
 	public void setOpened(boolean opened) {
 		claw.set(opened ? DoubleSolenoid.Value.kReverse :
 			   			  DoubleSolenoid.Value.kForward);

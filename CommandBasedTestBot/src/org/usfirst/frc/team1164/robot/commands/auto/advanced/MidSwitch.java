@@ -1,31 +1,18 @@
-package org.usfirst.frc.team1164.robot.commands.auto;
+package org.usfirst.frc.team1164.robot.commands.auto.advanced;
+
+import org.usfirst.frc.team1164.robot.commands.auto.base.AutoDrive;
 import org.usfirst.frc.team1164.robot.commands.claw.OpenClaw;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class ScoreScale extends CommandGroup {
-	public static final boolean RIGHT = true;
-	public static final boolean LEFT = false;
-	
-    public ScoreScale(boolean side) {
-    	if (side == RIGHT) {
-	    	addSequential(new DriveForward(25));
-	    	addSequential(new AutoTurn(45.0));
-	    	addSequential(new OpenClaw());
-    	}
-    	else
-    	{
-    		addSequential(new DriveForward(25));
-    		addSequential(new AutoTurn(-45.0));
-    		addSequential(new OpenClaw());
-    	}
-    	
-    }
-}
-    	
-    	// Add Commands here:
+public class MidSwitch extends CommandGroup {
+
+    public MidSwitch() {
+    	addSequential (new AutoDrive(8));
+    	addSequential (new OpenClaw());
+        // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
         // these will run in order.
@@ -41,3 +28,5 @@ public class ScoreScale extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
+    }
+}

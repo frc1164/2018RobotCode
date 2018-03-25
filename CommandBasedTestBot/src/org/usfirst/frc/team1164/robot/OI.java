@@ -7,21 +7,24 @@
 
 package org.usfirst.frc.team1164.robot;
 
-import static org.usfirst.frc.team1164.logic.Controls.A;
-import static org.usfirst.frc.team1164.logic.Controls.B;
-import static org.usfirst.frc.team1164.logic.Controls.BACK;
-import static org.usfirst.frc.team1164.logic.Controls.LB;
-import static org.usfirst.frc.team1164.logic.Controls.RB;
-import static org.usfirst.frc.team1164.logic.Controls.START;
+import static org.usfirst.frc.team1164.logic.XboxControls.A;
+import static org.usfirst.frc.team1164.logic.XboxControls.B;
+import static org.usfirst.frc.team1164.logic.XboxControls.X;
+import static org.usfirst.frc.team1164.logic.XboxControls.Y;
+import static org.usfirst.frc.team1164.logic.XboxControls.BACK;
+import static org.usfirst.frc.team1164.logic.XboxControls.LB;
+import static org.usfirst.frc.team1164.logic.XboxControls.RB;
+import static org.usfirst.frc.team1164.logic.XboxControls.START;
 
-import org.usfirst.frc.team1164.robot.commands.InitClimb;
-import org.usfirst.frc.team1164.robot.commands.InitDrive;
-import org.usfirst.frc.team1164.robot.commands.arm.FoldArm;
-import org.usfirst.frc.team1164.robot.commands.arm.UnfoldArm;
-import org.usfirst.frc.team1164.robot.commands.arm.changeArmSpeed;
-import org.usfirst.frc.team1164.robot.commands.calibration.CalibrateTest;
+import org.usfirst.frc.team1164.robot.commands.arm.FoldWrist;
+import org.usfirst.frc.team1164.robot.commands.arm.UnfoldWrist;
+import org.usfirst.frc.team1164.robot.commands.auto.base.AutoSetArmHeight;
+import org.usfirst.frc.team1164.robot.commands.arm.AdjustArmMovementSpeed;
+import org.usfirst.frc.team1164.robot.commands.calibration.ArmCallibrateTest;
 import org.usfirst.frc.team1164.robot.commands.chassis.DisengageHighGear;
 import org.usfirst.frc.team1164.robot.commands.chassis.EngageHighGear;
+import org.usfirst.frc.team1164.robot.commands.initialization.InitClimb;
+import org.usfirst.frc.team1164.robot.commands.initialization.InitDrive;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -34,16 +37,13 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public class OI {
 	private XboxController driverStick, operatorStick;
 
-	private Button openClaw, closeClaw;
 	private Button highGear, lowGear;
 	private Button initDriving, initClimbing;
 	private Button foldArm, unfoldArm;
 	private Button increaseArmSpeed, decreaseArmSpeed;
+	private Button lowScale, highScale, _switch, ground;
 	
-	private Button testButton1, testButton2;
-
 	public OI() {
-//		testButton2 = new JoystickButton(driverStick, B.toInt());
 		initializeControllers();
 		initializeOperatorControls();
 		initializeDriverControls();
@@ -55,44 +55,44 @@ public class OI {
 		operatorStick = new XboxController(1);
 	}
 	
-	private void initializeOperatorControls() {
-		openClaw = new JoystickButton(operatorStick, A.toInt());
-		closeClaw = new JoystickButton(operatorStick, B.toInt());
-		
+	private void initializeOperatorControls() {		
 		initClimbing = new JoystickButton(operatorStick, BACK.toInt());
 		initDriving = new JoystickButton (operatorStick, START.toInt());
 		
 		foldArm = new JoystickButton(operatorStick, LB.toInt());
 		unfoldArm = new JoystickButton(operatorStick, RB.toInt());
 		
-		increaseArmSpeed = new JoystickButton(operatorStick, A.toInt()); 
-		decreaseArmSpeed = new JoystickButton(operatorStick, B.toInt());
+//		increaseArmSpeed = new JoystickButton(operatorStick, A.toInt()); 
+//		decreaseArmSpeed = new JoystickButton(operatorStick, B.toInt());
+		
+		lowScale = new JoystickButton(operatorStick, Y.toInt());
+		highScale = new JoystickButton(operatorStick, X.toInt());
+		_switch = new JoystickButton(operatorStick, B.toInt());
+		ground = new JoystickButton(operatorStick, A.toInt());
 	}
 	
 	private void initializeDriverControls() {
-//		testButton1 = new JoystickButton(driverStick, A.toInt());
 		highGear = new JoystickButton(driverStick, RB.toInt());
 		lowGear = new JoystickButton(driverStick, LB.toInt());
 	}
 	
 	private void initializeButtons() {
-//		openClaw.whenPressed(new OpenClaw());
-//		closeClaw.whenPressed(new CloseClaw());
-//		
 		initClimbing.whenPressed(new InitClimb());
 		initDriving.whenPressed(new InitDrive());
 		
-		foldArm.whenPressed(new FoldArm());
-		unfoldArm.whenPressed(new UnfoldArm());
+		foldArm.whenPressed(new FoldWrist());
+		unfoldArm.whenPressed(new UnfoldWrist());
 		
-		increaseArmSpeed.whenPressed(new changeArmSpeed(0.01));
-		decreaseArmSpeed.whenPressed(new changeArmSpeed(-0.01));
+//		increaseArmSpeed.whenPressed(new AdjustArmMovementSpeed(0.01));
+//		decreaseArmSpeed.whenPressed(new AdjustArmMovementSpeed(-0.01));
 		
 		highGear.whenPressed(new EngageHighGear());
 		lowGear.whenPressed(new DisengageHighGear());
 		
-//		testButton1.whenPressed(new CalibrateTest());
-//		testButton2.whenPressed(new setArmHeight(600));
+		lowScale.whenPressed(new AutoSetArmHeight(122, true));
+		highScale.whenPressed(new AutoSetArmHeight(183, true));
+		_switch.whenPressed(new AutoSetArmHeight(61, true));
+		ground.whenPressed(new AutoSetArmHeight(24, true));
 	}
 	
 	

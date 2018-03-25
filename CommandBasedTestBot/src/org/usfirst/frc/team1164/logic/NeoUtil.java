@@ -3,12 +3,15 @@ package org.usfirst.frc.team1164.logic;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-
+/**
+ * Various utilities used throughout the code 
+ */
 public class NeoUtil{
 	
 	public static double VoltsToDegrees(double volts) {
-		//potentiometer returns a voltage from 0 to 5, and the range of motion is 300 degrees. 
-		//This works out to 60 degrees per volt.
+	/* potentiometer returns a voltage from 0 to 5, and the range of motion is 300 degrees. 
+	 * This works out to 60 degrees per volt.
+	 */
 		return volts*60;
 	}
 	
@@ -19,14 +22,6 @@ public class NeoUtil{
 			writer.append(data);
 			writer.close();
 	}
-	
-	public static boolean inRange(double x, double min, double max) {
-		return (x < max && x > min);
-	}
-	
-	public static boolean outRange(double x, double min, double max) {
-		return (x < min || x > max);
-	}
 
 	public static double deadband(double tolerance, double numberInput) {
 		if (Math.abs(numberInput) >= tolerance) {
@@ -36,6 +31,17 @@ public class NeoUtil{
 			return 0;
 		}
 	}
+	
+	
+	/* the following is used for the arm and the encoder
+	 * it takes in a distance in Centimeters and returns
+	 * a encoder value that correlates to any given distance
+	 * in a reasonable range
+	 * 
+	 * for example pluging in 45CM will most likely give you
+	 * a value of 244 which can be used to set the arm height
+	 */
+	
 	
     //----------------------------------------------
     // DO NOT CHANGE MANUALLY

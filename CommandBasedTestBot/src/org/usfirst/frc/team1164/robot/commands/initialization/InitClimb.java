@@ -1,4 +1,6 @@
-package org.usfirst.frc.team1164.robot.commands;
+package org.usfirst.frc.team1164.robot.commands.initialization;
+
+import java.util.concurrent.TimeUnit;
 
 import org.usfirst.frc.team1164.robot.Robot;
 
@@ -7,11 +9,12 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class InitDrive extends Command {
+public class InitClimb extends Command {
 
-    public InitDrive() {
+    public InitClimb() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.kChassis);
+        // eg. requires(chassis);
+    	requires(Robot.kChassis);
     }
 
     // Called just before this Command runs the first time
@@ -21,9 +24,14 @@ public class InitDrive extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.kChassis.setGear(true);
-    	Robot.kChassis.setPTO(false);
-    	Robot.kChassis.setNeutralizer(false);
-    	
+    	Robot.kChassis.setNeutralizer(true);
+    	try {
+    		TimeUnit.SECONDS.sleep(1);
+    	} catch (InterruptedException ex) {
+    		System.out.println(ex);
+    	}
+    	Robot.kChassis.setGear(false);
+    	Robot.kChassis.setPTO(true);
     }
 
     // Make this return true when this Command no longer needs to run execute()

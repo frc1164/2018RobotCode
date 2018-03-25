@@ -1,24 +1,28 @@
-package org.usfirst.frc.team1164.robot.commands.calibration;
-
-import org.usfirst.frc.team1164.robot.Robot;
-import org.usfirst.frc.team1164.robot.commands.arm.FoldArm;
-import org.usfirst.frc.team1164.robot.commands.arm.UnfoldArm;
-import org.usfirst.frc.team1164.robot.commands.auto.setArmHeight;
+package org.usfirst.frc.team1164.robot.commands.auto.advanced;
+import org.usfirst.frc.team1164.robot.commands.auto.base.AutoDrive;
+import org.usfirst.frc.team1164.robot.commands.auto.base.AutoTurn;
+import org.usfirst.frc.team1164.robot.commands.claw.OpenClaw;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-
 /**
  *
  */
-public class CalibrateTest extends CommandGroup {
+public class ScoreSwitch extends CommandGroup {
 
-    public CalibrateTest() {
-    	requires(Robot.kArm);
-    	addSequential(new UnfoldArm());
-    	addSequential(new CallibrateArmEncoder());
-    	addSequential(new setArmHeight(1000, false));
-    	addSequential(new FoldArm());
-    	
+	public static final boolean RIGHT = true;
+	public static final boolean LEFT = false;
+	
+    public ScoreSwitch(boolean side) {
+    	if (side == RIGHT) {
+    		addSequential(new AutoDrive(12));
+    		addSequential(new AutoTurn(45.0));
+    		addSequential(new OpenClaw());
+    	}
+    	else {
+    		addSequential(new AutoDrive(12));
+    		addSequential(new AutoTurn(-45.0));
+    		addSequential(new OpenClaw());
+    	}
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());

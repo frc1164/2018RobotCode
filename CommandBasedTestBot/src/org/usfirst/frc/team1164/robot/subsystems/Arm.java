@@ -11,7 +11,7 @@ import static org.usfirst.frc.team1164.robot.RobotMap.Arm_victor_port;
 
 import org.usfirst.frc.team1164.logic.NeoUtil;
 import org.usfirst.frc.team1164.robot.RobotMap;
-import org.usfirst.frc.team1164.robot.commands.arm.MoveArm;
+import org.usfirst.frc.team1164.robot.commands.arm.DriveArm;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
@@ -34,7 +34,7 @@ public class Arm extends Subsystem {
 	private double armSpeed;
 	
 	public void initDefaultCommand() {
-		setDefaultCommand(new MoveArm());
+		setDefaultCommand(new DriveArm());
 	}
 
 	//------------------------------------------//
@@ -143,31 +143,5 @@ public class Arm extends Subsystem {
 		return armSpeed;
 	}
 
-	//------------------------------------------//
-	
-	
-	
-	
-	
-//	public void moveArmDown(double speed) {
-//		if (speed < 0.4 && getArmEncoder() > 2.1) {
-//			armVictor.set(speed);
-//		} else {
-//			armVictor.set(0);
-//		}
-//	}
-//	
-//	public void moveArmUp(double speed) {
-//		if (speed < 0.4 && getArmEncoder() < 4.94) {
-//			armVictor.set(speed);
-//		} else {
-//			armVictor.set(0);
-//		}
-//	}
-
-//	public void armBreak() {
-//		armVictor.set(0);
-//	}
-	    
 }
 	
