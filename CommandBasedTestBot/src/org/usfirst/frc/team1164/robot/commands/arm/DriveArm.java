@@ -45,10 +45,10 @@ public class DriveArm extends Command {
     	double speed = 0;
     	if (m_oi.getOperatorAxis(XboxControls.LS_Y.toInt()) < -0.2) {
     		if (Arm_limit_top > kArm.getArmEncoder() && !kArm.getTopSwitch()) {
-    			if (kArm.getArmEncoder() > 2200) {
+    			if (kArm.getArmEncoder() > 1700) {
     				speed = 0.1;
     			} else {
-    				speed = -0.38;
+    				speed = kArm.getArmSpeed();
     			}
     	    	SmartDashboard.putNumber("arm speed", kArm.getArmSpeed());
     		}
@@ -59,7 +59,7 @@ public class DriveArm extends Command {
     			if (kArm.getArmEncoder() < 300) {
     				speed = -0.1;
     			} else {
-    				speed = -0.38;
+    				speed = -kArm.getArmSpeed();
     			}
     	    	SmartDashboard.putNumber("arm speed", -kArm.getArmSpeed());
     		}
