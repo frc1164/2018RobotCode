@@ -25,6 +25,7 @@ public class CallibrateArmEncoder extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	Robot.kArm.setArmFolded(false);
 		if (Robot.kArm.getBotSwitch()) {
 			isDone = true;
 			Robot.kArm.resetArmEncoder();
