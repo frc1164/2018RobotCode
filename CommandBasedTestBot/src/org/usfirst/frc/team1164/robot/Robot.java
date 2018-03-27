@@ -74,10 +74,6 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		bootup(new InitAuto());
-		
-		autoCommand = decider.decide();
-		if (autoCommand != null) 
-			autoCommand.start();
 	}
 	
 	@Override
