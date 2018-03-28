@@ -4,6 +4,7 @@ import static org.usfirst.frc.team1164.robot.Robot.kArm;
 import static org.usfirst.frc.team1164.robot.Robot.kChassis;
 import static org.usfirst.frc.team1164.robot.Robot.kClaw;
 
+import org.usfirst.frc.team1164.robot.Robot;
 import org.usfirst.frc.team1164.robot.commands.arm.UnfoldWrist;
 import org.usfirst.frc.team1164.robot.commands.auto.base.AutoSetArmHeight;
 import org.usfirst.frc.team1164.robot.commands.calibration.CallibrateArmEncoder;
@@ -24,6 +25,7 @@ public class InitAuto extends CommandGroup {
     	addSequential(new UnfoldWrist());
     	addSequential(new InitDrive());
     	addSequential(new CallibrateArmEncoder());
-    	addSequential(new AutoSetArmHeight(1000, false));
+//    	addSequential(new AutoSetArmHeight(1000, false));
+    	addSequential(Robot.decider.decide());
     }
 }

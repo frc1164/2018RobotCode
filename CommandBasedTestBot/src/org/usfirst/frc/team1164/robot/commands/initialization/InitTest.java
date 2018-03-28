@@ -14,9 +14,10 @@ public class InitTest extends CommandGroup {
 
     public InitTest() {
     	addSequential(new CallibrateArmEncoder());
-    	addSequential(new AutoSetArmHeight(840, false));
+    	addSequential(new AutoSetArmHeight(1000, false));
     	addSequential(new FoldWrist());
     	addSequential(new CloseClaw());
+    	
     	
         // Add Commands here:
         // e.g. addSequential(new Command1());

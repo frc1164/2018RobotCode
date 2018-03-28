@@ -15,12 +15,12 @@ import org.usfirst.frc.team1164.robot.subsystems.Arm;
 import org.usfirst.frc.team1164.robot.subsystems.Chassis;
 import org.usfirst.frc.team1164.robot.subsystems.Claw;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.hal.PDPJNI;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
@@ -44,6 +44,7 @@ public class Robot extends TimedRobot {
 	public static PDPJNI PDP = new PDPJNI();
 	public static DecissionMattrix decider;
 	
+	
 	//-------------------------------------------
 	
 	@Override
@@ -51,6 +52,8 @@ public class Robot extends TimedRobot {
 		m_oi = new OI();
 		decider = new DecissionMattrix();
 		LW.robot();
+		CameraServer AxisCamera = CameraServer.getInstance();
+		AxisCamera.addAxisCamera("10.11.64.13");
 	}
 
 	public void robotPeriodic() {
@@ -73,11 +76,10 @@ public class Robot extends TimedRobot {
 	
 	@Override
 	public void autonomousInit() {
-		bootup(new InitAuto());
 		
-		autoCommand = decider.decide();
-		if (autoCommand != null) 
-			autoCommand.start();
+		autoCommand = new InitAuto();
+		bootup(autoCommand);
+		
 	}
 	
 	@Override
@@ -103,13 +105,15 @@ public class Robot extends TimedRobot {
 	
 	//-------------------------------------------
 	
+	private Command TestInit = new InitTest();
+	
 	public void testInit() {
-		bootup(new InitTest());
+		SmartDashboard.putData(TestInit);
 	}
 	
 	@Override
 	public void testPeriodic() {
-		
+		Scheduler.getInstance().run();
 	}
 
 	//-------------------------------------------

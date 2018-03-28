@@ -1,6 +1,6 @@
 package org.usfirst.frc.team1164.robot.commands.arm;
 
-import org.usfirst.frc.team1164.robot.Robot;
+import static org.usfirst.frc.team1164.robot.Robot.kArm;
 import static org.usfirst.frc.team1164.robot.RobotMap.*;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -13,14 +13,14 @@ public class FoldWrist extends Command {
 	 */
 	
     public FoldWrist() {
-    	requires(Robot.kArm);
+    	requires(kArm);
     }
 
     protected void initialize() {}
 
     protected void execute() {
-    	if (Robot.kArm.getArmEncoder() > Arm_limit_bot_folded) {
-    		Robot.kArm.setArmFolded(true);
+    	if (kArm.getArmEncoder() > Arm_limit_bot_folded) {
+    		kArm.setArmFolded(true);
     	}
     }
 
