@@ -7,23 +7,24 @@
 
 package org.usfirst.frc.team1164.robot;
 
-import org.usfirst.frc.team1164.logic.autoDecissionMattrix;
-import org.usfirst.frc.team1164.robot.subsystems.*;
-import org.usfirst.frc.team1164.robot.commands.*;
-import org.usfirst.frc.team1164.robot.commands.Auto.DriveForward;
+import java.util.concurrent.TimeUnit;
 
+import org.usfirst.frc.team1164.logic.autoDecissionMattrix;
+import org.usfirst.frc.team1164.robot.commands.StartingConfiguration;
+import org.usfirst.frc.team1164.robot.subsystems.Arm;
+import org.usfirst.frc.team1164.robot.subsystems.Chassis;
+import org.usfirst.frc.team1164.robot.subsystems.Claw;
+
+import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.hal.PDPJNI;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.hal.PDPJNI;
-import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-
-import java.util.concurrent.TimeUnit;
-import java.lang.System;
 
 
 /**
@@ -42,6 +43,7 @@ public class Robot extends TimedRobot {
 	public LiveWindow lw;
 	public static OI m_oi;
 	public static PDPJNI PDP = new PDPJNI();
+	public static CameraServer AxisCamera;
 
 //	private Command m_autonomousCommand;
 	
@@ -62,6 +64,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		m_oi = new OI();
+		AxisCamera.addAxisCamera("10.11.64.13");
 
 		m_chooser.addDefault("Position 1", 1);
 		m_chooser.addObject("Position 2", 2);
