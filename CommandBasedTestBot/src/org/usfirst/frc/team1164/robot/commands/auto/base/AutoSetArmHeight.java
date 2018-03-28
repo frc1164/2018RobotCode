@@ -45,7 +45,9 @@ public class AutoSetArmHeight extends Command {
         return isDone;
     }
 
-    protected void end() {}
+    protected void end() {
+    	kArm.setArmVictor(0);
+    }
 
     protected void interrupted() {}
 }

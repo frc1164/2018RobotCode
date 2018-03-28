@@ -2,6 +2,8 @@ package org.usfirst.frc.team1164.logic.motionProfiler;
 
 import static org.usfirst.frc.team1164.robot.RobotMap.timeFrame;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 public class PIDController {
 	private double prevError;
 	private double nextPoint;
@@ -37,12 +39,15 @@ public class PIDController {
 		return output;
 	}
 	
-	public boolean isDone(int deadbandAllowance, double deadband) {
-		if (prevError < deadband || prevError > -deadband) {
+	public boolean isDone(int deadbandAllowance, double deadband, double error) {
+		SmartDashboard.putNumber("thing error", error);
+		if (error < deadband && error > -deadband) {
 			inDeadband++;
+			SmartDashboard.putBoolean("in deadband", false);
 		}
 		else {
 			inDeadband = 0;
+			SmartDashboard.putBoolean("in deadband", true);
 		}
 		if (inDeadband >= deadbandAllowance) {
 			return true;

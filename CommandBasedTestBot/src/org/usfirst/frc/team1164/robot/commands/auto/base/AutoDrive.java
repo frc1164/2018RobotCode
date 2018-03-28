@@ -53,7 +53,6 @@ public class AutoDrive extends Command {
 		double srn = 0;
 //		srn = 0.001 * (Math.random() - 0.5);
 		
-		
 		double actualPos = kChassis.getAverageEncoder() * encoderToFt;
 		
 		double straight = straightController.getOutput(actualPos);
@@ -94,8 +93,10 @@ public class AutoDrive extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		return false;
-		//return straightController.isDone(10, 0.25) && turnController.isDone(10, 5.0);
+//		return false;
+		boolean finished = straightController.isDone(10, 1) && turnController.isDone(10, 5.0);
+		SmartDashboard.putBoolean("autoDrive done", finished);
+		return finished;
 	}
 	
 	public void end() {

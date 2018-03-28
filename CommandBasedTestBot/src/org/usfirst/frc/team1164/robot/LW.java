@@ -6,6 +6,7 @@ public class LW {
 	
 	public static void robot() {
 		Robot.decider.SmartDashboard();
+		
 	}
 	
 	public static void disabled() {
@@ -17,7 +18,6 @@ public class LW {
 	}
 	
 	public static void teleop() {
-		
 	}
 	
 	public static void test() {

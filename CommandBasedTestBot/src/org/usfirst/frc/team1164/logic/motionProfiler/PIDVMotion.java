@@ -15,7 +15,8 @@ public class PIDVMotion extends PIDMotion {
 		
 		//passes the set point to the PID controller
 		P.setNextPoint(MP.getPos());
-		
+
+		actualCurrentPos = actualPos;
 		//adds the kV to the PID controller's output
 		return P.getOutput(actualPos) + (MP.getVel() * kV);
 	}

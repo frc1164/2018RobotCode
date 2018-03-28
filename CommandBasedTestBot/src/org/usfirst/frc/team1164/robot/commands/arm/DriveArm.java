@@ -45,7 +45,7 @@ public class DriveArm extends Command {
     	double speed = 0;
     	if (m_oi.getOperatorAxis(XboxControls.LS_Y.toInt()) < -0.2) {
     		if (Arm_limit_top > kArm.getArmEncoder() && !kArm.getTopSwitch()) {
-    			if (kArm.getArmEncoder() > 1700) {
+    			if (kArm.getArmEncoder() > 2300) {
     				speed = 0.1;
     			} else {
     				speed = kArm.getArmSpeed();
@@ -56,7 +56,7 @@ public class DriveArm extends Command {
     		double limit = (kArm.getArmFolded() ? Arm_limit_bot_folded : 
     											  Arm_limit_bot);
     		if (limit < kArm.getArmEncoder() && !kArm.getBotSwitch()) {
-    			if (kArm.getArmEncoder() < 300) {
+    			if (kArm.getArmEncoder() < 200) {
     				speed = -0.1;
     			} else {
     				speed = -kArm.getArmSpeed();

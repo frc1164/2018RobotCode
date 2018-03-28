@@ -4,6 +4,7 @@ public class PIDMotion {
 	
 	MotionProfiler MP;
 	PIDController P;
+	double actualCurrentPos;
 	
 	public PIDMotion(double maxAcceleration, double maxVelocity, double kP, double kI, double kD) {
 		
@@ -16,6 +17,7 @@ public class PIDMotion {
 	public double getOutput(double actualPos) {
 		MP.update();
 		P.setNextPoint(MP.getPos());
+		actualCurrentPos = actualPos;
 		return P.getOutput(actualPos);
 	}
 	
@@ -25,8 +27,10 @@ public class PIDMotion {
 	
 	
 	public boolean isDone(int deadbandAllowance, double deadband) {
-		return P.isDone(deadbandAllowance, deadband);
+		return P.isDone(deadbandAllowance, deadband, MP.getEndPoint() - actualCurrentPos);
 	}
 	
-	public int getAccelLength() { return MP.getAccelLength(); }
+	public int getAccelLength() { 
+		return MP.getAccelLength();
+	}
 }

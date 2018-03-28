@@ -70,6 +70,10 @@ public class MotionProfiler {
 		return curPos;  
 	}
 	
+	public double getEndPoint() {
+		return endpoint;
+	}
+	
 	// get the length of acceleration block
 	public int getAccelLength() {
 		return counter.getGap();
