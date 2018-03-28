@@ -60,6 +60,10 @@ public class MotionProfiler {
 		counter.setEndPoint((int) (endpoint / (vMax * timeFrame)));
 	}
 	
+	public double getEndPoint() {
+		return endpoint;
+	}
+	
 	public double getVel() {
 //		return most recent velocity
 		return curVel;

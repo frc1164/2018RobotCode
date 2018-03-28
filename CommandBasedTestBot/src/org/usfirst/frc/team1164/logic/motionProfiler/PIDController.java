@@ -37,8 +37,8 @@ public class PIDController {
 		return output;
 	}
 	
-	public boolean isDone(int deadbandAllowance, double deadband) {
-		if (prevError < deadband || prevError > -deadband) {
+	public boolean isDone(int deadbandAllowance, double deadband, double error) {
+		if (prevError < deadband && prevError > -deadband) {
 			inDeadband++;
 		}
 		else {

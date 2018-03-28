@@ -51,12 +51,12 @@ public class Robot extends TimedRobot {
 	public void robotInit() {
 		m_oi = new OI();
 		decider = new DecissionMattrix();
-		LW.robot();
 		CameraServer AxisCamera = CameraServer.getInstance();
 		AxisCamera.addAxisCamera("10.11.64.13");
 	}
 
 	public void robotPeriodic() {
+		LW.robot();
 		SmartDashboard.putNumber("Arm encoder", kArm.getArmEncoder());
 	}
 
@@ -67,6 +67,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void disabledPeriodic() {
+		LW.disabled();
 		Scheduler.getInstance().run();
 	}
 
@@ -76,13 +77,13 @@ public class Robot extends TimedRobot {
 	
 	@Override
 	public void autonomousInit() {
-		
 		autoCommand = new InitAuto();
 		bootup(autoCommand);
 	}
 	
 	@Override
 	public void autonomousPeriodic() {
+		LW.auto();
 		Scheduler.getInstance().run();
 	}
 
@@ -93,25 +94,23 @@ public class Robot extends TimedRobot {
 		if (autoCommand != null) {
 			autoCommand.cancel();
 		}
-		
 		bootup(new InitTeleop());
 	}
 
 	@Override
 	public void teleopPeriodic() {
+		LW.teleop();
 		Scheduler.getInstance().run();
 	}
 	
 	//-------------------------------------------
 	
-	private Command TestInit = new InitTest();
 	
-	public void testInit() {
-		SmartDashboard.putData(TestInit);
-	}
+	public void testInit() {}
 	
 	@Override
 	public void testPeriodic() {
+		LW.test();
 		Scheduler.getInstance().run();
 	}
 

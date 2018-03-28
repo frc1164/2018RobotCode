@@ -341,7 +341,11 @@ public class Chassis extends Subsystem {
 	}
 
 	public double getAverageEncoder() {
-		return (getLeftEncoder() + getRightEncoder())/2;
+		if (Math.abs(getLeftEncoder()) > Math.abs(getRightEncoder())) {
+			return getLeftEncoder();
+		} else {
+			return getRightEncoder();
+		}
 	}
 	
 	public void resetEncoders() {

@@ -95,11 +95,12 @@ public class AutoDrive extends Command {
 	@Override
 	protected boolean isFinished() {
 //		return false;
-		return straightController.isDone(10, 0.25) && turnController.isDone(10, 5.0);
+		return straightController.isDone(10, 1) && turnController.isDone(10, 5.0);
 	}
 	
 	public void end() {
-		
+		kChassis.setLeftSpeed(0);
+		kChassis.setRightSpeed(0);
 	}
 	
 	public void interrupted() {

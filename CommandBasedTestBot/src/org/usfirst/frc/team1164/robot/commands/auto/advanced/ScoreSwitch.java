@@ -9,19 +9,11 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  *
  */
 public class ScoreSwitch extends CommandGroup {
-
-	public static final boolean RIGHT = true;
-	public static final boolean LEFT = false;
 	
-    public ScoreSwitch(boolean side) {
+    public ScoreSwitch(double turn) {
 		addSequential(new AutoSetArmHeight(61, true));
 		addSequential(new AutoDrive(12));
-    	if (side == RIGHT) {
-    		addSequential(new AutoTurn(45.0));
-    	}
-    	else {
-    		addSequential(new AutoTurn(-45.0));
-    	}
+    	addSequential(new AutoTurn(turn));
 		addSequential(new OpenClaw());
         // Add Commands here:
         // e.g. addSequential(new Command1());

@@ -7,6 +7,7 @@ import static org.usfirst.frc.team1164.robot.RobotMap.Arm_limit_bot_folded;
 import static org.usfirst.frc.team1164.robot.RobotMap.Arm_limit_top;
 
 import org.usfirst.frc.team1164.logic.XboxControls;
+import org.usfirst.frc.team1164.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -45,8 +46,8 @@ public class DriveArm extends Command {
     	double speed = 0;
     	if (m_oi.getOperatorAxis(XboxControls.LS_Y.toInt()) < -0.2) {
     		if (Arm_limit_top > kArm.getArmEncoder() && !kArm.getTopSwitch()) {
-    			if (kArm.getArmEncoder() > 1700) {
-    				speed = 0.1;
+    			if (kArm.getArmEncoder() > RobotMap.Arm_limit_top - 100) {
+    				speed = 0.15;
     			} else {
     				speed = kArm.getArmSpeed();
     			}
@@ -56,8 +57,8 @@ public class DriveArm extends Command {
     		double limit = (kArm.getArmFolded() ? Arm_limit_bot_folded : 
     											  Arm_limit_bot);
     		if (limit < kArm.getArmEncoder() && !kArm.getBotSwitch()) {
-    			if (kArm.getArmEncoder() < 300) {
-    				speed = -0.1;
+    			if (kArm.getArmEncoder() < limit + 200) {
+    				speed = -0.15;
     			} else {
     				speed = -kArm.getArmSpeed();
     			}

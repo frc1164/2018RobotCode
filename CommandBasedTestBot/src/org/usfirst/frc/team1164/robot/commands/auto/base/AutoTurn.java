@@ -71,7 +71,8 @@ public class AutoTurn extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	// small random number to update smart dashboard.
-    	double srn = 0.001 * (Math.random() - 0.5);
+//    	double srn = 0.001 * (Math.random() - 0.5);
+    	double srn = 0;
 		
 		double actualTurn = kChassis.getNavxAngle();
 		
@@ -80,11 +81,11 @@ public class AutoTurn extends Command {
 		kChassis.setLeftSpeed(speed);
 		kChassis.setRightSpeed(-speed);
 		
-		SmartDashboard.putNumber("Distance", actualTurn+srn);
-		SmartDashboard.putNumber("turnControllerOutput", speed);
-		SmartDashboard.putNumber("LeftEncoder", kChassis.getLeftEncoder());
-		SmartDashboard.putNumber("RightEncoder", kChassis.getRightEncoder());
-		SmartDashboard.putNumber("turnActual", actualTurn);
+//		SmartDashboard.putNumber("Distance", actualTurn+srn);
+//		SmartDashboard.putNumber("turnControllerOutput", speed);
+//		SmartDashboard.putNumber("LeftEncoder", kChassis.getLeftEncoder());
+//		SmartDashboard.putNumber("RightEncoder", kChassis.getRightEncoder());
+//		SmartDashboard.putNumber("turnActual", actualTurn);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -95,6 +96,8 @@ public class AutoTurn extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	kChassis.setRightSpeed(0);
+    	kChassis.setLeftSpeed(0);
     }
 
     // Called when another command which requires one or more of the same

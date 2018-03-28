@@ -20,7 +20,7 @@ public class InitDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.kChassis.setGear(true);
+    	Robot.kChassis.setGear(false);
     	Robot.kChassis.setPTO(false);
     	Robot.kChassis.setNeutralizer(false);
     	
