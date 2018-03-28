@@ -79,7 +79,6 @@ public class Robot extends TimedRobot {
 		
 		autoCommand = new InitAuto();
 		bootup(autoCommand);
-		
 	}
 	
 	@Override

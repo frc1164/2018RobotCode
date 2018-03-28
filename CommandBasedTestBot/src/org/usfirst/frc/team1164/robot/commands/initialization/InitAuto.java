@@ -29,3 +29,4 @@ public class InitAuto extends CommandGroup {
     	addSequential(Robot.decider.decide());
     }
 }
+
