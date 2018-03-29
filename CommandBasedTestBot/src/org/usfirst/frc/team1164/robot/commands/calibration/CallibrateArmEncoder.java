@@ -3,6 +3,7 @@ package org.usfirst.frc.team1164.robot.commands.calibration;
 import org.usfirst.frc.team1164.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * moves the arm down till it hits the limit switch

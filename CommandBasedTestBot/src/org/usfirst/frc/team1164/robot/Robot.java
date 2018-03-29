@@ -8,6 +8,7 @@
 package org.usfirst.frc.team1164.robot;
 
 import org.usfirst.frc.team1164.logic.DecissionMattrix;
+import org.usfirst.frc.team1164.robot.commands.calibration.CallibrateArmEncoder;
 import org.usfirst.frc.team1164.robot.commands.initialization.InitAuto;
 import org.usfirst.frc.team1164.robot.commands.initialization.InitTeleop;
 import org.usfirst.frc.team1164.robot.commands.initialization.InitTest;
@@ -79,6 +80,9 @@ public class Robot extends TimedRobot {
 	
 	@Override
 	public void autonomousPeriodic() {
+		SmartDashboard.putNumber("AverageEncoder11", kChassis.getAverageEncoder());
+		SmartDashboard.putNumber("LeftEncoder11", kChassis.getLeftEncoder());
+		SmartDashboard.putNumber("RightEncoder11", kChassis.getRightEncoder());
 		Scheduler.getInstance().run();
 	}
 
