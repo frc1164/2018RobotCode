@@ -6,19 +6,17 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class BaseDriveForward extends Command {
-	private double time;
+	private double distance;
 	private double speed;
 	
-	public BaseDriveForward(double time, double speed) {
-		this.time = time;
+	public BaseDriveForward(double distance, double speed) {
+		this.distance = distance;
 		this.speed = speed;
 		requires(Robot.kChassis);
-		setTimeout(time);
 		
 	}
 	
 	public void initialize() {
-		Robot.kChassis.setGear(true);
 		Robot.kChassis.resetEncoders();
 	}
 	
@@ -26,11 +24,22 @@ public class BaseDriveForward extends Command {
 		Robot.kChassis.setLeftSpeed(speed);
 		Robot.kChassis.setRightSpeed(speed);
 		
+		
+		SmartDashboard.putNumber("Distance", distance);
+		SmartDashboard.putNumber("speed", speed);
+		SmartDashboard.putNumber("LeftEncoder", Robot.kChassis.getLeftEncoder());
+		SmartDashboard.putNumber("RightEncoder", Robot.kChassis.getLeftEncoder());
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return isTimedOut();
+		double leftEncoder = Robot.kChassis.getLeftEncoder();
+		double rightEncoder = Robot.kChassis.getRightEncoder();
+		
+		boolean checkLeft = leftEncoder >= distance || leftEncoder < 0;
+		boolean checkRight = rightEncoder >= distance || leftEncoder < 0;
+		
+		return (checkLeft || checkRight);
 	}
 	
 	public void end() {
