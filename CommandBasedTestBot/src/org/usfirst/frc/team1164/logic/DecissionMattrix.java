@@ -79,7 +79,7 @@ public class DecissionMattrix {
 			}
 		}
 		else if (mode == 4){
-			returnCommand = new BaseDriveForward(244, .25);
+			returnCommand = new BaseDriveForward(1, .25);
 		}
 		else if (mode == 5) {
 			returnCommand = new AutoDrive(10);
