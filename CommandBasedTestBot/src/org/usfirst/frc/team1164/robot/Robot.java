@@ -44,6 +44,9 @@ public class Robot extends TimedRobot {
 	public static PDPJNI PDP = new PDPJNI();
 	public static DecissionMattrix decider;
 	
+	//Starting Configuration code
+	public static Command SetStartingConfig = new InitTest();
+	
 	
 	//-------------------------------------------
 	
@@ -106,7 +109,7 @@ public class Robot extends TimedRobot {
 	//-------------------------------------------
 	
 	
-	public void testInit() {}
+	public void testInit() {SmartDashboard.putData(SetStartingConfig);}
 	
 	@Override
 	public void testPeriodic() {
