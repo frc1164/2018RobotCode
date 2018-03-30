@@ -57,6 +57,9 @@ public class Robot extends TimedRobot {
 	public void robotPeriodic() {
 		SmartDashboard.putNumber("navx", kChassis.getNavxAngle());
 		SmartDashboard.putNumber("Arm encoder", kArm.getArmEncoder());
+		SmartDashboard.putNumber("AverageEncoder11", kChassis.getAverageEncoder());
+		SmartDashboard.putNumber("LeftEncoder11", kChassis.getLeftEncoder());
+		SmartDashboard.putNumber("RightEncoder11", kChassis.getRightEncoder());
 	}
 
 	//-------------------------------------------
@@ -75,7 +78,11 @@ public class Robot extends TimedRobot {
 	
 	@Override
 	public void autonomousInit() {
-		bootup(new InitAuto());
+		autoCommand = new InitAuto();
+		if (autoCommand != null) {
+			autoCommand.start();
+			
+		}
 	}
 	
 	@Override
@@ -94,20 +101,23 @@ public class Robot extends TimedRobot {
 			autoCommand.cancel();
 		}
 		
-		bootup(new InitTeleop());
+		Command c = new InitTeleop();
+		c.start();
 	}
 
 	@Override
 	public void teleopPeriodic() {
-		SmartDashboard.putNumber("Left E", Robot.kChassis.getLeftEncoder());
-		SmartDashboard.putNumber("Rigth E", Robot.kChassis.getRightEncoder());
+		SmartDashboard.putNumber("AverageEncoder11", kChassis.getAverageEncoder());
+		SmartDashboard.putNumber("LeftEncoder11", kChassis.getLeftEncoder());
+		SmartDashboard.putNumber("RightEncoder11", kChassis.getRightEncoder());
 		Scheduler.getInstance().run();
 	}
 	
 	//-------------------------------------------
 	
 	public void testInit() {
-		bootup(new InitTest());
+		Command c = new InitTest();
+		c.start();
 	}
 	
 	@Override
@@ -115,9 +125,5 @@ public class Robot extends TimedRobot {
 		
 	}
 
-	//-------------------------------------------
 	
-	public void bootup(Command c) {
-		c.start();
-	}
 }

@@ -47,7 +47,7 @@ public class DecissionMattrix {
 			} 	
 			else if (gameData.charAt(1) == 'L') {
 				SmartDashboard.putString("AutoCommand", "Score Scale Right");
-				returnCommand = new ScoreScale(ScoreScale.LEFT);
+				returnCommand = new ScoreScale(-45);
 			} 
 			else {
 				SmartDashboard.putString("AutoCommand", "AutoRun");
@@ -71,7 +71,7 @@ public class DecissionMattrix {
 			} 
 			else if (gameData.charAt(1) == 'R') {
 				SmartDashboard.putString("AutoCommand", "Score Scale Left");
-				returnCommand = new ScoreScale (ScoreScale.RIGHT);
+				returnCommand = new ScoreScale (45);
 			} 
 			else {
 				SmartDashboard.putString("AutoCommand", "AutoRun");

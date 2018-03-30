@@ -24,7 +24,7 @@ public class InitAuto extends CommandGroup {
     	addSequential(new InitDrive());
     	addSequential(new UnfoldWrist());
     	addSequential(new CallibrateArmEncoder());
-//    	addSequential(new AutoSetArmHeight(1000, false));
+    	addSequential(new AutoSetArmHeight(300, false));
     	addSequential(Robot.decider.decide());
     }
 }
