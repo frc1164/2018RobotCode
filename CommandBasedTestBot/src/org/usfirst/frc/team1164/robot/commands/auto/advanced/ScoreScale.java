@@ -13,7 +13,7 @@ public class ScoreScale extends CommandGroup {
 	public static final boolean LEFT = false;
 	
     public ScoreScale(double turn) {
-    	addSequential(new AutoSetArmHeight(183, true));
+    	addSequential(new AutoSetArmHeight(2400, false));
     	addSequential(new AutoDrive(25));
 	    addSequential(new AutoTurn(turn));
     	addSequential(new OpenClaw());

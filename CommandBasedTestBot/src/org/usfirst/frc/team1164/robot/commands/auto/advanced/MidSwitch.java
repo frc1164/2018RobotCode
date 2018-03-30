@@ -11,8 +11,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class MidSwitch extends CommandGroup {
 
     public MidSwitch() {
-    	addSequential(new AutoSetArmHeight(61, true));
-    	addSequential (new AutoDrive(8));
+    	addSequential(new AutoSetArmHeight(800, false));
+    	addSequential (new AutoDrive(16));
     	addSequential (new OpenClaw());
         // Add Commands here:
         // e.g. addSequential(new Command1());

@@ -47,8 +47,10 @@ public class DriveArm extends Command {
     		if (Arm_limit_top > kArm.getArmEncoder() && !kArm.getTopSwitch()) {
     			if (kArm.getArmEncoder() > 2300) {
     				speed = 0.1;
+    			} else if (kArm.getArmEncoder() > 2000) {
+    				speed = 0.5;
     			} else {
-    				speed = kArm.getArmSpeed();
+    				speed = 0.7;
     			}
     	    	SmartDashboard.putNumber("arm speed", kArm.getArmSpeed());
     		}
@@ -56,10 +58,12 @@ public class DriveArm extends Command {
     		double limit = (kArm.getArmFolded() ? Arm_limit_bot_folded : 
     											  Arm_limit_bot);
     		if (limit < kArm.getArmEncoder() && !kArm.getBotSwitch()) {
-    			if (kArm.getArmEncoder() < 200) {
+    			if (kArm.getArmEncoder() < 300) {
     				speed = -0.1;
+    			} else if (kArm.getArmEncoder() < 900) {
+    				speed = -0.4;
     			} else {
-    				speed = -kArm.getArmSpeed();
+    				speed = -0.7;
     			}
     	    	SmartDashboard.putNumber("arm speed", -kArm.getArmSpeed());
     		}

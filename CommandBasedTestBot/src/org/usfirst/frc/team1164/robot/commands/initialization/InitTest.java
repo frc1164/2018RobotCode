@@ -1,5 +1,10 @@
 package org.usfirst.frc.team1164.robot.commands.initialization;
 
+import org.usfirst.frc.team1164.robot.commands.arm.FoldWrist;
+import org.usfirst.frc.team1164.robot.commands.auto.base.AutoSetArmHeight;
+import org.usfirst.frc.team1164.robot.commands.calibration.CallibrateArmEncoder;
+import org.usfirst.frc.team1164.robot.commands.claw.CloseClaw;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -8,6 +13,10 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class InitTest extends CommandGroup {
 
     public InitTest() {
+    	addSequential(new CallibrateArmEncoder());
+    	addSequential(new AutoSetArmHeight(1000, false));
+    	addSequential(new FoldWrist());
+    	addSequential(new CloseClaw());
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());

@@ -7,6 +7,8 @@
 
 package org.usfirst.frc.team1164.robot;
 
+import edu.wpi.first.wpilibj.Preferences;
+
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -59,7 +61,8 @@ public final class RobotMap {
 	
 	public static final double auto_armHeight_tolerance = 100;
 	public static final double timeFrame = 0.02;
-	public static final double encoderToFt = (1/30.20);
+	public static final double encoderToFt = (1/30.2);//Preferences.getInstance().getDouble("encoderToFt", (1/30.2));
+	// (1/30.2)
 	
 	//---------------------------------------------------//
 	//													 //

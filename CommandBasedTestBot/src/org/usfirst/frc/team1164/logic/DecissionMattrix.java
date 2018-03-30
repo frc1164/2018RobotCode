@@ -19,23 +19,29 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class DecissionMattrix {
 	
-	private SendableChooser<Integer> m_chooser = new SendableChooser<>();
+	private SendableChooser<Integer> positionChooser = new SendableChooser<>();
+	private SendableChooser<Integer> preferenceChooser = new SendableChooser<>();
 	
 	public DecissionMattrix() {
-		m_chooser.addDefault("Position 1", 1);
-		m_chooser.addObject("Position 2", 2);
-		m_chooser.addObject("Position 3", 3);
-		m_chooser.addObject("Degraded Mode", 4);
-		m_chooser.addObject("TestForward", 5);
-		m_chooser.addObject("TestTurn", 6);
+		positionChooser.addDefault("Position 1", 1);
+		positionChooser.addObject("Position 2", 2);
+		positionChooser.addObject("Position 3", 3);
+		positionChooser.addObject("Degraded Mode", 4);
+		positionChooser.addObject("TestForward", 5);
+		positionChooser.addObject("TestTurn", 6);
+
+		preferenceChooser.addObject("Scale", 1);
+		preferenceChooser.addObject("switch", 2);
+		preferenceChooser.addObject("forward", 3);
 	}
 	
 	public void SmartDashboard() {
-		SmartDashboard.putData("Starting position", m_chooser);
+		SmartDashboard.putData("Starting position", positionChooser);
+		SmartDashboard.putData("preference", preferenceChooser);
 	}
 	
 	public Command decide() {
-		int mode = m_chooser.getSelected();
+		int mode = positionChooser.getSelected();
 		String gameData = DriverStation.getInstance().getGameSpecificMessage();
 		
 		Command returnCommand = null;
@@ -43,15 +49,15 @@ public class DecissionMattrix {
 		if (mode == 1) {
 			if(gameData.charAt(0) == 'L') {
 				SmartDashboard.putString("AutoCommand", "Score Switch Right");
-				returnCommand = new ScoreSwitch(-45);
+				returnCommand = new ScoreSwitch(45);
 			} 	
 			else if (gameData.charAt(1) == 'L') {
 				SmartDashboard.putString("AutoCommand", "Score Scale Right");
-				returnCommand = new ScoreScale(-45);
+				returnCommand = new ScoreScale(45);
 			} 
 			else {
 				SmartDashboard.putString("AutoCommand", "AutoRun");
-				returnCommand = new AutoDrive(10);
+				returnCommand = new AutoDrive(20);
 			}
 		}
 		else if (mode == 2) {
@@ -61,28 +67,28 @@ public class DecissionMattrix {
 			}
 			else {
 				SmartDashboard.putString("AutoCommand", "AutoRun");
-				returnCommand = new AutoDrive(10);
+				returnCommand = new AutoDrive(20);
 			}
 		}
 		else if (mode == 3) {
 			if(gameData.charAt(0) == 'R') {
 				SmartDashboard.putString("AutoCommand", "Score Switch Left");
-				returnCommand = new ScoreSwitch(45);
+				returnCommand = new ScoreSwitch(-45);
 			} 
 			else if (gameData.charAt(1) == 'R') {
 				SmartDashboard.putString("AutoCommand", "Score Scale Left");
-				returnCommand = new ScoreScale (45);
+				returnCommand = new ScoreScale (-45);
 			} 
 			else {
 				SmartDashboard.putString("AutoCommand", "AutoRun");
-				returnCommand = new AutoDrive(10);
+				returnCommand = new AutoDrive(20);
 			}
 		}
 		else if (mode == 4){
 			returnCommand = new BaseDriveForward(244, .25);
 		}
 		else if (mode == 5) {
-			returnCommand = new AutoDrive(10);
+			returnCommand = new AutoDrive(20);
 		}
 		else {
 			returnCommand = new AutoTurn(90);

@@ -19,7 +19,7 @@ public class InitTeleop extends CommandGroup {
     	
     	addSequential(new InitDrive());
     	addSequential(new UnfoldWrist());
-    	addSequential(new CallibrateArmEncoder());
-    	addSequential(new AutoSetArmHeight(1000, false));
+//    	addSequential(new CallibrateArmEncoder());
+//    	addSequential(new AutoSetArmHeight(1000, false));
     }
 }

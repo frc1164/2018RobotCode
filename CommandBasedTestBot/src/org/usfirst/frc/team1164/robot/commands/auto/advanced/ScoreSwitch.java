@@ -14,9 +14,10 @@ public class ScoreSwitch extends CommandGroup {
 	public static final boolean LEFT = false;
 	
     public ScoreSwitch(double turn) {
-		addSequential(new AutoSetArmHeight(61, true));
+		addSequential(new AutoSetArmHeight(700, false));
 		addSequential(new AutoDrive(12));
 		addSequential(new AutoTurn(turn));
+		addSequential(new OpenClaw());
 		
 //    	if (side == RIGHT) {
 //    		addSequential(new AutoTurn(45.0));

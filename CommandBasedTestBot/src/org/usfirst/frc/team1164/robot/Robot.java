@@ -8,7 +8,6 @@
 package org.usfirst.frc.team1164.robot;
 
 import org.usfirst.frc.team1164.logic.DecissionMattrix;
-import org.usfirst.frc.team1164.robot.commands.calibration.CallibrateArmEncoder;
 import org.usfirst.frc.team1164.robot.commands.initialization.InitAuto;
 import org.usfirst.frc.team1164.robot.commands.initialization.InitTeleop;
 import org.usfirst.frc.team1164.robot.commands.initialization.InitTest;
@@ -16,12 +15,12 @@ import org.usfirst.frc.team1164.robot.subsystems.Arm;
 import org.usfirst.frc.team1164.robot.subsystems.Chassis;
 import org.usfirst.frc.team1164.robot.subsystems.Claw;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.hal.PDPJNI;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
@@ -44,6 +43,7 @@ public class Robot extends TimedRobot {
 	public static OI m_oi;
 	public static PDPJNI PDP = new PDPJNI();
 	public static DecissionMattrix decider;
+	public static CameraServer AxisCamera = CameraServer.getInstance();
 	
 	//-------------------------------------------
 	
@@ -52,9 +52,11 @@ public class Robot extends TimedRobot {
 		m_oi = new OI();
 		decider = new DecissionMattrix();
 		LW.robot();
+		AxisCamera.addAxisCamera("10.11.64.13");
 	}
 
 	public void robotPeriodic() {
+		SmartDashboard.putData("Initialization", new InitTest());
 		SmartDashboard.putNumber("navx", kChassis.getNavxAngle());
 		SmartDashboard.putNumber("Arm encoder", kArm.getArmEncoder());
 		SmartDashboard.putNumber("AverageEncoder11", kChassis.getAverageEncoder());
