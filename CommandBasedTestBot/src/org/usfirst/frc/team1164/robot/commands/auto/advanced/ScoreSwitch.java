@@ -18,14 +18,6 @@ public class ScoreSwitch extends CommandGroup {
 		addSequential(new AutoDrive(12));
 		addSequential(new AutoTurn(turn));
 		addSequential(new OpenClaw());
-		
-//    	if (side == RIGHT) {
-//    		addSequential(new AutoTurn(45.0));
-//    	}
-//    	else {
-//    		addSequential(new AutoTurn(-45.0));
-//    	}
-		addSequential(new OpenClaw());
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());

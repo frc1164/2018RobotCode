@@ -118,7 +118,7 @@ public class Arm extends Subsystem {
 	}
 	
 	public boolean getBotSwitch() {
-		return botLimitSwitch.get();
+		return !botLimitSwitch.get();
 	}
 
 	//------------------------------------------//

@@ -53,7 +53,8 @@ public class AutoDrive extends Command {
 		double srn = 0;
 //		srn = 0.001 * (Math.random() - 0.5);
 		
-		double actualPos = kChassis.getAverageEncoder() * encoderToFt;
+		double actualPos = kChassis.getAverageEncoder() *
+				Preferences.getInstance().getDouble("encoderToFt", (1/30.2));
 		
 		double straight = straightController.getOutput(actualPos);
 //		actualPos = 0;

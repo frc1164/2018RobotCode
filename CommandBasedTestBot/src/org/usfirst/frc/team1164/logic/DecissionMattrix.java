@@ -8,6 +8,7 @@ import org.usfirst.frc.team1164.robot.commands.auto.base.BaseDriveForward;
 import org.usfirst.frc.team1164.robot.commands.auto.base.AutoTurn;
 
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -45,6 +46,10 @@ public class DecissionMattrix {
 		String gameData = DriverStation.getInstance().getGameSpecificMessage();
 		
 		Command returnCommand = null;
+		
+		
+		
+		
 		
 		if (mode == 1) {
 			if(gameData.charAt(0) == 'L') {
@@ -88,7 +93,7 @@ public class DecissionMattrix {
 			returnCommand = new BaseDriveForward(244, .25);
 		}
 		else if (mode == 5) {
-			returnCommand = new AutoDrive(20);
+			returnCommand = new AutoDrive(Preferences.getInstance().getDouble("DistanceToGo", 20.0));
 		}
 		else {
 			returnCommand = new AutoTurn(90);
