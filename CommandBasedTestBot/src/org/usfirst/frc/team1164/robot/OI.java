@@ -49,7 +49,7 @@ public class OI {
 	private Button SetArmSwitch = new JoystickButton(driverStick, 2); //b
 	private Button SetArmScale = new JoystickButton(driverStick, 4); //y
 	
-	public static double armSpeed = 0.15;
+	public static double armSpeed = 0.3;
 	
 	public OI() {
 //		buttonOpenClaw.whenPressed(new OpenClaw());

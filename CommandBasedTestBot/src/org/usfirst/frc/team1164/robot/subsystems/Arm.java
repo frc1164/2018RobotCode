@@ -33,6 +33,10 @@ public class Arm extends Subsystem {
 
 	private DoubleSolenoid FoldingPiston = new DoubleSolenoid(RobotMap.ARM_FoldingPiston_ForwardChannel, RobotMap.ARM_FoldingPiston_ReverseChannel);
    
+	public Arm() {
+		ArmVictor.setInverted(true);
+	}
+	
 	// Put methods for controlling this subsystem
     // here. Call these from Commands.
 	
