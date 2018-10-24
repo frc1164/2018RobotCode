@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1164.robot.commands;
 
+import org.usfirst.frc.team1164.robot.OI;
 import org.usfirst.frc.team1164.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -20,11 +21,10 @@ public class ToggleClaw extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (Robot.kClaw.getOpenState()) {
-    		Robot.kClaw.Close();
-    	}
-    	else {
+    	if(OI.getOperatorAxis(3) >= 0.5) {
     		Robot.kClaw.Open();
+    	} else if (OI.getOperatorAxis(2) >= 0.5) {
+    		Robot.kClaw.Close();
     	}
     }
 

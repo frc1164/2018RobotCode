@@ -28,12 +28,12 @@ public class MoveArm extends Command {
     protected void execute() {
 
 		SmartDashboard.putNumber("arm pot", Robot.kArm.getArmEncoder());
-    	SmartDashboard.putNumber("lTrigger", OI.getOperatorAxis(2));
+    	SmartDashboard.putNumber("LTrigger", OI.getOperatorAxis(2));
     	SmartDashboard.putNumber("RTrigger", OI.getOperatorAxis(3));
     	
-    	if (OI.getOperatorAxis(3) > 0.2) {
+    	if (OI.getOperatorAxis(1) > 0.2 /*&& !Robot.kArm.GetForwardLimitSwitch()*/) {
     		Robot.kArm.moveArmUp(OI.armSpeed);
-    	} else if (OI.getOperatorAxis(2) > 0.2) {
+    	} else if (OI.getOperatorAxis(1) < -0.2 && Robot.kArm.GetReverseLimitSwitch()) {
     		Robot.kArm.moveArmDown(-OI.armSpeed);
     	} else {
     		Robot.kArm.armBreak();

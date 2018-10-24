@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1164.robot.subsystems;
 
 import org.usfirst.frc.team1164.robot.RobotMap;
+import org.usfirst.frc.team1164.robot.commands.ToggleClaw;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -18,6 +19,7 @@ public class Claw extends Subsystem{
 
 	@Override
 	protected void initDefaultCommand() {
+		setDefaultCommand(new ToggleClaw());
 		// TODO Auto-generated method stub
 		
 	}

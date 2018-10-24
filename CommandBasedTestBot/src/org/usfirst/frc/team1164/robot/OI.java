@@ -39,34 +39,34 @@ public class OI {
 	private Button buttonChassis_Init = new JoystickButton (operatorStick, 8); //start
 
 
-	private Button foldArm = new JoystickButton(operatorStick, 3);
-	private Button unfoldArm = new JoystickButton(operatorStick, 4);
+	private Button foldArm = new JoystickButton(operatorStick, 5);
+	private Button unfoldArm = new JoystickButton(operatorStick, 6);
 	
-	private Button increaseArmSpeed = new JoystickButton(operatorStick, 6); // lbutton
-	private Button decreaseArmSpeed = new JoystickButton(operatorStick, 5); // rbutton
+//	private Button increaseArmSpeed = new JoystickButton(operatorStick, 6); // lbutton
+//	private Button decreaseArmSpeed = new JoystickButton(operatorStick, 5); // rbutton
 	
 	private Button SetArmLow = new JoystickButton(driverStick, 1); //a
 	private Button SetArmSwitch = new JoystickButton(driverStick, 2); //b
 	private Button SetArmScale = new JoystickButton(driverStick, 4); //y
 	
-	public static double armSpeed = 0.15;
+	public static double armSpeed = 0.3;
 	
 	public OI() {
-		buttonOpenClaw.whenPressed(new OpenClaw());
-		buttonCloseClaw.whenPressed(new CloseClaw());
+//		buttonOpenClaw.whenPressed(new OpenClaw());
+//		buttonCloseClaw.whenPressed(new CloseClaw());
 		buttonHighGear.whenPressed(new SetTransmissionHighGear());
 		buttonLowGear.whenPressed(new SetTransmissionLowGear());
     
 		buttonPTO_Init.whenPressed(new ClimbingConfiguration());
 		buttonChassis_Init.whenPressed(new StartingConfiguration());
-		increaseArmSpeed.whenPressed(new setArmSpeed(0.01));
-		decreaseArmSpeed.whenPressed(new setArmSpeed(-0.01));
+//		increaseArmSpeed.whenPressed(new setArmSpeed(0.01));
+//		decreaseArmSpeed.whenPressed(new setArmSpeed(-0.01));
 		foldArm.whenPressed(new FoldArm());
 		unfoldArm.whenPressed(new UnfoldArm());
 		
-		SetArmLow.whenPressed(new SetArmPosition(RobotMap.ARM_BottomPosition_Volts));
-		SetArmSwitch.whenPressed(new SetArmPosition(RobotMap.ARM_SwitchPosition_Volts));
-		SetArmScale.whenPressed(new SetArmPosition(RobotMap.ARM_ScalePosition_Volts));
+//		SetArmLow.whenPressed(new SetArmPosition(RobotMap.ARM_BottomPosition_Volts));
+//		SetArmSwitch.whenPressed(new SetArmPosition(RobotMap.ARM_SwitchPosition_Volts));
+//		SetArmScale.whenPressed(new SetArmPosition(RobotMap.ARM_ScalePosition_Volts));
 
 	}
 	
