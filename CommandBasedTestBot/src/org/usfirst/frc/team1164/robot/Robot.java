@@ -64,7 +64,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		m_oi = new OI();
-		AxisCamera.addAxisCamera("10.11.64.13");
+		//AxisCamera.addAxisCamera("10.11.64.13");
 
 		m_chooser.addDefault("Position 1", 1);
 		m_chooser.addObject("Position 2", 2);

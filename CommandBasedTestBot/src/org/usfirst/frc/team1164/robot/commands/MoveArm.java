@@ -31,11 +31,13 @@ public class MoveArm extends Command {
     	SmartDashboard.putNumber("LTrigger", OI.getOperatorAxis(2));
     	SmartDashboard.putNumber("RTrigger", OI.getOperatorAxis(3));
     	
-    	if (OI.getOperatorAxis(1) > 0.2 /*&& !Robot.kArm.GetForwardLimitSwitch()*/) {
+    	if (OI.getOperatorAxis(1) > 0.2 && Robot.kArm.GetReverseLimitSwitch()) {
     		Robot.kArm.moveArmUp(OI.armSpeed);
-    	} else if (OI.getOperatorAxis(1) < -0.2 && Robot.kArm.GetReverseLimitSwitch()) {
+    	}
+    	if (OI.getOperatorAxis(1) < -0.2 && !Robot.kArm.GetForwardLimitSwitch()) {
     		Robot.kArm.moveArmDown(-OI.armSpeed);
-    	} else {
+    	}
+    	if(OI.getOperatorAxis(1) < 0.2 && OI.getOperatorAxis(1) > -0.2) {
     		Robot.kArm.armBreak();
     	}
     }
