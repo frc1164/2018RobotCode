@@ -17,10 +17,14 @@ import org.usfirst.frc.team1164.robot.commands.SetTransmissionLowGear;
 import org.usfirst.frc.team1164.robot.commands.StartingConfiguration;
 import org.usfirst.frc.team1164.robot.commands.UnfoldArm;
 import org.usfirst.frc.team1164.robot.commands.setArmSpeed;
+import org.usfirst.frc.team1164.robot.PosJoystickTrigger;
+import org.usfirst.frc.team1164.robot.NegJoystickTrigger;
+import org.usfirst.frc.team1164.robot.commands.MoveArm;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.buttons.Trigger;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -49,6 +53,9 @@ public class OI {
 	private Button SetArmSwitch = new JoystickButton(driverStick, 2); //b
 	private Button SetArmScale = new JoystickButton(driverStick, 4); //y
 	
+	private Trigger MoveArmUp = new PosJoystickTrigger(operatorStick, 1, 0.2);
+	private Trigger MoveArmDown = new NegJoystickTrigger(operatorStick, 1, -0.2);
+	
 	public static double armSpeed = 0.3;
 	
 	public OI() {
@@ -67,6 +74,9 @@ public class OI {
 //		SetArmLow.whenPressed(new SetArmPosition(RobotMap.ARM_BottomPosition_Volts));
 //		SetArmSwitch.whenPressed(new SetArmPosition(RobotMap.ARM_SwitchPosition_Volts));
 //		SetArmScale.whenPressed(new SetArmPosition(RobotMap.ARM_ScalePosition_Volts));
+		
+		MoveArmUp.whenActive(new MoveArm(1));
+		MoveArmDown.whenActive(new MoveArm(-1));
 
 	}
 	
