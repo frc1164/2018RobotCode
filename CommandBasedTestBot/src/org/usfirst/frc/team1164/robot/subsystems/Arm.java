@@ -3,9 +3,6 @@ package org.usfirst.frc.team1164.robot.subsystems;
 import org.usfirst.frc.team1164.logic.NeoUtil;
 import org.usfirst.frc.team1164.robot.RobotMap;
 
-import org.usfirst.frc.team1164.robot.commands.MoveArm;
-
-
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.AnalogInput;
@@ -86,7 +83,7 @@ public class Arm extends Subsystem {
 	 }
 
     public void initDefaultCommand() {
-    	setDefaultCommand(new MoveArm());
+    	//setDefaultCommand();
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }

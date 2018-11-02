@@ -13,10 +13,11 @@ import org.usfirst.frc.team1164.robot.Robot;
  */
 public class MoveArm extends Command {
 	
-	
-    public MoveArm() {
+	int direction;
+    public MoveArm(int mydirection) {
         // Use requires() here to declare subsystem dependencies
        requires(Robot.kArm);
+       direction = mydirection;
     }
 
     // Called just before this Command runs the first time
@@ -31,24 +32,25 @@ public class MoveArm extends Command {
     	SmartDashboard.putNumber("LTrigger", OI.getOperatorAxis(2));
     	SmartDashboard.putNumber("RTrigger", OI.getOperatorAxis(3));
     	
-    	if (OI.getOperatorAxis(1) > 0.2 && Robot.kArm.GetReverseLimitSwitch()) {
+    	if (direction == 1) {
     		Robot.kArm.moveArmUp(OI.armSpeed);
     	}
-    	if (OI.getOperatorAxis(1) < -0.2 && !Robot.kArm.GetForwardLimitSwitch()) {
+    	else if (direction == -1) {
     		Robot.kArm.moveArmDown(-OI.armSpeed);
     	}
-    	if(OI.getOperatorAxis(1) < 0.2 && OI.getOperatorAxis(1) > -0.2) {
+    	else{
     		Robot.kArm.armBreak();
     	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return (!Robot.kArm.GetForwardLimitSwitch() || Robot.kArm.GetForwardLimitSwitch()) ;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.kArm.armBreak();
     }
 
     // Called when another command which requires one or more of the same
