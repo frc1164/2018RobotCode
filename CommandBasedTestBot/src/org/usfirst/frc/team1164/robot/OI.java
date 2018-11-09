@@ -51,7 +51,8 @@ public class OI {
 	
 	private Button SetArmLow = new JoystickButton(driverStick, 1); //a
 	private Button SetArmSwitch = new JoystickButton(driverStick, 2); //b
-	private Button SetArmScale = new JoystickButton(driverStick, 4); //y
+	private Button SetArmScale = new JoystickButton(driverStick, 4); //y]
+	private Button RaiseArm = new JoystickAxis(operatorStick, 1);
 	
 	private Trigger MoveArmUp = new PosJoystickTrigger(operatorStick, 1, 0.2);
 	private Trigger MoveArmDown = new NegJoystickTrigger(operatorStick, 1, -0.2);
