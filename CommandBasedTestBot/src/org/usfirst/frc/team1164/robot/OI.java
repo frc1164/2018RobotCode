@@ -21,6 +21,7 @@ import org.usfirst.frc.team1164.robot.commands.setArmSpeed;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.buttons.Trigger;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -47,7 +48,8 @@ public class OI {
 	
 	private Button SetArmLow = new JoystickButton(driverStick, 1); //a
 	private Button SetArmSwitch = new JoystickButton(driverStick, 2); //b
-	private Button SetArmScale = new JoystickButton(driverStick, 4); //y
+	private Button SetArmScale = new JoystickButton(driverStick, 4); //y]
+	private Button RaiseArm = new JoystickAxis(operatorStick, 1);
 	
 	public static double armSpeed = 0.3;
 	
