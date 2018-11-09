@@ -19,7 +19,11 @@ import org.usfirst.frc.team1164.robot.commands.UnfoldArm;
 import org.usfirst.frc.team1164.robot.commands.setArmSpeed;
 import org.usfirst.frc.team1164.robot.PosJoystickTrigger;
 import org.usfirst.frc.team1164.robot.NegJoystickTrigger;
-import org.usfirst.frc.team1164.robot.commands.MoveArm;
+import org.usfirst.frc.team1164.robot.ZeroJoystickTrigger;
+import org.usfirst.frc.team1164.robot.commands.MoveArmUp;
+import org.usfirst.frc.team1164.robot.commands.MoveArmDown;
+import org.usfirst.frc.team1164.robot.commands.StopArm;
+
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -52,10 +56,11 @@ public class OI {
 	private Button SetArmLow = new JoystickButton(driverStick, 1); //a
 	private Button SetArmSwitch = new JoystickButton(driverStick, 2); //b
 	private Button SetArmScale = new JoystickButton(driverStick, 4); //y]
-	private Button RaiseArm = new JoystickAxis(operatorStick, 1);
+	
 	
 	private Trigger MoveArmUp = new PosJoystickTrigger(operatorStick, 1, 0.2);
 	private Trigger MoveArmDown = new NegJoystickTrigger(operatorStick, 1, -0.2);
+	private Trigger StopArm = new ZeroJoystickTrigger(operatorStick, 1, 0.2);
 	
 	public static double armSpeed = 0.3;
 	
@@ -76,8 +81,9 @@ public class OI {
 //		SetArmSwitch.whenPressed(new SetArmPosition(RobotMap.ARM_SwitchPosition_Volts));
 //		SetArmScale.whenPressed(new SetArmPosition(RobotMap.ARM_ScalePosition_Volts));
 		
-		MoveArmUp.whenActive(new MoveArm(1));
-		MoveArmDown.whenActive(new MoveArm(-1));
+		MoveArmUp.whenActive(new MoveArmUp());
+		MoveArmDown.whenActive(new MoveArmDown());
+		StopArm.whenActive(new StopArm());
 
 	}
 	

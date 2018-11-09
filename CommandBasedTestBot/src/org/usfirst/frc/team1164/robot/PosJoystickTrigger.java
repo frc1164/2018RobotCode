@@ -21,12 +21,18 @@ public class PosJoystickTrigger extends Trigger {
 		triggerLimit = myTriggerLimit;
 		joystickChannel = myJoystickChannel;
 		controller = myController;
+		System.out.println("PosJoystickContstructed");
+
 		
 	}// of Xbox Controller constructor
 	
 	public boolean get() {
-		if(stick.getRawAxis(joystickChannel) >= triggerLimit) return true;
-		
+		try{
+			if(stick.getRawAxis(joystickChannel) >= triggerLimit) return true;
+		}// of try
+		catch (NullPointerException e) {
+			if(controller.getRawAxis(joystickChannel) >= triggerLimit) return true;
+		}// of catch
 		return false;
 	}// of method get
 	
